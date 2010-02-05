@@ -1,0 +1,25 @@
+$Id: README,v 1.2 2010/02/02 11:47:18 ak Exp $
+
+CHANGES ----------------------------- Version histoty
+INSTALL ----------------------------- How to install and configure virtual mailbox
+KNOWNBGUS --------------------------- Known bugs in virtmail.m4
+LICENSE ----------------------------- This software's license
+README ------------------------------ This file
+TODO -------------------------------- Not implemented or tested yet
+examples/a-part-of-dovecot.conf ----- Example of etc/dovecot.conf(a part of) 
+examples/a-part-of-sendmail.mc ------ Example of cf/sendmail.mc(a part of)
+examples/dovecot-virtuser-passwd ---- Example of dovecot's passwd file
+examples/maildroprc ----------------- Example of etc/maildroprc
+examples/procmailrc ----------------- Example of etc/procmailrc
+examples/procmailrcs-example.jp.cf -- Example of etc/procmailrcs/example.jp.cf
+examples/virtusertable -------------- Example of /etc/mail/virtusertable
+maildrop-configure ------------------ maildrop configure example
+procmail-localconfig.patch ---------- procmail-3.22 patch for 'INSTALL'
+virtmail.m4 ------------------------- Mailer definition of mailer/virtmail.m4
+
+virtmail.m4 has been tested at the followings:
+ sendmail) 8.13.8, 8.14.3, 8.14.4
+ dovecot)  1.2.9 1.2.10
+ procmail) 3.22
+ maildrop) 2.3.0.20100112
+

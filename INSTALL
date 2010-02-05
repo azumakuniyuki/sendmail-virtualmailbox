@@ -1,0 +1,130 @@
+$Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
+
+             How to install and use virtual_mailbox(virtmail.m4)
+--------------------------------------------------------------------------------
+ * procmail delivers email to local user's Maildir (NOT virtual mailbox)
+ * maildrop delivers email to virutal user's mailbox (NO unix account)
+ * mailer/virtmail.m4 requires FEATURE(`virtusertable')
+--------------------------------------------------------------------------------
+
+
+- procmail ---------------------------------------------------------------------
+ * procmail will be installed into /usr/local/mda
+ * procmail runs as a local delivery agent for local users(Maildir-ed)
+
+01. Download procmail source archive from http://www.procmail.org/
+02. Build procmail and install into ``/usr/local/mda'' (or other location).
+    See also ./procmail-localconfig.patch
+
+    # cd procmail-3.22/
+    # patch -p0 < procmail-localconfig.patch ... or edit Makefile and config.h 
+    # make && make install
+    # strip /usr/local/mda/bin/*
+
+03. Create local user's Maildir directory,
+    e.g.) local user = root, foo, and bar
+
+    # mkdir -pm 0700 /root/Maildir/{cur,tmp,new}
+    # for LU in foo bar; do
+    > mkdir -pm 0700 /home/$LU/Maildir/{cur,tmp,new}
+    > chown -R $LU:$LU /home/$LU/Maildir
+    > done
+    #
+
+04. Copy procmailrc, and create empty log file for procmail
+    # cp ./examples/procmailrc /usr/local/mda/etc/procmailrc
+    # touch /var/log/procmail-local.log
+    # chmod 600 /var/log/procmail-local.log
+
+
+- maildrop ---------------------------------------------------------------------
+ * maildrop will be installed into /usr/local/mda
+ * maildrop runs as a local delivery agent for virtual users(Maildir-ed)
+
+05. Download maildrop source archive from http://www.courier-mta.org/maildrop/
+06. Build maildrop and install into ``/usr/local/mda''
+
+    # cd maildrop-2.3.0.20100112/
+    # ./configure --prefix=/usr/local/mda --enable-sendmail=/usr/sbin/sendmail \
+      --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/mda/etc
+    # make && make install-strip
+
+07. Add virtual mailbox owner: ``virtmail''
+    # groupadd virtmail
+    # useradd -g virtmail -d /home/virtmail -s /sbin/bash -c 'Virtual Mailbox'
+    # mkdir -pm 0700 /etc/skel/Maildir/{cur,tmp,new}
+
+08. Copy maildroprc, Create empty log file for maildrop
+    # cp ./examples/maildroprc /usr/local/mda/maildroprc
+    # touch /var/log/maildrop-virtual.log
+    # chown virtmail:root /var/log/maildrop-virtual.log
+    # chmod 0600 /var/log/maildrop-virtual.log
+
+09. Create virtual mailbox directories at /home/virtmail/
+    e.g.) Virtual mailbox user:
+           hoge@example.jp, fuga@example.jp, and piyo@example.org
+
+    # su - virtmail
+    $ for VU in hoge fuga; do
+    > mkdir -pm 0700 /home/virtmail/example.jp/$VU/Maildir/{/cur,tmp,new}
+    > done
+    $ mkdir -pm 0700 /home/virtmail/example.org/piyo/Maildir/{cur,tmp,new}
+
+
+- sendmail ---------------------------------------------------------------------
+
+10. Copy virtmail.m4 file to sendmail source directory
+    # cp ./virtmail.m4 /path/to/sendmail-src/cf/mailer
+
+11. Edit your cf/sendmail.mc,Paste the content of examples/a-part-of-sendmail.mc
+    file into sendmail.mc, and make sendmail.cf
+    # cp /path/to/sendmail-src/cf/cf/sendmail.mc /etc/mail/virtmail.cf
+
+12. Edit /etc/mail/virtuser-domains,  insert 2 domain names of virtual mailbox
+    into virtuser-domains file.
+
+    # cd /etc/mail
+    # touch ./virtuser-domains
+    # echo 'example.jp' >> ./virtuser-domains
+    # echo 'example.org' >> ./virtuser-domains
+    
+13. Edit /etc/mail/virtusertable, see ./examples/virtusertable
+
+    # cd /etc/mail
+    # touch ./virtusertable
+    # vi ./virtusertable
+    # makemap hash virtusertable.db < virtusertable
+
+14. Address test(local user) with sendmail -bt
+    # echo '3,0 postmaster@example.jp' | sendmail -bt -C/etc/mail/virtmail.cf
+    ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
+    Enter <ruleset> <address>
+    > canonify           input: postmaster @ example . jp
+    Canonify2          input: postmaster < @ example . jp >
+    ... snip ...
+    Parse1           returns: $# local $: root
+    parse            returns: $# local $: root
+
+15. Address test(virtual user) with sendmail -bt
+    # echo '3,0 hoge@example.jp' | sendmail -bt -C/etc/mail/virtmail.cf
+    ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
+    Enter <ruleset> <address>
+    ... snip ...
+    canonify         returns: hoge < @ example . jp . VIRTMAIL . >
+    .. snip ...
+    Parse1           returns: $# virtmail $@ localhost $: hoge < @ example . jp . >
+    parse            returns: $# virtmail $@ localhost $: hoge < @ example . jp . >
+
+16. If virtmail works, copy virtmail.cf to sendmail.cf
+    # cp /etc/mail/virtmail.cf /etc/mail/sendmail.cf
+
+
+- pop3d|imapd ------------------------------------------------------------------
+
+17. Configure your POP3|IMAP server. If you use dovecot,
+    see ./examples/a-part-of-dovecot.conf, ./examples/dovecot-virtuser-passwd
+
+18. Configure /etc/logrotate.conf for procmail and maildrop if you need.
+19. Restart sendmail and POP3|IMAP server
+
+--------------------------------------------------------------------------------

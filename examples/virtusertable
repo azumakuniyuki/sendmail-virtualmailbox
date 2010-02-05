@@ -1,0 +1,10 @@
+# $Id: virtusertable-example,v 1.1 2010/02/02 03:41:35 ak Exp $
+abuse@example.jp		postmaster
+postmaster@example.jp		%1
+hoge@example.jp			%0.VIRTMAIL
+fuga@example.jp			%0.VIRTMAIL
+
+abuse@example.org		postmaster
+postmaster@example.org		%1
+piyo@example.org		%0.VIRTMAIL
+
