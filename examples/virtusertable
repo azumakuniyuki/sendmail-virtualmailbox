@@ -3,8 +3,10 @@ abuse@example.jp		postmaster
 postmaster@example.jp		%1
 hoge@example.jp			%0.VIRTMAIL
 fuga@example.jp			%0.VIRTMAIL
+@example.jp			"ERROR:5.5.0:550 User Unknown"
 
 abuse@example.org		postmaster
 postmaster@example.org		%1
 piyo@example.org		%0.VIRTMAIL
+@example.org			"ERROR:5.5.0:550 User Unknown"
 
