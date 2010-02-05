@@ -1,4 +1,15 @@
 $Id: README,v 1.2 2010/02/02 11:47:18 ak Exp $
+--------------------------------------------------------------------------------
+ sendmail-virtualmailbox: Virtual Mailbox(Maildir) Implementation with sendmail
+--------------------------------------------------------------------------------
+ sendmail-virtualmailbox(virtmail.m4) is a MAILER which provides virtual mailbox
+ feature to sendmail. It require the following:
+
+ * procmail: It delivers email to a local user(has UNIX account)'s Maildir/
+ * maildrop: It delivers email to a virtual user(has NO UNIX account)'s Maildir/
+ * FEATURE(`virtusertable') in sendmail.mc
+--------------------------------------------------------------------------------
+
 
 CHANGES ----------------------------- Version histoty
 INSTALL ----------------------------- How to install and configure virtual mailbox
