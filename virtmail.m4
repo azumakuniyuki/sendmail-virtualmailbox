@@ -61,13 +61,12 @@ define(`_VIRTMAIL_ARGS_',
 define(`_VIRTMAIL_QGRP',`ifelse(defn(`VIRTMAIL_MAILER_QGRP'),`',`',`Q=VIRTMAIL_MAILER_QGRP,')')
 
 LOCAL_RULE_0
-R$+ < @ $={VirtHost} .VIRTMAIL_MAILER_PSEUDOTLD.> $*	$: <VIRT> $1 < @ $2 . > $3 $| <$&{addr_type}>
+R$+ < @ $={VirtHost} .VIRTMAIL_MAILER_PSEUDOTLD.> $*	$: <VIRT> $1 < @ $2 . > $3 $| <@>
 ifelse(defn(`VIRTMAIL_MAILER_TYPE'),`procmail',`dnl
-R<VIRT> $+ <@$+.> $* $| <e r>		$#virtmail $@ VIRTMAIL_MAILER_CONFIGDIR/$2.cf $: $1 <@$2.> $3
+R<VIRT> $+ <@$+.> $* $| <@>		$#virtmail $@ VIRTMAIL_MAILER_CONFIGDIR/$2.cf $: $1 <@$2.> $3
 ',defn(`VIRTMAIL_MAILER_TYPE'),`maildrop',`dnl
-R<VIRT> $+ <@$+.> $* $| <e r>		$#virtmail $@ localhost $: $1 <@$2.> $3
+R<VIRT> $+ <@$+.> $* $| <@>		$#virtmail $@ localhost $: $1 <@$2.> $3
 ')dnl
-R<VIRT> $+ $| < $* >			$@ $1
 
 
 divert(7)
