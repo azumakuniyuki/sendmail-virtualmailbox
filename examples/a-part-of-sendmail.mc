@@ -1,5 +1,6 @@
 dnl $Id: a-part-of-sendmail.mc,v 1.2 2010/02/02 11:07:37 ak Exp $
 
+FEATURE(`local_procmail',`/usr/local/mda/bin/procmail')dnl
 FEATURE(`virtusertable',`hash -o /etc/mail/virtusertable')dnl
 VIRTUSER_DOMAIN_FILE(`-o /etc/mail/virtuser-domains')dnl
 define(`PROCMAIL_MAILER_PATH',`/usr/local/mda/bin/procmail')dnl
