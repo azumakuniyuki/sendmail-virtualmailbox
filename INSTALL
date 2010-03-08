@@ -79,7 +79,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 
 11. Edit your cf/sendmail.mc,Paste the content of examples/a-part-of-sendmail.mc
     file into sendmail.mc, and make sendmail.cf
-    # cp /path/to/sendmail-src/cf/cf/sendmail.mc /etc/mail/virtmail.cf
+    # cp /path/to/sendmail-src/cf/cf/sendmail.cf /etc/mail/virtmail.cf
 
 12. Edit /etc/mail/virtuser-domains,  insert 2 domain names of virtual mailbox
     into virtuser-domains file.
