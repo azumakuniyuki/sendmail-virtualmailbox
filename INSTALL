@@ -32,6 +32,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     #
 
 04. Copy procmailrc, and create empty log file for procmail
+    # mkdir /usr/local/mda/etc
     # cp ./examples/procmailrc /usr/local/mda/etc/procmailrc
     # touch /var/log/procmail-local.log
     # chmod 600 /var/log/procmail-local.log
