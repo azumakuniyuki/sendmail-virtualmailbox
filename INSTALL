@@ -45,14 +45,14 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 05. Download maildrop source archive from http://www.courier-mta.org/maildrop/
 06. Build maildrop and install into ``/usr/local/mda''
 
-    # cd maildrop-2.3.0.20100112/
+    # cd maildrop-2.5.1/
     # ./configure --prefix=/usr/local/mda --enable-sendmail=/usr/sbin/sendmail \
       --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/mda/etc
     # make && make install-strip
 
 07. Add virtual mailbox owner: ``virtmail''
     # groupadd virtmail
-    # useradd -g virtmail -d /home/virtmail -s /sbin/bash -c 'Virtual Mailbox'
+    # useradd -g virtmail -d /home/virtmail -s /bin/bash -c 'Virtual Mailbox' virtmail
     # mkdir -pm 0700 /etc/skel/Maildir/{cur,tmp,new}
 
 08. Copy maildroprc, Create empty log file for maildrop
