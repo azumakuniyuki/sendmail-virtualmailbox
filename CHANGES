@@ -1,0 +1,12 @@
+# $Id: $
+
+2010/10/27	maildrop 2.5.1 and dovecot 1.2.15 .
+2010/03/08	Add more example configuration files.
+2010/02/08	Add more example configuration files.
+2010/02/07	Fix ruleset 98/ParseLocal bug.
+2010/02/06	Use git repository.
+2009/01/01	cf/feature -> cf/mailer .
+2008/07/11	Rename: virtualmailbox.m4 -> virtmail.m4
+2008/04/29	Register into CVS repository.
+2007/12/29	Test version, virtualmailbox.m4 only.
+
