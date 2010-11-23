@@ -19,6 +19,11 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     # cd procmail-3.22/
     # patch -p0 < procmail-localconfig.patch ... or edit Makefile and config.h 
     # make && make install
+
+    ***** If "make" fails with the following message: 
+    ***** formisc.h:20: error: conflicting types for 'getline',
+    ***** apply patch ./procmail-conflict-types-for-getline.patch
+
     # strip /usr/local/mda/bin/*
 
 03. Create local user's Maildir directory,
