@@ -1,5 +1,12 @@
 $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
-
+                                                
+  #### ##  ##  ##### ###### ##   ##     ##      
+   ##  ### ## ###      ##  ####  ##     ##      
+   ##  ######  ###     ## ##  ## ##     ##      
+   ##  ## ###   ###    ## ###### ##     ##      
+   ##  ##  ##    ###   ## ##  ## ##     ##      
+  #### ##  ## #####    ## ##  ## ###### ######  
+                                                
              How to install and use virtual_mailbox(virtmail.m4)
 --------------------------------------------------------------------------------
  * procmail delivers email to local user's Maildir (NOT virtual mailbox)
@@ -13,21 +20,21 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  * procmail runs as a local delivery agent for local users(Maildir-ed)
 
 01. Download procmail source archive from http://www.procmail.org/
-02. Build procmail and install into ``/usr/local/mda'' (or other location).
-    See also ./procmail-localconfig.patch
+02. Build procmail and install into ``/usr/local/mda''.  If you want to install
+    procmail into other location, See and edit ./procmail-localconfig.patch
 
     # cd procmail-3.22/
     # patch -p0 < procmail-localconfig.patch ... or edit Makefile and config.h 
     # make && make install
 
     ***** If "make" fails with the following message: 
-    ***** formisc.h:20: error: conflicting types for 'getline',
-    ***** apply patch ./procmail-conflict-types-for-getline.patch
+    *****  formisc.h:20: error: conflicting types for 'getline',
+    ***** Apply patch file: ./procmail-conflict-types-for-getline.patch
 
     # strip /usr/local/mda/bin/*
 
-03. Create local user's Maildir directory,
-    e.g.) local user = root, foo, and bar
+03. Create local user's Maildir directories,
+    e.g.) local user is root, foo, and bar
 
     # mkdir -pm 0700 /root/Maildir/{cur,tmp,new}
     # for LU in foo bar; do
@@ -36,7 +43,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     > done
     #
 
-04. Copy procmailrc, and create empty log file for procmail
+04. Copy procmailrc file, and create an empty log file for procmail
     # mkdir /usr/local/mda/etc
     # cp ./examples/procmailrc /usr/local/mda/etc/procmailrc
     # touch /var/log/procmail-local.log
@@ -48,11 +55,17 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  * maildrop runs as a local delivery agent for virtual users(Maildir-ed)
 
 05. Download maildrop source archive from http://www.courier-mta.org/maildrop/
-06. Build maildrop and install into ``/usr/local/mda''
+06. Build maildrop and install into ``/usr/local/mda''. If you want to install
+    maildrop into other location, set the path to the directory at --prefix and
+    --with-etcdir configure option.
 
-    # cd maildrop-2.5.1/
+    # cd maildrop-2.5.2/
     # ./configure --prefix=/usr/local/mda --enable-sendmail=/usr/sbin/sendmail \
       --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/mda/etc
+
+      ### OR ###
+    # /bin/sh /path/to/maildrop-configure
+      ### THEN ###
     # make && make install-strip
 
 07. Add virtual mailbox owner: ``virtmail''
@@ -60,13 +73,13 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     # useradd -g virtmail -d /home/virtmail -s /bin/bash -c 'Virtual Mailbox' virtmail
     # mkdir -pm 0700 /etc/skel/Maildir/{cur,tmp,new}
 
-08. Copy maildroprc, Create empty log file for maildrop
+08. Copy maildroprc file, Create an empty log file for maildrop
     # cp ./examples/maildroprc /usr/local/mda/maildroprc
     # touch /var/log/maildrop-virtual.log
     # chown virtmail:root /var/log/maildrop-virtual.log
     # chmod 0600 /var/log/maildrop-virtual.log
 
-09. Create virtual mailbox directories at /home/virtmail/
+09. Create virtual mailbox directories in /home/virtmail/
     e.g.) Virtual mailbox user:
            hoge@example.jp, fuga@example.jp, and piyo@example.org
 
@@ -79,29 +92,30 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 
 - sendmail ---------------------------------------------------------------------
 
-10. Copy virtmail.m4 file to sendmail source directory
+10. Copy virtmail.m4 file to the sendmail source directory
     # cp ./virtmail.m4 /path/to/sendmail-src/cf/mailer
 
-11. Edit your cf/sendmail.mc,Paste the content of examples/a-part-of-sendmail.mc
-    file into sendmail.mc, and make sendmail.cf
+11. Edit your cf/sendmail.mc located in sendmail-src/cf/cf ,Paste the content of
+    examples/a-part-of-sendmail.mc file into sendmail.mc, and run the following 
+    command: ``make sendmail.cf''.
     # cp /path/to/sendmail-src/cf/cf/sendmail.cf /etc/mail/virtmail.cf
 
-12. Edit /etc/mail/virtuser-domains,  insert 2 domain names of virtual mailbox
-    into virtuser-domains file.
+12. Edit /etc/mail/virtuser-domains. Insert two domain names of virtual mailbox
+    into /etc/mail/virtuser-domains file.
 
     # cd /etc/mail
     # touch ./virtuser-domains
     # echo 'example.jp' >> ./virtuser-domains
     # echo 'example.org' >> ./virtuser-domains
     
-13. Edit /etc/mail/virtusertable, see ./examples/virtusertable
+13. Edit /etc/mail/virtusertable. See ./examples/virtusertable
 
     # cd /etc/mail
     # touch ./virtusertable
     # vi ./virtusertable
     # makemap hash virtusertable.db < virtusertable
 
-14. Address test(local user) with sendmail -bt
+14. Address test(local user) with sendmail -bt command
     # echo '3,0 postmaster@example.jp' | sendmail -bt -C/etc/mail/virtmail.cf
     ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
     Enter <ruleset> <address>
@@ -111,7 +125,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     Parse1           returns: $# local $: root
     parse            returns: $# local $: root
 
-15. Address test(virtual user) with sendmail -bt
+15. Address test(virtual user) with sendmail -bt command
     # echo '3,0 hoge@example.jp' | sendmail -bt -C/etc/mail/virtmail.cf
     ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
     Enter <ruleset> <address>
@@ -121,7 +135,9 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     Parse1           returns: $# virtmail $@ localhost $: hoge < @ example . jp . >
     parse            returns: $# virtmail $@ localhost $: hoge < @ example . jp . >
 
-16. If virtmail works, copy virtmail.cf to sendmail.cf
+16. If virtmail works properly, save virtmail.cf as /etc/mail/sendmail.cf after
+    backup your sendmail.cf .
+    # cp /etc/mail/sendmail.cf /etc/mail/sendmail-`date '+%F'`.cf
     # cp /etc/mail/virtmail.cf /etc/mail/sendmail.cf
 
 
