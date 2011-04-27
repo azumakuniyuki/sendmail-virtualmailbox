@@ -59,7 +59,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     maildrop into other location, set the path to the directory at --prefix and
     --with-etcdir configure option.
 
-    # cd maildrop-2.5.2/
+    # cd maildrop-2.5.3/
     # ./configure --prefix=/usr/local/mda --enable-sendmail=/usr/sbin/sendmail \
       --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/mda/etc
 
