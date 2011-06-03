@@ -2,7 +2,7 @@
 #
 # maildroprc for virtual mailbox
 #
-PATH='/usr/local/mda/bin:/usr/local/bin:/usr/bin:/bin:.'
+PATH='/usr/local/virtmail/bin:/usr/local/bin:/usr/bin:/bin:.'
 SHELL='/bin/sh'
 UMASK='077'
 logfile "/var/log/maildrop-virtual.log"

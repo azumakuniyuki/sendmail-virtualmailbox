@@ -1,9 +1,9 @@
 dnl $Id: a-part-of-sendmail.mc,v 1.2 2010/02/02 11:07:37 ak Exp $
 
-FEATURE(`local_procmail',`/usr/local/mda/bin/procmail')dnl
+FEATURE(`local_procmail',`/usr/local/virtmail/bin/procmail')dnl
 FEATURE(`virtusertable',`hash -o /etc/mail/virtusertable')dnl
 VIRTUSER_DOMAIN_FILE(`-o /etc/mail/virtuser-domains')dnl
-define(`PROCMAIL_MAILER_PATH',`/usr/local/mda/bin/procmail')dnl
+define(`PROCMAIL_MAILER_PATH',`/usr/local/virtmail/bin/procmail')dnl
 
 dnl * Other available macros(mailer/virtmail.m4)
 dnl
@@ -23,12 +23,12 @@ dnl                                 ** maildrop does not use this value
 dnl
 
 dnl A. If you use maildrop as a LDA for virtual mailbox
-define(`VIRTMAIL_MAILER_PATH',`/usr/local/mda/bin/maildrop')dnl
+define(`VIRTMAIL_MAILER_PATH',`/usr/local/virtmail/bin/maildrop')dnl
 define(`VIRTMAIL_MAILER_USER',`virtmail')dnl
 
 dnl B. If you use procmail as a LDA for virtual mailbox
-define(`VIRTMAIL_MAILER_PATH',`/usr/local/mda/bin/procmail')dnl
-define(`VIRTMAIL_MAILER_CONFIGDIR',`/usr/local/mda/etc/procmailrcs')dnl
+define(`VIRTMAIL_MAILER_PATH',`/usr/local/virtmail/bin/procmail')dnl
+define(`VIRTMAIL_MAILER_CONFIGDIR',`/usr/local/virtmail/etc/procmailrcs')dnl
 
 
 MAILER(`local')

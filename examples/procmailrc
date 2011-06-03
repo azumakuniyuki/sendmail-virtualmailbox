@@ -2,7 +2,7 @@
 #
 # procmailrc for local user's Maildir
 #
-PATH='/usr/local/mda/bin:/usr/local/bin:/usr/bin:/bin:.'
+PATH='/usr/local/virtmail/bin:/usr/local/bin:/usr/bin:/bin:.'
 LOGFILE='/var/log/procmail-local.log'
 MAILDIR="$HOME/Maildir/"
 DEFAULT="$MAILDIR"

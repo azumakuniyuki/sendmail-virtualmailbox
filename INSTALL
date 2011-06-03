@@ -16,12 +16,13 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 
 
 - procmail ---------------------------------------------------------------------
- * procmail will be installed into /usr/local/mda
+ * procmail will be installed into /usr/local/virtmail
  * procmail runs as a local delivery agent for local users(Maildir-ed)
 
 01. Download procmail source archive from http://www.procmail.org/
-02. Build procmail and install into ``/usr/local/mda''.  If you want to install
-    procmail into other location, See and edit ./procmail-localconfig.patch
+02. Build procmail and install into ``/usr/local/virtmail'' directory.  If you
+    want to install procmail into other location, See and edit the patch file:
+    ./procmail-localconfig.patch
 
     # cd procmail-3.22/
     # patch -p0 < procmail-localconfig.patch ... or edit Makefile and config.h 
@@ -31,7 +32,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     *****  formisc.h:20: error: conflicting types for 'getline',
     ***** Apply patch file: ./procmail-conflict-types-for-getline.patch
 
-    # strip /usr/local/mda/bin/*
+    # strip /usr/local/virtmail/bin/*
 
 03. Create local user's Maildir directories,
     e.g.) local user is root, foo, and bar
@@ -44,24 +45,24 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     #
 
 04. Copy procmailrc file, and create an empty log file for procmail
-    # mkdir /usr/local/mda/etc
-    # cp ./examples/procmailrc /usr/local/mda/etc/procmailrc
+    # mkdir /usr/local/virtmail/etc
+    # cp ./examples/procmailrc /usr/local/virtmail/etc/procmailrc
     # touch /var/log/procmail-local.log
     # chmod 600 /var/log/procmail-local.log
 
 
 - maildrop ---------------------------------------------------------------------
- * maildrop will be installed into /usr/local/mda
+ * maildrop will be installed into /usr/local/virtmail
  * maildrop runs as a local delivery agent for virtual users(Maildir-ed)
 
 05. Download maildrop source archive from http://www.courier-mta.org/maildrop/
-06. Build maildrop and install into ``/usr/local/mda''. If you want to install
-    maildrop into other location, set the path to the directory at --prefix and
-    --with-etcdir configure option.
+06. Build maildrop and install into ``/usr/local/virtmail'' directory. If you 
+    want to install maildrop into other location, set the path to the directory
+    at --prefix and --with-etcdir configure option.
 
     # cd maildrop-2.5.3/
-    # ./configure --prefix=/usr/local/mda --enable-sendmail=/usr/sbin/sendmail \
-      --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/mda/etc
+    # ./configure --prefix=/usr/local/virtmail --enable-sendmail=/usr/sbin/sendmail \
+      --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/virtmail/etc
 
       ### OR ###
     # /bin/sh /path/to/maildrop-configure
@@ -74,7 +75,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
     # mkdir -pm 0700 /etc/skel/Maildir/{cur,tmp,new}
 
 08. Copy maildroprc file, Create an empty log file for maildrop
-    # cp ./examples/maildroprc /usr/local/mda/maildroprc
+    # cp ./examples/maildroprc /usr/local/virtmail/maildroprc
     # touch /var/log/maildrop-virtual.log
     # chown virtmail:root /var/log/maildrop-virtual.log
     # chmod 0600 /var/log/maildrop-virtual.log

@@ -8,14 +8,14 @@
 # IF YOU USE THE PROCMAIL PROGRAM AS A LDA FOR VIRTUAL MAILBOX, PLEASE
 # REMEMBER TO RUN THE FOLLOWING COMMANDS: 
 #
-#  cp procmailrcs-example.jp.cf /usr/local/mda/etc/procmailrcs/example.jp.cf
-#  cd /usr/local/mda/etc/procmailrcs/
+#  cp procmailrcs-example.jp.cf /usr/local/virtmail/etc/procmailrcs/example.jp.cf
+#  cd /usr/local/virtmail/etc/procmailrcs/
 #  chown virtmail.root ./example.jp.cf
 #  touch /var/log/procmail-virtual.log
 #  chown root.virtmail /var/log/procmail-virtual.log
 #  chmod 0660 /var/log/procmail-virtual.log
 #
-PATH='/usr/local/mda/bin:/usr/local/bin:/usr/bin:/bin:.'
+PATH='/usr/local/virtmail/bin:/usr/local/bin:/usr/bin:/bin:.'
 SHELL='/bin/sh'
 LOGFILE='/var/log/procmail-virtual.log'
 
