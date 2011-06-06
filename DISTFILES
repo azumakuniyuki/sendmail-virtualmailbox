@@ -2,6 +2,11 @@
 /usr/local/sbin/smctl -------------------- Symbolic link to /usr/local/sendmail/sbin/sendmailctl
 /usr/local/sendmail ---------------------- Base directory of sendmail-virtualmailbox 
  bin/ ------------------------------------ Commands
+  hoststat ------------------------------- Symbolic link to /usr/local/sendmail/sbin/sendmail
+  mailq ---------------------------------- Symbolic link to /usr/local/sendmail/sbin/sendmail
+  newaliases ----------------------------- Symbolic link to /usr/local/sendmail/sbin/sendmail
+  purgestat ------------------------------ Symbolic link to /usr/local/sendmail/sbin/sendmail
+  vacation
  etc/ ------------------------------------ Configuration files
   Makefile
   access
@@ -22,6 +27,8 @@
   virtusertable
   genericstable
  libexec/ -------------------------------- Binaries of procmail and maildrop
+  maildrop ------------------------------- maildrop as a MDA for virtual mailbox
+  procmail ------------------------------- procmail as a MDA for local mailbox
  sbin/ ----------------------------------- System commands
   make-vmailbox -------------------------- Helper script for making virtual mailbox
   sendmail ------------------------------- sendmail binary
