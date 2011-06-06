@@ -503,13 +503,11 @@ virtmail.m4:
 		-e 's|\([^:]\)//|\1/|g' > $@
 
 sendmail.cf: $(SM_DISTDIR) sendmail.mc virtmail.m4
-
 	$(CP) virtmail.m4 $(SM_DISTDIR)/cf/mailer/
 	$(M4) $(SM_DISTDIR)/cf/m4/cf.m4 sendmail.mc > $@
 	$(CP) sendmail.cf $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).cf
 
 install-sendmail: $(SM_DISTDIR)
-
 	$(MKDIR) -p @prefix@
 	$(MKDIR) -p @sysconfdir@
 	$(MKDIR) -p @datarootdir@
@@ -520,7 +518,9 @@ install-sendmail: $(SM_DISTDIR)
 	$(MKDIR) -p @sbindir@
 	$(MKDIR) -p @localstatedir@
 	$(MKDIR) -p @localstatedir@/hoststat
+	$(MKDIR) -p @localstatedir@/tmp
 	$(MKDIR) -p @prefix@/include
+	$(MKDIR) -p @localstatedir@/adm/sm.bin
 	cd $(SM_DISTDIR) && ( /bin/sh ./Build install DESTDIR=@prefix@ )
 
 	test -f @sbindir@/sm-mta || $(LN) -s @sbindir@/sendmail @sbindir@/sm-mta

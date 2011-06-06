@@ -35,9 +35,6 @@ queuedirs:
 lstatedirs:
 	$(MKDIR) -pm 0755 @localstatedir@/log
 	$(MKDIR) -pm 0755 @localstatedir@/run
-	$(MKDIR) -pm 0755 @localstatedir@/tmp
-	$(MKDIR) -pm 0755 @localstatedir@/hoststat
-	$(MKDIR) -pm 0755 @localstatedir@/adm/sm.bin
 
 sendmail-cf:
 	cd ./build && $(MAKE) sendmail.cf
