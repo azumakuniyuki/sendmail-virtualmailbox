@@ -13,8 +13,8 @@ readonly SENDMAILROOT='__PREFIX__'
 readonly MYNAME="`basename $0`"
 
 KILL_SIGNAL=15
-DEBUG_LEVEL='0'
-SMLOG_LEVEL='9'
+DEBUG_LEVEL=''
+SMLOG_LEVEL=''
 RUN_MAKEMAP='0'
 STDERRORDEV='/dev/stderr'
 STATUS_CODE=1
@@ -48,10 +48,15 @@ smcontrol()
 			result NG
 			STATUS_CODE=$EX_GENERAL
 		else
+			local mtaoptions=''
 			local daemonopts="`test -s $SENDMAILROOT/etc/daemon-options && grep -v '^#' $SENDMAILROOT/etc/daemon-options`"
 			local mqinterval="`test -s $SENDMAILROOT/etc/queue-interval && head -1 $SENDMAILROOT/etc/queue-interval`"
+
+			[ -n "$SMLOG_LEVEL" ] && mtaoptions="$mtaoptions -OLogLevel=$SMLOG_LEVEL"
+			[ -n "$DEBUG_LEVEL" ] && mtaoptions="$mtaoptions -d$DEBUG_LEVEL"
+
 			[ -z "$mqinterval" ] && mqinterval='6m'
-			( $SENDMAILROOT/sbin/sendmail -bd -q$mqinterval $daemonopts && sleep 1 )
+			( $SENDMAILROOT/sbin/sendmail -bd -q$mqinterval $daemonopts $mtaoptions && sleep 1 )
 
 			if [ "$?" -eq "0" -a -s "$procidfile" ]; then
 				result OK
@@ -263,7 +268,7 @@ help()
 	echo '  OPTIONS:'
 	echo '   * boot options:'
 	echo '     -d <n|KEY>   : Enable debug mode (-d<n>) and output transwhataction logs'
-	echo '     -L <n>       : Specify LogLevel (external interface only)'
+	echo '     -L <n>       : Specify LogLevel'
 	echo '     -M           : Run makemap before starting.'
 	echo "     -v           : Print $MYNAME/sendmail version"
 	echo 
