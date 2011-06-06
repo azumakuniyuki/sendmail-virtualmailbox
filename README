@@ -13,30 +13,61 @@ $Id: README,v 1.2 2010/02/02 11:47:18 ak Exp $
  sendmail-virtualmailbox(virtmail.m4) is a MAILER which provides virtual mailbox
  feature to sendmail. It require the following:
 
+ PROGRAMS
+ * sendmail: It is installed into /usr/local/sendmail
  * procmail: It delivers email to a local user(has UNIX account)'s Maildir/
  * maildrop: It delivers email to a virtual user(has NO UNIX account)'s Maildir/
- * FEATURE(`virtusertable') in sendmail.mc
+
+ USERS AND GROUPS
+ * sendmail: O DefaultUser=sendmail
+ * smsubmit: Owner of /usr/local/sendmail/var/spool/cqueue (submission)
+ * virtmail: Owner of /home/virtmail (virtual mailbox direcotry)
 --------------------------------------------------------------------------------
 
 
 CHANGES ------------------------------------ Version histoty
+DISTFILES ---------------------------------- File list after installation
 INSTALL ------------------------------------ How to install and configure virtual mailbox
 KNOWNBGUS ---------------------------------- Known bugs in virtmail.m4
 LICENSE ------------------------------------ This software's license
 README ------------------------------------- This file
 TODO --------------------------------------- Not implemented or tested yet
-examples/a-part-of-aliases ----------------- Example of /etc/mail/aliases
-examples/a-part-of-dovecot.conf ------------ Example of etc/dovecot.conf(a part of) 
-examples/a-part-of-sendmail.mc ------------- Example of cf/sendmail.mc(a part of)
-examples/dovecot-virtuser-passwd ----------- Example of dovecot's passwd file
-examples/maildroprc ------------------------ Example of etc/maildroprc
-examples/procmailrc ------------------------ Example of etc/procmailrc
-examples/procmailrcs-example.jp.cf --------- Example of etc/procmailrcs/example.jp.cf
-examples/virtusertable --------------------- Example of /etc/mail/virtusertable
-maildrop-configure ------------------------- maildrop configure example
-procmail-localconfig.patch ----------------- procmail-3.22 patch for 'INSTALL'
-procmail-conflict-types-for-getline.patch -- Patch for the error 'Conflicting types for getline'
-virtmail.m4 -------------------------------- Mailer definition of mailer/virtmail.m4
+configure ---------------------------------- configure script for making sendmail-virtualmailbox
+build/ ------------------------------------- Base directory for making procmail, maildrop, and sendamil
+ maildrop-configure.sh --------------------- Configure script source for making maidrop
+ procmail-conflict-types-for-getline.patch - Patch for the error 'Conflicting types for getline' 
+ procmail-localconfig.diff ----------------- Patch for procmail to change paths.
+ sendmail-mc.in ---------------------------- /usr/local/sendmail/etc/sendmail.cf source
+ sendmail-site.config.m4 ------------------- Build macros for sendmail
+ submit-mc.in ------------------------------ /usr/local/sendmail/etc/submit.cf source
+ virtmail.m4.in ---------------------------- source of cf/mailer/virtmail.m4
+dist/ -------------------------------------- Files for manual installation
+examples/ ---------------------------------- Some example configuration files
+ a-part-of-aliases ------------------------- Example of /etc/mail/aliases
+ a-part-of-dovecot.conf -------------------- Example of dovecot.conf (a part of) 
+ a-part-of-logrotate.conf ------------------ Example of /etc/logrotate.conf (a part of) 
+ a-part-of-sendmail.mc --------------------- Example of cf/sendmail.mc(a part of)
+ dovecot-virtuser-passwd ------------------- Example of dovecot's passwd file
+ etc-passwd -------------------------------- Required users for sendmail-virtualmailbox
+ etc-group --------------------------------- Required groups for sendmail-virtualmailbox
+src/ --------------------------------------- Source files
+ etc/ -------------------------------------- Source files for /usr/local/sendmail/etc
+  access.in -------------------------------- /usr/local/sendmail/etc/access
+  daemon-options.in ------------------------ /usr/local/sendmail/etc/daemon-options
+  etc-makefile.in -------------------------- /usr/local/sendmail/etc/Makefile
+  generics-domains.in ---------------------- /usr/local/sendmail/etc/generics-domains
+  genericstable.in ------------------------- /usr/local/sendmail/etc/genericstable
+  local-host-names.in ---------------------- /usr/local/sendmail/etc/local-host-names
+  maildroprc.in ---------------------------- /usr/local/sendmail/etc/maildroprc
+  mailertable.in --------------------------- /usr/local/sendmail/etc/mailertable
+  procmailrc.in ---------------------------- /usr/local/sendmail/etc/procmailrc
+  queue-interval.in ------------------------ /usr/local/sendmail/etc/queue-interval
+  relay-domains.in ------------------------- /usr/local/sendmail/etc/relay-domains
+  virtuser-domains.in ---------------------- /usr/local/sendmail/etc/virtuser-domains
+  virtusertable.in ------------------------- /usr/local/sendmail/etc/virtusertable
+ sbin/ ------------------------------------- Source scripts for /usr/local/sendmail/sbin
+  make-vmailbox.SH ------------------------- /usr/local/sendmail/sbin/make-vmailbox
+  sendmailctl.SH --------------------------- /usr/local/sendmail/sbin/sendmailctl, /usr/local/sbin/smctl
 
 virtmail.m4 has been tested at the followings:
  sendmail) 8.13.8, 8.14.3 - 8.14.5
