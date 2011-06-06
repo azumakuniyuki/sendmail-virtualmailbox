@@ -1,0 +1,110 @@
+ $Id: RELEASE_NOTES,v 1.76.2.12 2011/05/24 03:55:39 ak Exp $
+-----------------------------------------------------------------------
+                    _                 _ _ 
+ ___  ___ _ __   __| |_ __ ___   __ _(_) |
+/ __|/ _ \ '_ \ / _` | '_ ` _ \ / _` | | |
+\__ \  __/ | | | (_| | | | | | | (_| | | |
+|___/\___|_| |_|\__,_|_| |_| |_|\__,_|_|_|
+       _      _               _                 _ _ _               
+__   _(_)_ __| |_ _   _  __ _| |_ __ ___   __ _(_) | |__   _____  __
+\ \ / / | '__| __| | | |/ _` | | '_ ` _ \ / _` | | | '_ \ / _ \ \/ /
+ \ V /| | |  | |_| |_| | (_| | | | | | | | (_| | | | |_) | (_) >  < 
+  \_/ |_|_|   \__|\__,_|\__,_|_|_| |_| |_|\__,_|_|_|_.__/ \___/_/\_\
+
+             SENDMAIL-VIRTUALMAILBOX/RELEASE_NOTES
+-----------------------------------------------------------------------
+
+1.0.0		2011/06/06
+
+  New functionality: 
+    * Support configure script and make command  for automatically mak-
+      ing procmail, maildrop, and sendmail.
+    * Sendmail wrapper script: sendmailctl (/usr/local/sbin/smctl).
+    * Helper script for making virtual mailbox: sbin/make-vmailbox .
+    * procmail, maildrop, sendmail,  and their configuration files will
+      be installed into /usr/local/sendmail .
+
+-----------------------------------------------------------------------
+0.1.4		2011/06/03
+
+  Miscellaneous changes:
+    * Directory name has been changes: mda -> virtmail
+
+-----------------------------------------------------------------------
+0.1.3		2011/05/19
+
+  Tested on:
+    * sendmail 8.14.5
+
+-----------------------------------------------------------------------
+0.1.2		2011/04/27
+
+  Tested on:
+    * maildrop 2.5.3
+
+-----------------------------------------------------------------------
+0.1.1		2011/03/30
+
+  Tested on:
+    * maildrop 2.5.2
+
+-----------------------------------------------------------------------
+0.1.0		2010/11/23
+
+  New files:
+    * Add procmail-conflict-types-for-getline.patch
+
+-----------------------------------------------------------------------
+0.0.9		2010/10/27
+
+  Tested on:
+    * maildrop 2.5.1 and dovecot 1.2.15
+
+-----------------------------------------------------------------------
+0.0.8		2010/03/08
+
+  Assorted improvements and code cleanup:
+    * Add more example configuration files.
+
+-----------------------------------------------------------------------
+0.0.7		2010/02/08
+
+  Assorted improvements and code cleanup:
+    * Add more example configuration files.
+
+-----------------------------------------------------------------------
+0.0.6		2010/02/07
+
+  Fixed bugs:
+    * Fix ruleset 98/ParseLocal bug in virtmail.m4 .
+
+-----------------------------------------------------------------------
+0.0.5		2010/02/06
+
+  Miscellaneous changes:
+    * Source files are moved from CVS repository to git repository.
+
+-----------------------------------------------------------------------
+0.0.4		2009/01/01
+
+  Miscellaneous changes:
+    * Changed directory name: cf/feature -> cf/mailer .
+
+-----------------------------------------------------------------------
+0.0.3		2008/07/11
+
+  Miscellaneous changes:
+    * Changed file name: virtualmailbox.m4 -> virtmail.m4 .
+
+-----------------------------------------------------------------------
+0.0.2		2008/04/29
+
+  Miscellaneous changes:
+    * Register source files into CVS repository.
+
+-----------------------------------------------------------------------
+0.0.1		2007/12/29
+
+  New files:
+    * virtualmailbox.m4 for virtual mailbox implementation for sendmail
+
