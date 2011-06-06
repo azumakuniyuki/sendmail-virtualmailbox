@@ -1,0 +1,60 @@
+
+/usr/local/sbin/smctl -------------------- Symbolic link to /usr/local/sendmail/sbin/sendmailctl
+/usr/local/sendmail ---------------------- Base directory of sendmail-virtualmailbox 
+ bin/ ------------------------------------ Commands
+ etc/ ------------------------------------ Configuration files
+  Makefile
+  access
+  aliases
+  daemon-options ------------------------- Additional options for sendmail -bd
+  generics-domains
+  local-host-names
+  maildroprc ----------------------------- maildrop configuration file
+  mailertable
+  procmailrc ----------------------------- procmail configuration file
+  queue-interval ------------------------- Queue interval for sendmail -bd -q*
+  relay-domains
+  sendmail.cf
+  sendmail.mc ---------------------------- Copy of share/cf/cf/`hostname`.mc
+  submit.cf
+  submit.mc ------------------------------ Copy of share/cf/cf/submit.mc
+  virtuser-domains
+  virtusertable
+  genericstable
+ libexec/ -------------------------------- Binaries of procmail and maildrop
+ sbin/ ----------------------------------- System commands
+  make-vmailbox -------------------------- Helper script for making virtual mailbox
+  sendmail ------------------------------- sendmail binary
+  editmap
+  smrsh
+  praliases
+  mailstats
+  sendmailctl ---------------------------- Helper script for controlling sendmail
+  makemap
+ share/ ---------------------------------- Data
+  cf/ ------------------------------------ sendmail-cf source files
+  cf/cf/`hostname`.mc -------------------- etc/sendmail.cf source
+  cf/cf/`hostname`.cf -------------------- Same as etc/sendmail.cf
+  cf/mailer/virtmail.m4 ------------------ Virtual mailbox mailer
+  data/helpfile -------------------------- sendmail.hf
+  example/a-part-of-dovecot.conf --------- Example of dovecot.conf
+  example/a-part-of-aliases -------------- Example of etc/aliases
+  example/a-part-of-logrotate.conf ------- Example of /etc/logrotate.conf
+  example/dovecot-virtuser-passwd -------- Example of dovecot virtual user password file
+  example/virtusertable ------------------ Example of etc/virtusertable
+  example/a-part-of-sendmail.mc ---------- A part of sendmail.mc
+  example/etc-group ---------------------- Required groups for /etc/groups
+  example/etc-passwd --------------------- Required users for /etc/passwd
+  maildrop/html/ ------------------------- maildrop HTML documents
+  man/man*/ ------------------------------ Manual pages
+ var/ ------------------------------------ Local state directory
+  adm/sm.bin/ ---------------------------- Directory for smrsh
+  hoststat/ ------------------------------ Host status directory
+  log/maildrop-virtual.log --------------- maildrop log
+  log/procmail-local.log ----------------- procmail log
+  run/sendmail.pid ----------------------- Sendmail's process id
+  spool/cqueue --------------------------- Mail queue directory for submission
+  spool/mqueue --------------------------- Mail queue directory
+  tmp/statistics ------------------------- sendmail.st
+
+
