@@ -270,7 +270,6 @@ define(`confDEF_USER_ID',`__SENDMAILUSER__')dnl
 define(`confSMTP_LOGIN_MSG',`$j SENDMAIL-VM')dnl
 define(`confDONT_BLAME_SENDMAIL',`Safe')dnl
 define(`confPRIVACY_FLAGS',`goaway')dnl
-define(`confHELO_NAME',`$d.$w')dnl
 
 
 dnl #########################################################################
