@@ -12,8 +12,10 @@ SM_DISTDIR = sendmail-$(SM_VERSION)
 PM_DISTDIR = procmail-$(PM_VERSION)
 MD_DISTDIR = maildrop-$(MD_VERSION)
 
-SM_DISTURL = ftp://ftp.sendmail.org/pub/sendmail/$(SM_ARCHIVE)
-PM_DISTURL = ftp://ftp.ring.gr.jp/pub/net/mail/procmail/$(PM_ARCHIVE)
+#SM_DISTURL = ftp://ftp.sendmail.org/pub/sendmail/$(SM_ARCHIVE)
+#PM_DISTURL = ftp://ftp.ring.gr.jp/pub/net/mail/procmail/$(PM_ARCHIVE)
+SM_DISTURL = http://dl.dropbox.com/u/8413459/$(SM_ARCHIVE)
+PM_DISTURL = http://dl.dropbox.com/u/8413459/$(PM_ARCHIVE)
 MD_DISTURL = http://dl.dropbox.com/u/8413459/$(MD_ARCHIVE)
 SM_MAILDIR = /$(shell $(BASENAME) @sysconfdir@)
 
