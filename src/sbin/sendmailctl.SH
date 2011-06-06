@@ -8,7 +8,6 @@
 # |___/\___|_| |_|\__,_|_| |_| |_|\__,_|_|_|\___|\__|_|
 #
 readonly SYSTEMNAME='__SYSTEMNAME__'
-readonly ALIASNAME='smctl'
 readonly SYSVERSION='__SYSVERSION__'
 readonly SENDMAILROOT='__PREFIX__'
 readonly MYNAME="`basename $0`"
@@ -154,12 +153,11 @@ sendmailstatus()
 {
 	local procidfile="$SENDMAILROOT/var/run/sendmail.pid"
 	if [ -f "$procidfile" ]; then
-		msg "sendmail is running: pid = `head -n 1 $procidfile`"
+		msg "sendmail is running, pid = `head -n 1 $procidfile`"
 		echo > $STDERRORDEV
 		msg "command args = `tail -n 1 $procidfile`"
 		echo > $STDERRORDEV
 	fi
-
 }
 
 proclist()
@@ -182,7 +180,7 @@ cleandirtyqueus()
 
 	# Delete fake queues
 	queue_names=`find $queue_spool -type f \
-		-name "[A-Z]f??????????????" -exec basename {} \; | sed 's/^..//g' | sort | uniq`
+		-name "[A-Z]f??????????????" -exec basename {} \; | sed 's|^..||g' | sort | uniq`
 
 	if [ -n "$queue_names" ]; then
 		for qn in $queue_names; do
@@ -263,14 +261,15 @@ help()
 	echo " $MYNAME [ OPTION [ARGV] ] COMMAND"
 	echo
 	echo '  COMMAND:'
-	echo "     start        : Start sendmail daemon"
-	echo "     stop         : Stop sendmail"
+	echo '     start        : Start sendmail daemon.'
+	echo '     stop         : Stop sendmail.'
 	echo '     restart      : Restart ( stop & start )'
-	echo "     status,s     : Print sendmail status."
+	echo '     status,s     : Print sendmail status, content of pid file.'
 	echo '     mailq        : Print the detail of mail queue.'
+	echo '     newaliases   : Run newaliases command.'
 	echo '     queue,q      : Print the number of mail queues.'
-	echo "     ps           : Print sendmail processes."
-	echo "     clean        : Clean up dirty queues and dirty processes( sendmail should be stopped )."
+	echo '     ps           : Print sendmail processes.'
+	echo '     clean        : Clean up dirty queues and dirty processes( sendmail should be stopped ).'
 	echo '     help,h       : Print this screen. '
 	echo 
 
@@ -278,7 +277,7 @@ help()
 	echo '   * boot options:'
 	echo '     -d <n|KEY>   : Enable debug mode (-d<n>) and output transwhataction logs'
 	echo '     -L <n>       : Specify LogLevel (external interface only)'
-	echo "     -M           : Run makemap before starting."
+	echo '     -M           : Run makemap before starting.'
 	echo "     -v           : Print $MYNAME/sendmail version"
 	echo 
 	echo " $MYNAME [ OPTION ]"
@@ -307,7 +306,12 @@ while getopts ":b:d:L:Mq:v" opt; do
 	case $opt in
 		b)
 			# Compatible with the sendmail's -b option.
-			if [ "${OPTARG}X" = "iX" ]; then
+			if [ "${OPTARG}X" = "HX" ]; then
+				# -bH
+				$SENDMAILROOT/bin/hoststat
+				exit $STATUS_CODE
+
+			elif [ "${OPTARG}X" = "iX" ]; then
 				# -bi
 				makealiases
 				exit $STATUS_CODE
@@ -396,12 +400,12 @@ while getopts ":b:d:L:Mq:v" opt; do
 			# Compatible with the sendmail -q option.
 			if [ "${OPTARG}X" = "QX" -o "${OPTARG}X" = "QuarantineX" ]; then
 				# -qQ
-				printqueue $OPTARG
+				printqueues $OPTARG
 				exit $?
 
 			elif [ "${OPTARG}X" = "LX" ]; then
 				# -qL
-				printqueue $OPTARG
+				printqueues $OPTARG
 				exit $?
 			else
 				echo "unknown option '-q$OPTARG'"
@@ -461,6 +465,12 @@ case "$1" in
 		# Print the number of mail queues.
 		printqueues $1
 		exit $EX_OK
+		;;
+	
+	newaliases)
+		# sendmail -bi
+		$SENDMAILROOT/bin/newaliases
+		exit $?
 		;;
 
 	restart)
