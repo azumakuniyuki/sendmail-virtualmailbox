@@ -1,0 +1,3 @@
+sendmail:x:525:525:Sendmail:/usr/local/sendmail/var/spool/mqueue:/usr/sbin/nologin
+smsubmit:x:587:587:Sendmail Submission:/usr/local/sendmail/var/spool/cqueue:/usr/sbin/nologin
+virtmail:x:660:660:Virtual Mailbox:/home/virtmail:/bin/sh

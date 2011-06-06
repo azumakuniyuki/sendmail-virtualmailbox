@@ -1,0 +1,3 @@
+sendmail:x:525:
+smsubmit:x:587:
+virtmail:x:660:

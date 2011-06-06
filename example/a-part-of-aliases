@@ -1,10 +1,23 @@
-# $Id: a-part-of-aliases,v 1.1 2010/02/06 19:04:04 ak Exp $
-
+# $Id: aliases,v 1.1 2010/02/06 19:04:04 ak Exp $
+# aliases for sendmail-virtualmailbox
+#        _ _                     
+#   __ _| (_) __ _ ___  ___  ___ 
+#  / _` | | |/ _` / __|/ _ \/ __|
+# | (_| | | | (_| \__ \  __/\__ \
+#  \__,_|_|_|\__,_|___/\___||___/
+#                                
+# See also /usr/local/sendmail/share/example/virtusertable
+# ---------------------------------------------------------------------------
+# * Local unix user mailboxes, -> /home/$USER/Maildir
 postmaster:			root
-staff.example.jp:		hoge@example.jp, fuga@example.jp
-staff.example.org:		piyo@example.org
+hostmaster:			root
+admin:				\admin, /var/tmp/admin.mbox
+staff.example.jp:		hoge@example.jp.VIRTMAIL, 
+				fuga@example.jp.VIRTMAIL,
+				piyo-example-jp@gmail.com
+members.example.org:		piyo@example.org.VIRTMAIL
 
-# Virtual Lists
+# * Lists
 virtlist:			postmaster
 list.example.jp:		:include:/home/virtlist/example.jp/list/include
 list-ctl.example.jp:		:include:/home/virtlist/example.jp/list/include-ctl
@@ -17,13 +30,3 @@ owner-list-ctl.example.jp:	virtlist
 # If you use mead.pl, comment out list-admin: line and UNCOMMNET OUT here.
 #list-admin.example.jp:		virtlist, :include:/home/virtlist/example.jp/list/include-mead
 
-list.example.org:		:include:/home/virtlist/example.org/list/include
-list-ctl.example.org:		:include:/home/virtlist/example.org/list/include-ctl
-list-request.example.org:	list-admin.example.org
-list-admin.example.org:		virtlist
-owner-list.example.org:		virtlist
-owner-list-ctl.example.org:	virtlist
-
-# Mail Error Analyzer Daemon
-# If you use mead.pl, comment out list-admin: line and UNCOMMNET OUT here.
-#list-admin.example.org:	virtlist, :include:/home/virtlist/example.org/list/include-mead
