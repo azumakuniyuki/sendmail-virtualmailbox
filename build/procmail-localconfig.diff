@@ -1,25 +1,34 @@
---- Makefile	2010-02-01 20:05:07.000000000 -0600
-+++ Makefile	2010-02-01 20:06:12.000000000 -0600
+--- Makefile	2011-05-19 09:46:00.000000000 +0900
++++ Makefile	2011-05-19 09:47:12.000000000 +0900
 @@ -2,7 +2,7 @@
  
  # BASENAME should point to where the whole lot will be installed
  # change BASENAME to your home directory if need be
 -BASENAME	= /usr
-+BASENAME	= /usr/local/virtmail
++BASENAME	= __PREFIX__
  # For display in the man pages
  VISIBLE_BASENAME= $(BASENAME)
  
-@@ -11,7 +11,7 @@
+@@ -10,7 +10,7 @@
+ ARCHITECTURE	=
  #ARCHITECTURE	=.sun4
  
- BINDIR_TAIL	= bin$(ARCHITECTURE)
--MANDIR		= $(BASENAME)/man
-+MANDIR		= $(BASENAME)/share/man
+-BINDIR_TAIL	= bin$(ARCHITECTURE)
++BINDIR_TAIL	= libexec
+ MANDIR		= $(BASENAME)/man
  BINDIR		= $(BASENAME)/$(BINDIR_TAIL)
  VISIBLE_BINDIR	= $(VISIBLE_BASENAME)/$(BINDIR_TAIL)
- # MAN1SUFFIX for regular utility manuals
---- config.h	2010-02-01 20:06:23.000000000 -0600
-+++ config.h	2010-02-01 20:10:32.000000000 -0600
+@@ -112,7 +112,7 @@
+ MANS5S	= procmailrc procmailsc procmailex
+ 
+ # Possible locations for the sendmail.cf file
+-SENDMAILCFS = /etc/mail/sendmail.cf /etc/sendmail.cf /usr/lib/sendmail.cf
++SENDMAILCFS = /etc/mail/sendmail.cf /etc/sendmail.cf /usr/lib/sendmail.cf __SYSCONFDIR__/sendmail.cf
+ 
+ # Makefile - mark, don't (re)move this, a sed script needs it
+ 
+--- config.h	2011-05-19 09:47:36.000000000 +0900
++++ config.h	2011-05-19 09:50:59.000000000 +0900
 @@ -52,7 +52,7 @@
  	is group writable or contained in a group writable home directory
  	if the group involved is the user's default group. */
@@ -34,7 +43,7 @@
  	needed or under heavy load. */
  
 -/*#define DEFsendmail	"/usr/sbin/sendmail"	/* uncomment and/or change if
-+#define DEFsendmail	"/usr/sbin/sendmail"	/* uncomment and/or change if
++#define DEFsendmail	"__SBINDIR__/sendmail"	/* uncomment and/or change if
  						   the autoconfigured default
  	SENDMAIL is not suitable.  This program should quack like a sendmail:
  	it should accept the -oi flag (to tell it to _not_ treat a line
@@ -43,12 +52,21 @@
  	system mailbox.	 This also must be an absolute path */
  
 -#define ETCRC	"/etc/procmailrc"	/* optional global procmailrc startup
-+#define ETCRC	"/usr/local/virtmail/etc/procmailrc"	/* optional global procmailrc startup
++#define ETCRC	"__SYSCONFDIR__/procmailrc" /* optional global procmailrc startup
  					   file (will only be read if procmail
  	is started with no rcfile on the command line). */
  
 -#define ETCRCS	"/etc/procmailrcs/"	/* optional trusted path prefix for
-+#define ETCRCS	"/usr/local/virtmail/etc/procmailrcs/"	/* optional trusted path prefix for
++#define ETCRCS	"__SYSCONFDIR__/rcs/"	/* optional trusted path prefix for
  					   rcfiles which will be executed with
  	the uid of the owner of the rcfile (this only happens if procmail is
  	called with the -m option, without variable assignments on the command
+@@ -168,7 +168,7 @@
+ #define INEFFICIENTrealloc			  /* don't pussy-foot around */
+ #endif
+ #define MAXinMEM	(1024*1024)		 /* when to switch to mmap() */
+-#define MMAP_DIR	"/var/spool/procmail/"		     /* where to put */
++#define MMAP_DIR	"__LOCALSTATEDIR__/spool/procmail/"  /* where to put */
+ #endif								/* the files */
+ #define MINlogbuf	81			       /* fit an entire line */
+ #define MAXlogbuf	1000		       /* in case someone abuses LOG */

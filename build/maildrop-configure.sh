@@ -1,7 +1,10 @@
 # $Id: maildrop-configure,v 1.1 2010/02/02 11:39:49 ak Exp $
 ./configure \
-	--prefix=/usr/local/virtmail \
-	--enable-sendmail=/usr/sbin/sendmail \
+	--prefix=__PREFIX__ \
+	--bindir=__BINDIR__ \
+	--sysconfdir=__SYSCONFDIR__ \
+	--localstatedir=__LOCALSTATEDIR__ \
+	--enable-sendmail=__PREFIX__/sbin/sendmail \
 	--enable-keep-fromline=1 \
 	--enable-unicode \
-	--with-etcdir=/usr/local/virtmail/etc
+	--with-etcdir=__SYSCONFIDIR__
