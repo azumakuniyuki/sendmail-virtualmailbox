@@ -1,0 +1,10 @@
+# $Id: maildrop-configure,v 1.1 2010/02/02 11:39:49 ak Exp $
+./configure \
+	--prefix=/usr/local/sendmail \
+	--bindir=/usr/local/sendmail/libexec \
+	--sysconfdir=/usr/local/sendmail/etc \
+	--localstatedir=/usr/local/sendmail/var \
+	--enable-sendmail=/usr/local/sendmail/sbin/sendmail \
+	--enable-keep-fromline=1 \
+	--enable-unicode \
+	--with-etcdir=__SYSCONFIDIR__
