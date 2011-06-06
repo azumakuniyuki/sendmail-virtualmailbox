@@ -6,7 +6,6 @@ instdir = @sbindir@
 
 $(bin_SCRIPTS):
 	$(CAT) $@.SH | $(SED) \
-		-e "s|__SYSTEMNAME__|$(SYSTEMNAME)|g" \
 		-e "s|__SYSVERSION__|$(SYSVERSION)|g" \
 		-e "s|__TARGET_FQDN__|$(TARGET_FQDN)|g" \
 		-e "s|__TARGET_OSTYPE__|$(TARGET_OSTYPE)|g" \
@@ -27,7 +26,8 @@ $(bin_SCRIPTS):
 
 install-am:
 	$(INSTALL) -o root -g root -vpm 0755 $(bin_SCRIPTS) @sbindir@/
-	$(LN) -fs @sbindir@/sendmailctl /usr/local/sbin/smctl
+	test -e /usr/local/sbin/smctl || \
+		$(LN) -fs @sbindir@/sendmailctl /usr/local/sbin/smctl
 
 .PHONY: clean
 clean:

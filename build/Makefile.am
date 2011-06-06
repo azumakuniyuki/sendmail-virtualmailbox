@@ -12,9 +12,9 @@ SM_DISTDIR = sendmail-$(SM_VERSION)
 PM_DISTDIR = procmail-$(PM_VERSION)
 MD_DISTDIR = maildrop-$(MD_VERSION)
 
-#SM_DISTURL = ftp://ftp.sendmail.org/pub/sendmail/$(SM_ARCHIVE)
+SM_DISTURL = ftp://ftp.sendmail.org/pub/sendmail/$(SM_ARCHIVE)
 #PM_DISTURL = ftp://ftp.ring.gr.jp/pub/net/mail/procmail/$(PM_ARCHIVE)
-SM_DISTURL = http://dl.dropbox.com/u/8413459/$(SM_ARCHIVE)
+#SM_DISTURL = http://dl.dropbox.com/u/8413459/$(SM_ARCHIVE)
 PM_DISTURL = http://dl.dropbox.com/u/8413459/$(PM_ARCHIVE)
 MD_DISTURL = http://dl.dropbox.com/u/8413459/$(MD_ARCHIVE)
 SM_MAILDIR = /$(shell $(BASENAME) @sysconfdir@)
@@ -215,7 +215,7 @@ install-sendmail: $(SM_DISTDIR)
 	$(MKDIR) -p @bindir@
 	$(MKDIR) -p @sbindir@
 	$(MKDIR) -p @localstatedir@
-	$(MKDIR) -p @localstatedir@/stat
+	$(MKDIR) -p @localstatedir@/hoststat
 	$(MKDIR) -p @prefix@/include
 	cd $(SM_DISTDIR) && ( /bin/sh ./Build install DESTDIR=@prefix@ )
 
@@ -242,14 +242,13 @@ clean-am:
 	rm -f ./procmail-localconfig.patch
 	rm -f ./maildrop-configure
 	rm -f ./site.config.m4
-	rm -rf $(BUILDROOT)/dist/*
 	rm -f ./virtmail.m4
 
 distclean: clean
 
-	rm -f  $(PM_ARCHIVE)
-	rm -f  $(MD_ARCHIVE)
-	rm -f  $(SM_ARCHIVE)
+	rm -f $(PM_ARCHIVE)
+	rm -f $(MD_ARCHIVE)
+	rm -f $(SM_ARCHIVE)
 	rm -f ./*-ok
 	rm -fr ./archive/*
 

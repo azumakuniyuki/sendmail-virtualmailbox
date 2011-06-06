@@ -10,6 +10,7 @@ SENDMAIL = __SBINDIR__/sendmail
 MAKEMAP  = __SBINDIR__/makemap
 DBFILES  = virtusertable.db access.db genericstable.db mailertable.db
 PIDFILE  = __LOCALSTATEDIR__/run/sendmail.pid
+SMCTL    = __SBINDIR__/sendmailctl
 CFDIR    = __DATAROOTDIR__/cf
 OPTIONS  = __SYSCONFDIR__/daemon-options
 QINTERVAL= $(shell test -s queue-interval && head -1 queue-interval || echo 4m)
@@ -36,29 +37,14 @@ clean:
 	rm -f *.db *~
 
 start:
-	@if [ -s "$(PIDFILE)" ]; then \
-		echo 'Sendmail is running'; \
-		cat $(PIDFILE); \
-		exit 1; \
-	else \
-		echo 'Starting sendmail'; \
-		$(SENDMAIL) -bi > /dev/null; \
-		test -s $(PIDFILE) || $(SENDMAIL) -bd -q$(QINTERVAL) `cat $(OPTIONS) | grep -v '^#'`; \
-	fi
+	@/bin/sh $(SMCTL) start
 
 stop:
-	@if [ -s "$(PIDFILE)" ]; then \
-		echo 'Stopping sendmail'; \
-		test -s $(PIDFILE) && kill -TERM `head -1 $(PIDFILE)`; \
-	else \
-		echo 'Sendmail is not running'; \
-		exit 1; \
-	fi
+	@/bin/sh $(SMCTL) stop
 
 restart:
-	@make stop
-	@sleep 1
-	@make start
+	@/bin/sh $(SMCTL) stop
+	@/bin/sh $(SMCTL) start
 
 status:
 	@test -f $(PIDFILE) && tail -1 $(PIDFILE)

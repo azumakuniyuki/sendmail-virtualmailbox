@@ -1,9 +1,6 @@
 ### $Id: Makefile.am,v 1.2 2009/04/29 13:53:25 ak Exp $
 ### Makefile.am -- makefile(GNU) for sendmail-virtualmailbox
-SYSTEMNAME = sendmail-virtualmailbox
-SYSVERSION = 1.0.0
 SUBDIRS = build src
-
 .PHONY: clean
 all-am: Makefile
 install-am: maildirs lstatedirs queuedirs install-example message
