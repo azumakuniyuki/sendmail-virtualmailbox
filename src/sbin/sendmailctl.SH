@@ -222,23 +222,10 @@ result()
 			;;
 	esac
 
-	case "$OSTYPE" in
-		OpenBSD|FreeBSD|[Dd]arwin)
-			printf \\033[70G > $STDERRORDEV
-			printf \\033[1\;49m > $STDERRORDEV
-			echo -n $message > $STDERRORDEV
-			printf \\033[0\;39m > $STDERRORDEV
-			;;
-
-		[Ll]inux|[Ll]inux-gnu)
-			echo -en "\\033[70G" > $STDERRORDEV
-			echo -en "\\033[1;49m $message" > $STDERRORDEV
-			echo -en "\\033[0;39m" > $STDERRORDEV
-			;;
-		*)
-			echo -n "  $message" > $STDERRORDEV
-			;;
-	esac
+	printf \\033[70G > $STDERRORDEV
+	printf \\033[1\;49m > $STDERRORDEV
+	echo -n $message > $STDERRORDEV
+	printf \\033[0\;39m > $STDERRORDEV
 	echo > $STDERRORDEV
 }
 
