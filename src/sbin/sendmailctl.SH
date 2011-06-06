@@ -106,7 +106,7 @@ makealiases()
 {
 	msg 'newaliases'
 	if [ -f "$SENDMAILROOT/etc/aliases" ]; then
-
+		msg ", build $SENDMAILROOT/etc/aliases"
 		$SENDMAILROOT/sbin/sendmail -bi > /dev/null 2>&1
 		if [ "$?" -eq "0" ]; then
 			result OK
@@ -300,8 +300,8 @@ while getopts ":b:d:L:Mq:v" opt; do
 
 			elif [ "${OPTARG}X" = "iX" ]; then
 				# -bi
-				makealiases
-				exit $STATUS_CODE
+				$SENDMAILROOT/bin/newaliases
+				exit $?
 
 			elif [ "${OPTARG}X" = "pX" ]; then
 				# -bp
@@ -456,8 +456,8 @@ case "$1" in
 	
 	newaliases)
 		# sendmail -bi
-		$SENDMAILROOT/bin/newaliases
-		exit $?
+		makealiases
+		exit $STATUS_CODE
 		;;
 
 	restart)
