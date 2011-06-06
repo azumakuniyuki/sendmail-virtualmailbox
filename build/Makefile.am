@@ -28,6 +28,7 @@ sendmail: get-sendmail build-sendmail build-sendmail-cf
 
 get-procmail: $(PM_DISTDIR)
 $(PM_DISTDIR):
+	mkdir -p archive/
 	test -f archive/$(PM_ARCHIVE) && $(CP) archive/$(PM_ARCHIVE) . || $(WGET) $(PM_DISTURL)
 	test -f $(PM_ARCHIVE)
 	$(CP) $(PM_ARCHIVE) ./archive/
@@ -80,6 +81,7 @@ install-procmail: build-procmail
 
 get-maildrop: $(MD_DISTDIR)
 $(MD_DISTDIR):
+	mkdir -p archive/
 	test -f archive/$(MD_ARCHIVE) && $(CP) archive/$(MD_ARCHIVE) . || $(WGET) $(MD_DISTURL)
 	test -f $(MD_ARCHIVE)
 	$(CP) $(MD_ARCHIVE) ./archive/
@@ -122,6 +124,7 @@ install-maildrop: check-virtmail-user build-maildrop
 
 get-sendmail: $(SM_DISTDIR)
 $(SM_DISTDIR):
+	mkdir -p archive/
 	test -f archive/$(SM_ARCHIVE) && $(CP) archive/$(SM_ARCHIVE) . || $(WGET) $(SM_DISTURL)
 	test -f $(SM_ARCHIVE)
 	$(CP) $(SM_ARCHIVE) ./archive
