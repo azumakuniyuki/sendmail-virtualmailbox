@@ -1,8 +1,8 @@
-# $Id: procmailrc-example,v 1.1 2010/02/02 03:41:35 ak Exp $
+# $Id: procmailrc.in,v 1.1 2010/02/02 03:41:35 ak Exp $
 #
 # procmailrc for local user's Maildir
 #
-PATH='/usr/local/virtmail/bin:/usr/local/bin:/usr/bin:/bin:.'
-LOGFILE='/var/log/procmail-local.log'
+PATH='__BINDIR__:__SBINDIR____LIBEXECDIR__:/usr/local/bin:/usr/bin:/bin'
+LOGFILE='__LOCALSTATEDIR__/log/procmail-local.log'
 MAILDIR="$HOME/Maildir/"
 DEFAULT="$MAILDIR"

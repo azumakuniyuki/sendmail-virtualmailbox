@@ -1,16 +1,34 @@
-# $Id: virtusertable-example,v 1.1 2010/02/02 03:41:35 ak Exp $
-abuse@example.jp		postmaster
-postmaster@example.jp		%1
-hoge@example.jp			%0.VIRTMAIL
-fuga@example.jp			%0.VIRTMAIL
-staff@example.jp		%1.example.jp
-list@example.jp			%1.example.jp
-@example.jp			"ERROR:5.5.0:550 User Unknown"
+# $Id: virtusertable,v 1.1 2010/02/02 03:41:35 ak Exp $
+# virtusertable for sendmail-virtualmailbox
+#        _      _                       _        _     _      
+# __   _(_)_ __| |_ _   _ ___  ___ _ __| |_ __ _| |__ | | ___ 
+# \ \ / / | '__| __| | | / __|/ _ \ '__| __/ _` | '_ \| |/ _ \
+#  \ V /| | |  | |_| |_| \__ \  __/ |  | || (_| | |_) | |  __/
+#   \_/ |_|_|   \__|\__,_|___/\___|_|   \__\__,_|_.__/|_|\___|
+# 
+# See also __DATAROOTDIR__/example/aliases
+# ---------------------------------------------------------------------------
+# * Local unix user mailboxes: -> aliases -> /home/$USER/Maildir
+#abuse@example.jp		postmaster
+#abuse@example.org		postmaster
+#hostmaster@example.jp		%1
+#postmaster@example.jp		%1
+#postmaster@example.org		%1
+#webmaster@example.jp		admin
 
-abuse@example.org		postmaster
-postmaster@example.org		%1
-piyo@example.org		%0.VIRTMAIL
-staff@example.org		%1.example.org
-list@example.org		%1.example.org
-@example.org			"ERROR:5.5.0:550 User Unknown"
+# * Virtual mailboxes(a): -> /home/virtmail/$DOMAIN/$USER/Maildir
+#hoge@example.jp		%0.VIRTMAIL
+#fuga@example.jp		%0.VIRTMAIL
+#foo@example.org		%0.VIRTMAIL
+#bar@example.org		%0.VIRTMAIL
+
+# * Virtual mailboxes(b): -> aliases -> /home/virtmail/$DOMAIN/$USER/Maildir
+#staff@example.jp		%1.example.jp
+#list@example.jp		%1.example.jp
+#members@example.org		%1.example.org
+
+# * Default
+#@example.jp			"ERROR:5.5.0:550 User Unknown"
+#@example.org			"ERROR:5.5.0:550 User Unknown"
+
 

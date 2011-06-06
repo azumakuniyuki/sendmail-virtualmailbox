@@ -1,11 +1,11 @@
-# $Id: maildroprc-example,v 1.1 2010/02/02 03:41:35 ak Exp $
+# $Id: maildroprc.in,v 1.1 2010/02/02 03:41:35 ak Exp $
 #
 # maildroprc for virtual mailbox
 #
-PATH='/usr/local/virtmail/bin:/usr/local/bin:/usr/bin:/bin:.'
+PATH='__BINDIR__:__SBINDIR__:__LIBEXECDIR__:/usr/local/bin:/usr/bin:/bin:.'
 SHELL='/bin/sh'
 UMASK='077'
-logfile "/var/log/maildrop-virtual.log"
+logfile "__LOCALSTATEDIR__/log/maildrop-virtual.log"
 
 ADDRESSER="$FROM"
 RECIPIENT="$1"
