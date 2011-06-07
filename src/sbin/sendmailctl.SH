@@ -271,16 +271,7 @@ help()
 	echo '     -L <n>       : Specify LogLevel'
 	echo '     -M           : Run makemap before starting.'
 	echo "     -v           : Print $MYNAME/sendmail version"
-	echo 
-	echo " $MYNAME [ OPTION ]"
-	echo '   * sendmail wrapper options:'
-	echo '     -bH          : Exec purgestat, host status files are removed.'
-	echo "     -bi          : Initialize aliases database."
-	echo '     -bp          : Run mailq command.'
-	echo '     -qL          : Show lost files.'
-	echo '     -qQ          : Show quarantined queues, same as mailq -qQ'
 	echo
-
 
 	if [ $ENABLE_DEBUG -eq 1 ]; then
 		echo '  KEY: ( debug mode )'
@@ -294,36 +285,8 @@ help()
 }
 
 init
-while getopts ":b:d:L:Mq:v" opt; do
+while getopts ":d:L:Mv" opt; do
 	case $opt in
-		b)
-			# Compatible with the sendmail's -b option.
-			if [ "${OPTARG}X" = "HX" ]; then
-				# -bH
-				$SENDMAILROOT/bin/hoststat
-				exit $STATUS_CODE
-
-			elif [ "${OPTARG}X" = "iX" ]; then
-				# -bi
-				$SENDMAILROOT/bin/newaliases
-				exit $?
-
-			elif [ "${OPTARG}X" = "pX" ]; then
-				# -bp
-				printqueues $OPTARG
-				exit $STATUS_CODE
-
-			elif [ "${OPTARG}X" = "PX" ]; then
-				# -bP
-				# Print the number of mail queues.
-				printqueues q
-				exit $EX_OK
-			else
-				echo "unknown option '-b$OPTARG'"
-				exit $EX_USAGE
-			fi
-			;;
-
 		d)
 			# Enable debug mode
 			case "$OPTARG" in
@@ -387,22 +350,6 @@ while getopts ":b:d:L:Mq:v" opt; do
 		M)
 			# Run makemap command when boot
 			RUN_MAKEMAP=1
-			;;
-		q)
-			# Compatible with the sendmail -q option.
-			if [ "${OPTARG}X" = "QX" -o "${OPTARG}X" = "QuarantineX" ]; then
-				# -qQ
-				printqueues $OPTARG
-				exit $?
-
-			elif [ "${OPTARG}X" = "LX" ]; then
-				# -qL
-				printqueues $OPTARG
-				exit $?
-			else
-				echo "unknown option '-q$OPTARG'"
-				exit $EX_USAGE
-			fi
 			;;
 		v)
 			# Print my version.
