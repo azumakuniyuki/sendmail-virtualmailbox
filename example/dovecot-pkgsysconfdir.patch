@@ -1,0 +1,78 @@
+--- src/lib-master/Makefile.am	2010-04-13 20:16:12.000000000 +0900
++++ src/lib-master/Makefile.am	2011-06-07 04:03:10.000000000 +0900
+@@ -1,4 +1,4 @@
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ 
+ noinst_LTLIBRARIES = libmaster.la
+ 
+--- src/lib-master/Makefile.in	2011-05-11 23:35:52.000000000 +0900
++++ src/lib-master/Makefile.in	2011-06-07 04:04:07.000000000 +0900
+@@ -265,7 +265,7 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ noinst_LTLIBRARIES = libmaster.la
+ AM_CPPFLAGS = \
+ 	-I$(top_srcdir)/src/lib \
+--- doc/example-config/Makefile.am	2011-02-25 17:54:54.000000000 +0900
++++ doc/example-config/Makefile.am	2011-06-07 04:05:24.000000000 +0900
+@@ -1,6 +1,6 @@
+ SUBDIRS = conf.d
+ 
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ nodist_pkgsysconf_DATA = README
+ # nodist_ prefix just doesn't seem to work, so rm it directly:
+ dist-hook:
+--- doc/example-config/Makefile.in	2011-05-11 23:35:51.000000000 +0900
++++ doc/example-config/Makefile.in	2011-06-07 04:06:55.000000000 +0900
+@@ -283,7 +283,7 @@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ SUBDIRS = conf.d
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ nodist_pkgsysconf_DATA = README
+ exampledir = $(docdir)/example-config
+ example_DATA = \
+--- doc/example-config/conf.d/Makefile.am	2010-07-03 04:56:17.000000000 +0900
++++ doc/example-config/conf.d/Makefile.am	2011-06-07 04:07:53.000000000 +0900
+@@ -1,4 +1,4 @@
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ 
+ exampledir = $(docdir)/example-config/conf.d
+ example_DATA = \
+--- doc/example-config/conf.d/Makefile.in	2011-05-11 23:35:51.000000000 +0900
++++ doc/example-config/conf.d/Makefile.in	2011-06-07 04:08:49.000000000 +0900
+@@ -241,7 +241,7 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ exampledir = $(docdir)/example-config/conf.d
+ example_DATA = \
+ 	auth-checkpassword.conf.ext \
+--- doc/man/Makefile.am	2011-05-11 23:53:35.000000000 +0900
++++ doc/man/Makefile.am	2011-06-07 04:09:59.000000000 +0900
+@@ -1,4 +1,4 @@
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ 
+ dist_man1_MANS = \
+ 	deliver.1 \
+--- doc/man/Makefile.in	2011-05-11 23:53:36.000000000 +0900
++++ doc/man/Makefile.in	2011-06-07 04:10:43.000000000 +0900
+@@ -244,7 +244,7 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-pkgsysconfdir = $(sysconfdir)/dovecot
++pkgsysconfdir = $(sysconfdir)
+ dist_man1_MANS = \
+ 	deliver.1 \
+ 	doveadm-config.1 \

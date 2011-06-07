@@ -5,9 +5,18 @@
 #   fields. For a user database, you need to set also uid, gid and prefer-
 #   ably also home (see VirtualUsers).  (gecos) and (shell) fields are un-
 #   used by Dovecot.
+# 
+# passdb {
+#   driver = passwd-file
+#   args = /usr/local/dovecot/etc/virtuser-passwd
+# }
+#
+# userdb {
+#   driver = passwd-file
+#   args = /usr/local/dovecot/etc/virtuser-passwd
+# }
 #
 # user:password:uid:gid:(gecos):home:(shell):extra_fields
-#
 hoge@example.jp:<password here>:virtmail:virtmail::/home/virtmail/example.jp/hoge::
 fuga@example.jp:<password here>:virtmail:virtmail::/home/virtmail/example.jp/fuga::
 piyo@example.org:<password here>:virtmail:virtmail::/home/virtmail/example.org/piyo::

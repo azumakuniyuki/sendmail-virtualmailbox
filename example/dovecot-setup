@@ -1,0 +1,18 @@
+#!/bin/sh
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+cat doc/dovecot-initd.sh | \
+	sed 's|DAEMON=.*|DAEMON=/usr/local/dovecot/sbin/dovecot|' > /usr/local/dovecot/sbin/dovecot-initd.sh
+chmod a+x /usr/local/dovecot/sbin/dovecot-initd.sh
+install -o root -g root -pm 0644 doc/dovecot-openssl.cnf /usr/local/dovecot/etc/openssl.cnf
+cat doc/mkcert.sh | sed \
+	-e 's|SSLDIR=.*|SSLDIR=/usr/local/dovecot/etc/ssl|g' \
+	-e 's|OPENSSLCONFIG=.*|OPENSSLCONFIG=/usr/local/dovecot/etc/openssl.cnf|g' \
+	-e 's|CERTDIR=.*|CERTDIR=$SSLDIR|g' \
+	-e 's|KEYDIR=.*|KEYDIR=$SSLDIR|g' \
+	-e 's|CERTFILE=.*|CERTFILE=$CERTDIR/dovecot-cert.pem|g' \
+	-e 's|KEYFILE=.*|KEYFILE=$KEYDIR/dovecot-key.pem|g' \
+	> /usr/local/dovecot/sbin/mkcert.sh
+mkdir -p /usr/local/dovecot/etc/ssl/
+mkdir -p /usr/local/dovecot/etc/conf.d/
+mkdir -p /usr/local/dovecot/var/log/
+cp /usr/local/dovecot/share/doc/example-config/dovecot.conf /usr/local/dovecot/etc/

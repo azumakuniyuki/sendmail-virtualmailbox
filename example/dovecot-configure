@@ -1,0 +1,11 @@
+#!/bin/sh
+export D=/usr/local/dovecot
+/bin/sh ./configure \
+ --prefix=$D \
+ --docdir=$D/share/doc \
+ --mandir=$D/share/man \
+ --with-ssl=openssl \
+ --with-zlib \
+ --with-ssldir=$D/etc/ssl \
+ --with-rundir=$D/var/run \
+ --with-statedir=$D/var/lib

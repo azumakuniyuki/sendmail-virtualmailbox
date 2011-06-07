@@ -1,0 +1,68 @@
+auth_username_translation = %@
+base_dir = /usr/local/dovecot/var/run
+disable_plaintext_auth = no
+log_path = /usr/local/dovecot/var/log/dovecot.log
+debug_log_path = /usr/local/dovecot/var/log/dovecot-debug.log
+mail_location = maildir:~/Maildir
+first_valid_uid = 250
+first_valid_gid = 250
+
+passdb {
+  args = /usr/local/dovecot/etc/disabled-users
+  deny = yes
+  driver = passwd-file
+}
+
+passdb {
+  args = /usr/local/dovecot/etc/virtuser-passwd
+  driver = passwd-file
+}
+
+protocols = pop3 imap
+
+service auth {
+  user = root
+  vsz_limit = 256 M
+}
+
+service imap-login {
+  service_count = 1
+}
+
+service imap {
+  process_limit = 512
+  vsz_limit = 256 M
+}
+
+service pop3-login {
+  service_count = 1
+}
+
+service pop3 {
+  process_limit = 512
+  vsz_limit = 256 M
+}
+
+ssl = yes
+ssl_cert = </usr/local/dovecot/etc/ssl/dovecot-cert.pem
+ssl_key = </usr/local/dovecot/etc/ssl/dovecot-key.pem
+
+userdb {
+  driver = passwd
+}
+
+userdb {
+  args = /usr/local/dovecot/etc/virtuser-passwd
+  driver = passwd-file
+}
+
+protocol pop3 {
+  pop3_reuse_xuidl = yes
+  pop3_uidl_format = %08Xu%08Xv
+}
+
+protocol lda {
+  #postmaster_address = postmaster@
+  sendmail_path = /usr/local/sendmail/sbin/sendmail
+}
+
