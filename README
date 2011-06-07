@@ -47,6 +47,10 @@ examples/ ---------------------------------- Some example configuration files
  a-part-of-dovecot.conf -------------------- Example of dovecot.conf (a part of) 
  a-part-of-logrotate.conf ------------------ Example of /etc/logrotate.conf (a part of) 
  a-part-of-sendmail.mc --------------------- Example of cf/sendmail.mc(a part of)
+ dovecot.conf-example ---------------------- dovecot.conf example
+ dovecot-configure ------------------------- Example of configure for dovecot
+ dovecot-pkgsysconfdir.patch --------------- /usr/local/dovecot/etc/dovecot -> /usr/local/dovecot/etc
+ dovecot-setup ----------------------------- Script for dovecot after ``make install''
  dovecot-virtuser-passwd ------------------- Example of dovecot's passwd file
  etc-passwd -------------------------------- Required users for sendmail-virtualmailbox
  etc-group --------------------------------- Required groups for sendmail-virtualmailbox
