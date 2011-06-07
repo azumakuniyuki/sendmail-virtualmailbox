@@ -591,7 +591,7 @@ build-mailx: $(MX_DISTDIR) patch-mailx
 
 install-mailx: build-mailx
 	cd $(MX_DISTDIR) && $(MAKE) install
-	test -x @bindir@/mailx && $(LN) -fs @bindir@/mailx @bindir@mail
+	test -x @bindir@/mailx && $(LN) -fs @bindir@/mailx @bindir@/mail
 
 get-sid-milter: $(SI_DISTDIR)
 $(SI_DISTDIR):
