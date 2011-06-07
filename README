@@ -24,7 +24,6 @@ $Id: README,v 1.2 2010/02/02 11:47:18 ak Exp $
  * virtmail: Owner of /home/virtmail (virtual mailbox direcotry)
 --------------------------------------------------------------------------------
 
-
 CHANGES ------------------------------------ Version histoty
 DISTFILES ---------------------------------- File list after installation
 INSTALL ------------------------------------ How to install and configure virtual mailbox
@@ -35,10 +34,12 @@ TODO --------------------------------------- Not implemented or tested yet
 configure ---------------------------------- configure script for making sendmail-virtualmailbox
 build/ ------------------------------------- Base directory for making procmail, maildrop, and sendamil
  maildrop-configure.sh --------------------- Configure script source for making maidrop
+ mailx-localconfig.diff -------------------- Patch for heirloom-mailx to change paths.
  procmail-conflict-types-for-getline.patch - Patch for the error 'Conflicting types for getline' 
  procmail-localconfig.diff ----------------- Patch for procmail to change paths.
  sendmail-mc.in ---------------------------- /usr/local/sendmail/etc/sendmail.cf source
  sendmail-site.config.m4 ------------------- Build macros for sendmail
+ sid-milter-localconfig.diff --------------- Patch for sid-milter to change paths.
  submit-mc.in ------------------------------ /usr/local/sendmail/etc/submit.cf source
  virtmail.m4.in ---------------------------- source of cf/mailer/virtmail.m4
 dist/ -------------------------------------- Files for manual installation
