@@ -1,6 +1,6 @@
 #!/bin/sh
-# $Id: smcontrol.SH,v 5.43 2008/02/28 06:16:16 ak Exp $
-# @(#) smcontrol(8) - The control interface of sendmail-virtualmailbox
+# $Id: sendmailctl.SH,v 5.43 2008/02/28 06:16:16 ak Exp $
+# @(#) sendmailctl(8) - The control interface of sendmail-virtualmailbox
 #                     _                 _ _      _   _ 
 #  ___  ___ _ __   __| |_ __ ___   __ _(_) | ___| |_| |
 # / __|/ _ \ '_ \ / _` | '_ ` _ \ / _` | | |/ __| __| |
