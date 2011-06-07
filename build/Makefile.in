@@ -474,9 +474,10 @@ build-sendmail: $(SM_DISTDIR) check-sendmail-user
 			-e 's|\([^:]\)//|\1/|g' > $(SM_DISTDIR)/cf/cf/submit.mc ;\
 		cd $(SM_DISTDIR) && ( \
 			$(PERL) -i -pe "s|^MAILDIR=.*|MAILDIR=$(SM_MAILDIR)|" cf/cf/Makefile && \
-			/bin/sh ./Build -c DESTDIR=@prefix@ \
+			/bin/sh ./Build -c DESTDIR=@prefix@ && \
+			cd ./libmilter && /bin/sh ./Build -c DESTDIR=@prefix@ && \
+			$(TOUCH) $(BUILDROOT)/build/sendmail-build-ok ;\
 		) ;\
-		cd $(SM_DISTDIR)/libmilter && /bin/sh ./Build -c DESTDIR=@prefix@ ;\
 	fi
 
 build-sendmail-cf: $(SM_DISTDIR) sendmail.mc virtmail.m4 sendmail.cf
