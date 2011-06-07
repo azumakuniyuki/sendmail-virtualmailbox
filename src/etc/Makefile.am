@@ -4,7 +4,7 @@
 sysconf_DATA = procmailrc maildroprc virtusertable virtuser-domains \
 	       relay-domains local-host-names access mailertable \
 	       queue-interval genericstable generics-domains \
-	       daemon-options
+	       daemon-options sid-peer-hosts sid-pass-domains
 instdir = @sysconfdir@
 
 all-am: $(sysconf_DATA) etc-makefile
