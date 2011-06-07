@@ -61,7 +61,7 @@
  # MTA binary ownership/permissions
  MBINOWN=ifdef(`confMBINOWN', `confMBINOWN', `root')
 --- devtools/M4/UNIX/manpage.m4	2006-09-08 07:13:07.000000000 +0900
-+++ devtools/M4/UNIX/manpage.m4.x	2011-06-08 05:07:12.000000000 +0900
++++ devtools/M4/UNIX/manpage.m4	2011-06-08 05:07:12.000000000 +0900
 @@ -28,8 +28,8 @@
  MANOWN=	ifdef(`confMANOWN', `confMANOWN', `bin')
  MANGRP=	ifdef(`confMANGRP', `confMANGRP', `bin')
@@ -74,7 +74,7 @@
  MAN1MAN=${MANROOTMAN}ifdef(`confMAN1', `confMAN1', `1')
  MAN1EXT=ifdef(`confMAN1EXT', `confMAN1EXT', `1')
 --- devtools/M4/UNIX/sharedlib.m4	2006-09-06 07:56:53.000000000 +0900
-+++ devtools/M4/UNIX/sharedlib.m4.x	2011-06-08 05:08:36.000000000 +0900
++++ devtools/M4/UNIX/sharedlib.m4	2011-06-08 05:08:36.000000000 +0900
 @@ -20,7 +20,7 @@
  SHAREDLIB_EXT= ifdef(`confSHAREDLIB_EXT', `confSHAREDLIB_EXT', `.so')
  SHAREDLIB= bldCURRENT_PRODUCT${SHAREDLIB_EXT}${SHAREDLIB_SUFFIX}
@@ -84,3 +84,28 @@
  DEPLIBS= ifdef(`confDEPLIBS', `confDEPLIBS', `') ${bldCURRENT_PRODUCT`SMDEPLIBS'}
  
  CONFIG_SONAME= ifdef(`confSONAME', `confSONAME ${SHAREDLIB}', `')
+--- devtools/OS/GNU	2002-03-22 08:59:25.000000000 +0900
++++ devtools/OS/GNU	2011-06-08 05:41:23.000000000 +0900
+@@ -7,7 +7,7 @@
+ define(`confOPTIMIZE', `-g -O2')
+ define(`confDEPEND_TYPE', `CC-M')
+ define(`confEBINDIR', `/libexec')
+-define(`confMANROOT', `/man/man')
++define(`confMANROOT', `/share/man/man')
+ define(`confMANOWN', `root')
+ define(`confMANGRP', `wheel')
+ define(`confMANMODE', `644')
+--- devtools/OS/Linux	2002-03-22 08:59:25.000000000 +0900
++++ devtools/OS/Linux	2011-06-08 05:42:27.000000000 +0900
+@@ -5,9 +5,9 @@
+ 
+ define(`confDEPEND_TYPE', `CC-M')
+ define(`confSM_OS_HEADER', `sm_os_linux')
+-define(`confMANROOT', `/usr/man/man')
++define(`confMANROOT', `/share/man/man')
+ define(`confLIBS', `-ldl')
+-define(`confEBINDIR', `/usr/sbin')
++define(`confEBINDIR', `/sbin')
+ APPENDDEF(`confLIBSEARCH', `crypt nsl')
+ 
+ define(`confLD', `ld')
