@@ -3,28 +3,39 @@
 SM_VERSION = 8.14.5
 PM_VERSION = 3.22
 MD_VERSION = 2.5.3
+MX_VERSION = 12.4
+SI_VERSION = 1.0.0
 
 SM_ARCHIVE = sendmail.$(SM_VERSION).tar.gz
 PM_ARCHIVE = procmail-$(PM_VERSION).tar.gz
 MD_ARCHIVE = maildrop-$(MD_VERSION).tar.gz
+MX_ARCHIVE = mailx-$(MX_VERSION).tar.bz2
+SI_ARCHIVE = sid-milter-$(SI_VERSION).tar.gz
 
 SM_DISTDIR = sendmail-$(SM_VERSION)
 PM_DISTDIR = procmail-$(PM_VERSION)
 MD_DISTDIR = maildrop-$(MD_VERSION)
+MX_DISTDIR = mailx-$(MX_VERSION)
+SI_DISTDIR = sid-milter-$(SI_VERSION)
 
-SM_DISTURL = ftp://ftp.sendmail.org/pub/sendmail/$(SM_ARCHIVE)
+#SM_DISTURL = ftp://ftp.sendmail.org/pub/sendmail/$(SM_ARCHIVE)
 #PM_DISTURL = ftp://ftp.ring.gr.jp/pub/net/mail/procmail/$(PM_ARCHIVE)
-#SM_DISTURL = http://dl.dropbox.com/u/8413459/$(SM_ARCHIVE)
+SM_DISTURL = http://dl.dropbox.com/u/8413459/$(SM_ARCHIVE)
 PM_DISTURL = http://dl.dropbox.com/u/8413459/$(PM_ARCHIVE)
 MD_DISTURL = http://dl.dropbox.com/u/8413459/$(MD_ARCHIVE)
+MX_DISTURL = http://dl.dropbox.com/u/8413459/$(MX_ARCHIVE)
+SI_DISTURL = http://dl.dropbox.com/u/8413459/$(SI_ARCHIVE)
 SM_MAILDIR = /$(shell $(BASENAME) @sysconfdir@)
 
-all-am: procmail maildrop sendmail
-install-am: install-procmail install-maildrop install-sendmail
+
+all-am: procmail maildrop sendmail mailx sid-milter
+install-am: install-procmail install-maildrop install-sendmail install-mailx install-sid-milter
 
 procmail: get-procmail build-procmail
 maildrop: get-maildrop build-maildrop
 sendmail: get-sendmail build-sendmail build-sendmail-cf
+mailx: get-mailx build-mailx
+sid-milter: get-sid-milter build-sid-milter
 
 get-procmail: $(PM_DISTDIR)
 $(PM_DISTDIR):
@@ -160,6 +171,7 @@ build-sendmail: $(SM_DISTDIR) check-sendmail-user
 			$(PERL) -i -pe "s|^MAILDIR=.*|MAILDIR=$(SM_MAILDIR)|" cf/cf/Makefile && \
 			/bin/sh ./Build -c DESTDIR=@prefix@ \
 		) ;\
+		cd $(SM_DISTDIR)/libmilter && /bin/sh ./Build -c DESTDIR=@prefix@ ;\
 	fi
 
 build-sendmail-cf: $(SM_DISTDIR) sendmail.mc virtmail.m4 sendmail.cf
@@ -218,6 +230,7 @@ install-sendmail: $(SM_DISTDIR)
 	$(MKDIR) -p @prefix@/include
 	$(MKDIR) -p @localstatedir@/adm/sm.bin
 	cd $(SM_DISTDIR) && ( /bin/sh ./Build install DESTDIR=@prefix@ )
+	cd $(SM_DISTDIR)/libmilter && /bin/sh ./Build install DESTDIR=@prefix@
 
 	test -f @sbindir@/sm-mta || $(LN) -s @sbindir@/sendmail @sbindir@/sm-mta
 	for L in newaliases hoststat purgestat mailq; do \
@@ -226,6 +239,7 @@ install-sendmail: $(SM_DISTDIR)
 	test -f @sysconfdir@/aliases || \
 		$(INSTALL) -o root -g root -vpm 0644 $(SM_DISTDIR)/sendmail/aliases @sysconfdir@/
 	$(CP) -Rp $(SM_DISTDIR)/cf @datarootdir@/cf
+	$(CP) -Rp $(SM_DISTDIR)/include/* @prefix@/include/
 
 install-cf: sendmail.cf
 	$(INSTALL) -vpm 0644 -g root -o root sendmail.mc @sysconfdir@/
@@ -233,22 +247,108 @@ install-cf: sendmail.cf
 	$(INSTALL) -vpm 0644 -g root -o root $(SM_DISTDIR)/cf/cf/submit.mc @sysconfdir@/
 	$(INSTALL) -vpm 0644 -g root -o root $(SM_DISTDIR)/cf/cf/submit.cf @sysconfdir@/
 
+get-mailx: $(MX_DISTDIR)
+$(MX_DISTDIR):
+	mkdir -p archive/
+	test -f archive/$(MX_ARCHIVE) && $(CP) archive/$(MX_ARCHIVE) . || $(WGET) $(MX_DISTURL)
+	test -f $(MX_ARCHIVE)
+	$(CP) $(MX_ARCHIVE) ./archive
+	$(BUNZIP2) -dc $(MX_ARCHIVE) | $(TAR) xf -
+
+patch-mailx: $(MX_DISTDIR)
+	if [ -f "./mailx-patch-ok" ]; then \
+		true ;\
+	else \
+		$(CAT) mailx-localconfig.diff | $(SED) \
+			-e 's|__PREFIX__|@prefix@|g' \
+			-e 's|__SYSCONFDIR__|@sysconfdir@|g' \
+			-e 's|__DATAROOTDIR__|@datarootdir@|g' \
+			-e 's|__LIBEXECDIR__|@libexecdir@|g' \
+			-e 's|__BINDIR__|@bindir@|g' \
+			-e 's|__SBINDIR__|@sbindir@|g' \
+			-e 's|__LOCALSTATEDIR__|@localstatedir@|g' \
+			-e 's|__DATAROOTDIR__|@datarootdir@|g' \
+			-e 's|\([^:]\)//|\1/|g' > mailx-localconfig.patch ;\
+		cd $(MX_DISTDIR) && ( \
+			$(PATCH) -p0 < $(BUILDROOT)/build/mailx-localconfig.patch && \
+			$(TOUCH) $(BUILDROOT)/build/mailx-patch-ok \
+		) \
+	fi
+
+build-mailx: $(MX_DISTDIR) patch-mailx
+	if [ -f "./mailx-build-ok" ]; then \
+		true ;\
+	else \
+		cd $(MX_DISTDIR) && $(MAKE) ;\
+		$(TOUCH) $(BUILDROOT)/build/mailx-build-ok ;\
+	fi
+
+install-mailx: build-mailx
+	cd $(MX_DISTDIR) && $(MAKE) install
+	test -x @bindir@/mailx && $(LN) -fs @bindir@/mailx @bindir@mail
+
+get-sid-milter: $(SI_DISTDIR)
+$(SI_DISTDIR):
+	mkdir -p archive/
+	test -f archive/$(SI_ARCHIVE) && $(CP) archive/$(SI_ARCHIVE) . || $(WGET) $(SI_DISTURL)
+	test -f $(SI_ARCHIVE)
+	$(CP) $(SI_ARCHIVE) ./archive
+	$(GUNZIP) -dc $(SI_ARCHIVE) | $(TAR) xf -
+
+patch-sid-milter: $(SI_DISTDIR)
+	if [ -f "./sid-milter-patch-ok" ]; then \
+		true ;\
+	else \
+		$(CAT) sid-milter-localconfig.diff | $(SED) \
+			-e 's|__PREFIX__|@prefix@|g' \
+			-e 's|__SYSCONFDIR__|@sysconfdir@|g' \
+			-e 's|__DATAROOTDIR__|@datarootdir@|g' \
+			-e 's|__LIBEXECDIR__|@libexecdir@|g' \
+			-e 's|__BINDIR__|@bindir@|g' \
+			-e 's|__SBINDIR__|@sbindir@|g' \
+			-e 's|__LOCALSTATEDIR__|@localstatedir@|g' \
+			-e 's|__DATAROOTDIR__|@datarootdir@|g' \
+			-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
+			-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \
+			-e "s|__VIRTMAILUSER__|$(VIRTMAILUSER)|g" \
+			-e 's|\([^:]\)//|\1/|g' > sid-milter-localconfig.patch ;\
+		cd $(SI_DISTDIR) && ( \
+			$(PATCH) -p0 < $(BUILDROOT)/build/sid-milter-localconfig.patch && \
+			$(TOUCH) $(BUILDROOT)/build/sid-milter-patch-ok \
+		) \
+	fi
+
+build-sid-milter: $(SI_DISTDIR) patch-sid-milter
+	if [ -f "./sid-milter-build-ok" ]; then \
+		true ;\
+	else \
+		cd $(SI_DISTDIR) && /bin/sh ./Build -c DESTDIR=@prefix@ ;\
+		$(TOUCH) $(BUILDROOT)/build/sid-milter-build-ok ;\
+	fi
+
+install-sid-milter: build-sid-milter
+	cd $(SI_DISTDIR) && /bin/sh ./Build install DESTDIR=@prefix@
+
 .PHONY: clean
 clean-am:
-
 	rm -rf $(PM_DISTDIR)
 	rm -rf $(MD_DISTDIR)
 	rm -rf $(SM_DISTDIR)
+	rm -rf $(MX_DISTDIR)
+	rm -rf $(SI_DISTDIR)
 	rm -f ./procmail-localconfig.patch
+	rm -f ./mailx-localconfig.patch
+	rm -f ./sid-milter-localconfig.patch
 	rm -f ./maildrop-configure
 	rm -f ./site.config.m4
 	rm -f ./virtmail.m4
 
 distclean: clean
-
 	rm -f $(PM_ARCHIVE)
 	rm -f $(MD_ARCHIVE)
 	rm -f $(SM_ARCHIVE)
+	rm -f $(MX_ARCHIVE)
+	rm -f $(SI_ARCHIVE)
 	rm -f ./*-ok
 	rm -fr ./archive/*
 
