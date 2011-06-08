@@ -16,13 +16,13 @@
 #postmaster@example.org		%1
 #webmaster@example.jp		admin
 
-# * Virtual mailboxes(a): -> /home/virtmail/$DOMAIN/$USER/Maildir
+# * Virtual mailboxes(a): -> __VIRTMAILHOME__/$DOMAIN/$USER/Maildir
 #hoge@example.jp		%0.VIRTMAIL
 #fuga@example.jp		%0.VIRTMAIL
 #foo@example.org		%0.VIRTMAIL
 #bar@example.org		%0.VIRTMAIL
 
-# * Virtual mailboxes(b): -> aliases -> /home/virtmail/$DOMAIN/$USER/Maildir
+# * Virtual mailboxes(b): -> aliases -> __VIRTMAILHOME__/$DOMAIN/$USER/Maildir
 #staff@example.jp		%1.example.jp
 #list@example.jp		%1.example.jp
 #members@example.org		%1.example.org

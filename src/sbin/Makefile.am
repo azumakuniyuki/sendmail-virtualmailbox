@@ -22,6 +22,7 @@ $(bin_SCRIPTS):
 		-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
 		-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \
 		-e "s|__VIRTMAILUSER__|$(VIRTMAILUSER)|g" \
+		-e "s|__VIRTMAILHOME__|$(VIRTMAILHOME)|g" \
 		-e 's|\([^:]\)//|\1/|g' > $@
 
 install-am:

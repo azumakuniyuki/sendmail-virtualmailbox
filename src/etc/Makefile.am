@@ -23,6 +23,7 @@ $(sysconf_DATA):
 		-e 's|__SBINDIR__|@sbindir@|g' \
 		-e 's|__LOCALSTATEDIR__|@localstatedir@|g' \
 		-e 's|__DATAROOTDIR__|@datarootdir@|g' \
+		-e "s|__VIRTMAILHOME__|$(VIRTMAILHOME)|g" \
 		-e 's|\([^:]\)//|\1/|g' > $@
 
 etc-makefile:
@@ -39,6 +40,7 @@ etc-makefile:
 		-e 's|__SBINDIR__|@sbindir@|g' \
 		-e 's|__LOCALSTATEDIR__|@localstatedir@|g' \
 		-e 's|__DATAROOTDIR__|@datarootdir@|g' \
+		-e "s|__VIRTMAILHOME__|$(VIRTMAILHOME)|g" \
 		-e 's|\([^:]\)//|\1/|g' > $@
 
 install-am: $(sysconf_DATA) etc-makefile

@@ -2,8 +2,8 @@
 # $Id: make-vmailbox.SH,v 1.12.2.1 2011/03/19 09:41:17 ak Exp $
 export LANG=C
 export PATH="/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin"
-VIRTMAILUSER=__VIRTMAILUSER__
-VIRTMAILHOME="/home/__VIRTMAILUSER__"
+VIRTMAILUSER="__VIRTMAILUSER__"
+VIRTMAILHOME="__VIRTMAILHOME__"
 NEWMAILADDRS="$@"
 
 if [ -n "$NEWMAILADDRS" ]; then
