@@ -42,7 +42,7 @@ smcontrol()
 
 	if [ "${whataction}X" = "startX" ]; then
 
-		msg 'Starting sendmail'
+		msg 'Starting sendmail ... '
 		if [ -s "$procidfile" ]; then
 			msg ", $procidfile exists"
 			result NG
@@ -69,7 +69,7 @@ smcontrol()
 
 	elif [ "${whataction}X" = "stopX" ]; then
 
-		msg 'Stopping sendmail'
+		msg 'Stopping sendmail ... '
 		if [ -s "$procidfile" ]; then
 			( kill -$KILL_SIGNAL `head -1 $procidfile` && sleep 1 )
 			if [ "$?" -eq "0" -a ! -s "$procidfile" ]; then
@@ -90,7 +90,7 @@ smcontrol()
 makemaps()
 {
 	for M in access genericstable virtusertable mailertable; do
-		msg "makemap $M.db"
+		msg "makemap $M.db ... "
 		if [ -f "$SENDMAILROOT/etc/$M" ]; then
 			$SENDMAILROOT/sbin/makemap hash $SENDMAILROOT/etc/$M.db < $SENDMAILROOT/etc/$M > /dev/null 2>&1
 			if [ "$?" -eq "0" ]; then
@@ -109,7 +109,7 @@ makemaps()
 
 makealiases()
 {
-	msg 'newaliases'
+	msg 'Running newaliases ... '
 	if [ -f "$SENDMAILROOT/etc/aliases" ]; then
 		msg ", build $SENDMAILROOT/etc/aliases"
 		$SENDMAILROOT/sbin/sendmail -bi > /dev/null 2>&1
