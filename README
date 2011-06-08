@@ -21,7 +21,7 @@ $Id: README,v 1.2 2010/02/02 11:47:18 ak Exp $
  USERS AND GROUPS
  * sendmail: O DefaultUser=sendmail
  * smsubmit: Owner of /usr/local/sendmail/var/spool/cqueue (submission)
- * virtmail: Owner of /home/virtmail (virtual mailbox direcotry)
+ * virtmail: Owner of virtual mailbox direcotry: --virtualmailbox-home=DIR
 --------------------------------------------------------------------------------
 
 CHANGES ------------------------------------ Version histoty
@@ -43,6 +43,7 @@ build/ ------------------------------------- Base directory for making procmail,
  submit-mc.in ------------------------------ /usr/local/sendmail/etc/submit.cf source
  virtmail.m4.in ---------------------------- source of cf/mailer/virtmail.m4
 examples/ ---------------------------------- Some example configuration files
+ INSTALL-MANUALLY -------------------------- ./INSTALL of v0.1.4 for manual installation
  local-sendmail/ --------------------------- Files for manual operations to setup /usr/local/sendmail
  usr-sbin-sendmail/ ------------------------ Files for manual operations to setup /usr/local/virtmail with /usr/sbin/sendmail
  a-part-of-aliases ------------------------- Example of /etc/mail/aliases
