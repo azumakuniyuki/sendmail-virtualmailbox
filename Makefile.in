@@ -645,13 +645,14 @@ message:
 	@echo " $(SYSTEMNAME) $(SYSVERSION) "
 	@echo "-----------------------------------------------------------------------------"
 	@echo
-	@echo "  1. Run ``make sendmail-cf install-cf'' or Edit sendmail.mc and install "
-	@echo "     sendmail.cf in ./build directory"
+	@echo "  1. Run ``make sendmail-cf && make install-cf'' at current directory or Edit"
+	@echo "     sendmail.mc and install sendmail.cf in ./build directory"
 	@echo "  2. Edit @sysconfdir@/virtusertable, virtuser-domains, aliases"
 	@echo "  3. Run @sbindir@/newaliases"
 	@echo "  4. cd @sysconfdir@ && make virtusertable.db"
-	@echo "  5. cd @sysconfdir@ && make start"
-	@echo "  6. export PATH=\"@sbindir@:@bindir@:${PATH}\""
+	@echo "  5. If you use sid-milter, Edit sendmail.mc and run ``make sendmail.cf'' in"
+	@echo "     @sysconfdir@, and run ``@bindir@/sidctl start''"
+	@echo "  6. @prefix@/sbin/sendmailctl start or /usr/local/sbin/smctl start"
 	@echo
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

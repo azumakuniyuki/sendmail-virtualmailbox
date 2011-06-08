@@ -519,7 +519,10 @@ virtmail.m4:
 sendmail.cf: $(SM_DISTDIR) sendmail.mc virtmail.m4
 	$(CP) virtmail.m4 $(SM_DISTDIR)/cf/mailer/
 	$(M4) $(SM_DISTDIR)/cf/m4/cf.m4 sendmail.mc > $@
-	$(CP) sendmail.cf $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).cf
+	$(ECHO) "### $*.mc ###" >> $@
+	$(SED) -e 's|^|# |' sendmail.mc >> $@
+	test -f $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).cf || \
+		$(CP) sendmail.cf $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).cf
 
 install-sendmail: $(SM_DISTDIR)
 	$(MKDIR) -p @prefix@
@@ -548,10 +551,14 @@ install-sendmail: $(SM_DISTDIR)
 	$(CP) -Rp $(SM_DISTDIR)/include/* @prefix@/include/
 
 install-cf: sendmail.cf
-	$(INSTALL) -vpm 0644 -g root -o root sendmail.mc @sysconfdir@/
-	$(INSTALL) -vpm 0644 -g root -o root sendmail.cf @sysconfdir@/
-	$(INSTALL) -vpm 0644 -g root -o root $(SM_DISTDIR)/cf/cf/submit.mc @sysconfdir@/
-	$(INSTALL) -vpm 0644 -g root -o root $(SM_DISTDIR)/cf/cf/submit.cf @sysconfdir@/
+	for CF in sendmail.cf sendmail.mc; do \
+		test -f @sysconfdir@/$$CF && $(CP) @sysconfdir@/$$CF @sysconfdir@/$$CF.bak ;\
+		$(INSTALL) -vpm 0644 -g root -o root $$CF @sysconfdir@/ ;\
+	done
+	for CF in submit.cf submit.mc; do \
+		test -f @sysconfdir@/$$CF && $(CP) @sysconfdir@/$$CF @sysconfdir@/$$CF.bak ;\
+		$(INSTALL) -vpm 0644 -g root -o root $(SM_DISTDIR)/cf/cf/$$CF @sysconfdir@/ ;\
+	done
 
 get-mailx: $(MX_DISTDIR)
 $(MX_DISTDIR):
