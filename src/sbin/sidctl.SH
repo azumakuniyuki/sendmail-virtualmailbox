@@ -48,10 +48,10 @@ sidcontrol()
 			result NG
 			STATUS_CODE=$EX_GENERAL
 		else
-			commangarg="$commandarg -a $SENDMAILROOT/etc/sid-peer-hosts"
-			commangarg="$commandarg -d $SENDMAILROOT/etc/sid-pass-domains"
-			commangarg="$commandarg -P $procidfile"
-			commangarg="$commandarg $daemonopts"
+			commandarg="$commandarg -a $SENDMAILROOT/etc/sid-peer-hosts"
+			commandarg="$commandarg -d $SENDMAILROOT/etc/sid-pass-domains"
+			commandarg="$commandarg -P $procidfile"
+			commandarg="$commandarg $daemonopts"
 			( $commandarg && sleep 1 )
 
 			if [ "$?" -eq "0" -a -s "$procidfile" ]; then
