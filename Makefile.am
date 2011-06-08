@@ -43,7 +43,7 @@ install-cf: sendmail-cf
 	cd ./build && $(MAKE) install-cf
 
 install-example:
-	$(CP) example/* @datarootdir@/example/
+	$(CP) -Rp example/* @datarootdir@/example/
 
 clean-am:
 	rm -f ./*~ ./*.bak ./*.tmp ./*.db
