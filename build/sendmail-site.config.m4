@@ -15,7 +15,6 @@ dnl # APPENDDEF(`confENVDEF',`-D_PATH_PATH=\"/etc/hosts\"')
 dnl # APPENDDEF(`confENVDEF',`-DSASL')
 dnl # APPENDDEF(`confENVDEF',`-DNETINET6=0')
 dnl # APPENDDEF(`confMAPDEF',`-DMAP_REGEX -DNETINFO -DSOCKETMAP -DDNSMAP=1')
-APPENDDEF(`conf_sendmail_ENVDEV',`-DSM_CONF_SHM=1')dnl
 APPENDDEF(`conf_sendmail_ENVDEF',`-DMILTER')dnl
 APPENDDEF(`conf_libmilter_ENVDEF', `-DMILTER')dnl
 dnl # APPENDDEF(`conf_sendmail_ENVDEV',`-DSTARTTSL')dnl

@@ -385,7 +385,7 @@ install-procmail: build-procmail
 	$(STRIP) @libexecdir@/lockfile
 	$(STRIP) @libexecdir@/procmail
 
-	test -d @sysconfdir@/rc || $(MKDIR) -p @sysconfdir@/rc
+	test -d @sysconfdir@/rcs || $(MKDIR) -p @sysconfdir@/rcs
 	test -d @localstatedir@/log || $(MKDIR) -p @localstatedir@/log
 
 	if [ -f @localstatedir@/log/procmail-local.log ]; then \
@@ -427,7 +427,7 @@ check-virtmail-user:
 install-maildrop: check-virtmail-user build-maildrop
 	cd $(MD_DISTDIR) && $(MAKE) install-strip
 
-	test -d @sysconfdir@/rc || $(MKDIR) -p @sysconfdir@/rc
+	test -d @sysconfdir@/rcs || $(MKDIR) -p @sysconfdir@/rcs
 	test -d @localstatedir@/log || $(MKDIR) -p @localstatedir@/log
 
 	if [ -f @localstatedir@/log/maildrop-virtual.log ]; then \
