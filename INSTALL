@@ -7,147 +7,132 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
    ##  ##  ##    ###   ## ##  ## ##     ##      
   #### ##  ## #####    ## ##  ## ###### ######  
                                                 
-             How to install and use virtual_mailbox(virtmail.m4)
+             How to install and use sendmail-virtualmailbox
 --------------------------------------------------------------------------------
  * procmail delivers email to local user's Maildir (NOT virtual mailbox)
  * maildrop delivers email to virutal user's mailbox (NO unix account)
- * mailer/virtmail.m4 requires FEATURE(`virtusertable')
+ * sendmail is installed into /usr/local/sendmail with MILTER
 --------------------------------------------------------------------------------
 
+ 01. Add users and groups
 
-- procmail ---------------------------------------------------------------------
- * procmail will be installed into /usr/local/virtmail
- * procmail runs as a local delivery agent for local users(Maildir-ed)
+      Add users and groups which are listed in the following files:
+      example/etc-passwd, and example/etc-group .
 
-01. Download procmail source archive from http://www.procmail.org/
-02. Build procmail and install into ``/usr/local/virtmail'' directory.  If you
-    want to install procmail into other location, See and edit the patch file:
-    ./procmail-localconfig.patch
+--------------------------------------------------------------------------------
+ 02. Run configure script: 
 
-    # cd procmail-3.22/
-    # patch -p0 < procmail-localconfig.patch ... or edit Makefile and config.h 
-    # make && make install
+      # ./configure
 
-    ***** If "make" fails with the following message: 
-    *****  formisc.h:20: error: conflicting types for 'getline',
-    ***** Apply patch file: ./procmail-conflict-types-for-getline.patch
+      Default values are:
+        --prefix=/usr/local/sendmail
+        --sendmail-user=sendmail
+        --submit-user=smsubmit
+        --virtualmailbox-user=virtmail
+        --virtualmailbox-home=/home/virtmail
+        --hostname=`hostname | cut -d. -f1`
+        --domainname=`hostname | cut -d. -f2,3,4,5,6,7,8,9`
 
-    # strip /usr/local/virtmail/bin/*
+     If you want to install into another location, for example:
 
-03. Create local user's Maildir directories,
-    e.g.) local user is root, foo, and bar
+      # ./configure \
+         --prefix=/usr/local/smmta \
+         --sendmail-user=smmta \
+         --submit-user=smmsp \
+         --virtualmailbox-user=mail \
+         --virtualmailbox-home=/var/spool/vmailbox
 
-    # mkdir -pm 0700 /root/Maildir/{cur,tmp,new}
-    # for LU in foo bar; do
-    > mkdir -pm 0700 /home/$LU/Maildir/{cur,tmp,new}
-    > chown -R $LU:$LU /home/$LU/Maildir
-    > done
-    #
+--------------------------------------------------------------------------------
+ 03. Run make command
 
-04. Copy procmailrc file, and create an empty log file for procmail
-    # mkdir /usr/local/virtmail/etc
-    # cp ./examples/procmailrc /usr/local/virtmail/etc/procmailrc
-    # touch /var/log/procmail-local.log
-    # chmod 600 /var/log/procmail-local.log
+      # make && make install
+      
+      After you run ``make'', procmail, maildrop, heirloom-mailx, sendmail, and
+      sid-milter are automatically downloaded and built.
 
+--------------------------------------------------------------------------------
+ 04. Install sendmail.cf and sendmail.mc
 
-- maildrop ---------------------------------------------------------------------
- * maildrop will be installed into /usr/local/virtmail
- * maildrop runs as a local delivery agent for virtual users(Maildir-ed)
+      # make install-cf
 
-05. Download maildrop source archive from http://www.courier-mta.org/maildrop/
-06. Build maildrop and install into ``/usr/local/virtmail'' directory. If you 
-    want to install maildrop into other location, set the path to the directory
-    at --prefix and --with-etcdir configure option.
+      ``make'' create sendmail.mc and sendmail.cf at ./build directory.
+      When you run ``make install-cf'', ./build/sendmail.(cf|mc) are installed
+      into /usr/local/sendmail/etc/ and existing sendmail.cf will be copied as
+      sendmail.cf.bak .
 
-    # cd maildrop-2.5.3/
-    # ./configure --prefix=/usr/local/virtmail --enable-sendmail=/usr/sbin/sendmail \
-      --enable-keep-fromline=1 --enable-unicode --with-etcdir=/usr/local/virtmail/etc
+      sendmail.mc and sendmail.cf in ./build directory are also installed into
+      /usr/local/sendmail/share/cf/cf as `hostname`.(mc|cf)
 
-      ### OR ###
-    # /bin/sh /path/to/maildrop-configure
-      ### THEN ###
-    # make && make install-strip
+--------------------------------------------------------------------------------
+ 05. Edit configuration files
 
-07. Add virtual mailbox owner: ``virtmail''
-    # groupadd virtmail
-    # useradd -g virtmail -d /home/virtmail -s /bin/bash -c 'Virtual Mailbox' virtmail
-    # mkdir -pm 0700 /etc/skel/Maildir/{cur,tmp,new}
+      Edit virtuser-domains, virtusertable, and other sendmail configuration
+      files in /usr/local/sendmail/etc directory.
 
-08. Copy maildroprc file, Create an empty log file for maildrop
-    # cp ./examples/maildroprc /usr/local/virtmail/maildroprc
-    # touch /var/log/maildrop-virtual.log
-    # chown virtmail:root /var/log/maildrop-virtual.log
-    # chmod 0600 /var/log/maildrop-virtual.log
+      If you want to change sendmail.cf, edit sendmail.mc in /usr/local/sendmail
+      /etc/ directory and run ``make sendmail.cf'', or edit `hostname`.mc in 
+      /usr/local/sendmail/share/cf/cf/ directory and run ``make `hostname`.cf''.
 
-09. Create virtual mailbox directories in /home/virtmail/
-    e.g.) Virtual mailbox user:
-           hoge@example.jp, fuga@example.jp, and piyo@example.org
+--------------------------------------------------------------------------------
+ 06. Create local user's mailbox
 
-    # su - virtmail
-    $ for VU in hoge fuga; do
-    > mkdir -pm 0700 /home/virtmail/example.jp/$VU/Maildir/{/cur,tmp,new}
-    > done
-    $ mkdir -pm 0700 /home/virtmail/example.org/piyo/Maildir/{cur,tmp,new}
+      Create local user's mailbox(Maildir/) like following:
+      # mkdir -pm 0700 /root/Maildir/{cur,new,tmp}
+      # mkdir -pm 0700 /home/fuga/Maildir/{cur,new,tmp}
 
+      OR
 
-- sendmail ---------------------------------------------------------------------
+      # mkdir -pm 0700 /etc/skel/Maildir/{cur,new,tmp}
+      # adduser bar
 
-10. Copy virtmail.m4 file to the sendmail source directory
-    # cp ./virtmail.m4 /path/to/sendmail-src/cf/mailer
+--------------------------------------------------------------------------------
+ 07. Create virtual user's mailbox
 
-11. Edit your cf/sendmail.mc located in sendmail-src/cf/cf ,Paste the content of
-    examples/a-part-of-sendmail.mc file into sendmail.mc, and run the following 
-    command: ``make sendmail.cf''.
-    # cp /path/to/sendmail-src/cf/cf/sendmail.cf /etc/mail/virtmail.cf
+      Virtual user's mailbox directory is /home/virtmail by default. 
+      /usr/local/sendmail/sbin/make-vmailbox script is useful to create virtual
+      mailbox like the following:
 
-12. Edit /etc/mail/virtuser-domains. Insert two domain names of virtual mailbox
-    into /etc/mail/virtuser-domains file.
+      # make-vmailbox hoge@example.jp foo@example.org
+      # find /home/virtmail -type d
+      /home/virtmail/
+      /home/virtmail/example.jp
+      /home/virtmail/example.jp/hoge
+      /home/virtmail/example.jp/hoge/Maildir
+      /home/virtmail/example.jp/hoge/Maildir/tmp
+      /home/virtmail/example.jp/hoge/Maildir/new
+      /home/virtmail/example.jp/hoge/Maildir/cur
+      /home/virtmail/example.org/foo
+      /home/virtmail/example.org/foo/Maildir
+      /home/virtmail/example.org/foo/Maildir/tmp
+      /home/virtmail/example.org/foo/Maildir/new
+      /home/virtmail/example.org/foo/Maildir/cur
+      
 
-    # cd /etc/mail
-    # touch ./virtuser-domains
-    # echo 'example.jp' >> ./virtuser-domains
-    # echo 'example.org' >> ./virtuser-domains
-    
-13. Edit /etc/mail/virtusertable. See ./examples/virtusertable
+--------------------------------------------------------------------------------
+ 08. Setup dovecot or other IMAP/POP3 Server program
 
-    # cd /etc/mail
-    # touch ./virtusertable
-    # vi ./virtusertable
-    # makemap hash virtusertable.db < virtusertable
+      See example/dovecot-* files to install and configure dovecot.
 
-14. Address test(local user) with sendmail -bt command
-    # echo '3,0 postmaster@example.jp' | sendmail -bt -C/etc/mail/virtmail.cf
-    ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
-    Enter <ruleset> <address>
-    > canonify           input: postmaster @ example . jp
-    Canonify2          input: postmaster < @ example . jp >
-    ... snip ...
-    Parse1           returns: $# local $: root
-    parse            returns: $# local $: root
+--------------------------------------------------------------------------------
+ 08. Start Milter programs if you use
+     
+      Start milter programs, ( e.g. sid-milter, clamav-milter, and so on) before
+      starting sendmail. Helper script /usr/local/sendmail/sbin/sidctl is useful
+      to start/stop sid-milter.
 
-15. Address test(virtual user) with sendmail -bt command
-    # echo '3,0 hoge@example.jp' | sendmail -bt -C/etc/mail/virtmail.cf
-    ADDRESS TEST MODE (ruleset 3 NOT automatically invoked)
-    Enter <ruleset> <address>
-    ... snip ...
-    canonify         returns: hoge < @ example . jp . VIRTMAIL . >
-    .. snip ...
-    Parse1           returns: $# virtmail $@ localhost $: hoge < @ example . jp . >
-    parse            returns: $# virtmail $@ localhost $: hoge < @ example . jp . >
+      Dont forget enable a milter configuration in sendmail.cf.
+      # grep MILTER sendmail.cf
 
-16. If virtmail works properly, save virtmail.cf as /etc/mail/sendmail.cf after
-    backup your sendmail.cf .
-    # cp /etc/mail/sendmail.cf /etc/mail/sendmail-`date '+%F'`.cf
-    # cp /etc/mail/virtmail.cf /etc/mail/sendmail.cf
+--------------------------------------------------------------------------------
+ 09. Start sendmail
 
+      There are 3 ways to start sendmail daemon
+      a) /usr/local/sendmail/sbin/sendmail -bd -q5m -Lsm-mta
+      b) /usr/local/sendmail/sbin/sendmailctl start
+      c) /usr/local/sbin/smctl start
 
-- pop3d|imapd ------------------------------------------------------------------
-
-17. Configure your POP3|IMAP server. If you use dovecot,
-    see ./examples/a-part-of-dovecot.conf, ./examples/dovecot-virtuser-passwd
-
-18. Configure /etc/logrotate.conf for procmail and maildrop if you need.
-19. Restart sendmail and POP3|IMAP server
+      smctl is a symbolic link to sendmailctl command. If you use sendmailctl or
+      smctl command, Edit daemon-options and queue-interval file in /usr/local/
+      sendmail/etc directory.
 
 --------------------------------------------------------------------------------
