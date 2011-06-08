@@ -63,30 +63,37 @@ fi
 AC_ARG_WITH([sendmail-user],
 	AC_HELP_STRING(
 		[--sendmail-user=USER],
-		[sendmail run as the user, default is sendmail]),
+		[sendmail run as the user [sendmail]]),
 	[SENDMAILUSER=$withval],[SENDMAILUSER=sendmail])
 AC_SUBST(SENDMAILUSER)
 
 AC_ARG_WITH([submit-user],
 	AC_HELP_STRING(
 		[--submit-user=USER],
-		[submission run as the user, default is smsubmit]),
+		[submission run as the user [smsubmit]]),
 	[SMSUBMITUSER=$withval],[SMSUBMITUSER=smsubmit])
 AC_SUBST(SMSUBMITUSER)
 
 AC_ARG_WITH([virtmail-user],
 	AC_HELP_STRING(
 		[--virtualmailbox-user=USER],
-		[virtual mailbox owner, default is virtmail]),
+		[virtual mailbox owner [virtmail]]),
 	[VIRTMAILUSER=$withval],[VIRTMAILUSER=virtmail])
 AC_SUBST(VIRTMAILUSER)
 
-# AC_ARG_WITH([virtmail-home],
+AC_ARG_WITH([virtmail-home],
+	AC_HELP_STRING(
+		[--virtualmailbox-home=DIR],
+		[virtual mailbox home, [/home/$VIRTMAILUSER]]),
+	[VIRTMAILHOME=$withval],[VIRTMAILHOME=/home/$VIRTMAILUSER])
+ AC_SUBST(VIRTMAILHOME)
+
+#AC_ARG_WITH(binaries,
 #	AC_HELP_STRING(
-#		[--virtualmailbox-home=DIR],
-#		[virtual mailbox home, default is /home/VIRTMAILUSER]),
-#	[VIRTMAILHOME=$withval],[VIRTMAILHOME=/home/$VIRTMAILUSER])
-# AC_SUBST(VIRTMAILHOME)
+#		[--with-binaries],
+#		[Build sendmail, procmail, and maildrop [yes]] ),
+#	[WITH_BINARIES="$withval"], [WITH_BINARIES="yes"])
+#AC_SUBST(WITH_BINARIES)
 
 # Check OS
 case $host_os in

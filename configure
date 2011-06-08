@@ -675,6 +675,7 @@ WGET
 SENDMAILUSER
 SMSUBMITUSER
 VIRTMAILUSER
+VIRTMAILHOME
 TARGET_OSTYPE
 TARGET_FQDN
 TARGET_HOSTNAME
@@ -1264,10 +1265,12 @@ if test -n "$ac_init_help"; then
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --sendmail-user=USER    sendmail run as the user, default is sendmail
-  --submit-user=USER      submission run as the user, default is smsubmit
+  --sendmail-user=USER    sendmail run as the user sendmail
+  --submit-user=USER      submission run as the user smsubmit
   --virtualmailbox-user=USER
-                          virtual mailbox owner, default is virtmail
+                          virtual mailbox owner virtmail
+  --virtualmailbox-home=DIR
+                          virtual mailbox home, /home/$VIRTMAILUSER
   --hostname=HOST         hostname for sendmail.cf
   --domainname=DOMAIN     domainname for sendmail.cf
 
@@ -3465,12 +3468,22 @@ fi
 
 
 
-# AC_ARG_WITH([virtmail-home],
+
+# Check whether --with-virtmail-home was given.
+if test "${with_virtmail_home+set}" = set; then
+  withval=$with_virtmail_home; VIRTMAILHOME=$withval
+else
+  VIRTMAILHOME=/home/$VIRTMAILUSER
+fi
+
+
+
+#AC_ARG_WITH(binaries,
 #	AC_HELP_STRING(
-#		[--virtualmailbox-home=DIR],
-#		[virtual mailbox home, default is /home/VIRTMAILUSER]),
-#	[VIRTMAILHOME=$withval],[VIRTMAILHOME=/home/$VIRTMAILUSER])
-# AC_SUBST(VIRTMAILHOME)
+#		[--with-binaries],
+#		[Build sendmail, procmail, and maildrop [yes]] ),
+#	[WITH_BINARIES="$withval"], [WITH_BINARIES="yes"])
+#AC_SUBST(WITH_BINARIES)
 
 # Check OS
 case $host_os in
@@ -4267,7 +4280,7 @@ WGET!$WGET$ac_delim
 SENDMAILUSER!$SENDMAILUSER$ac_delim
 SMSUBMITUSER!$SMSUBMITUSER$ac_delim
 VIRTMAILUSER!$VIRTMAILUSER$ac_delim
-TARGET_OSTYPE!$TARGET_OSTYPE$ac_delim
+VIRTMAILHOME!$VIRTMAILHOME$ac_delim
 _ACEOF
 
   if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 97; then
@@ -4309,6 +4322,7 @@ _ACEOF
 ac_delim='%!_!# '
 for ac_last_try in false false false false false :; do
   cat >conf$$subs.sed <<_ACEOF
+TARGET_OSTYPE!$TARGET_OSTYPE$ac_delim
 TARGET_FQDN!$TARGET_FQDN$ac_delim
 TARGET_HOSTNAME!$TARGET_HOSTNAME$ac_delim
 TARGET_DOMAINNAME!$TARGET_DOMAINNAME$ac_delim
@@ -4316,7 +4330,7 @@ LIBOBJS!$LIBOBJS$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 5; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 6; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5
