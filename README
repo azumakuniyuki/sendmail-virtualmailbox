@@ -48,6 +48,7 @@ examples/ ---------------------------------- Some example configuration files
  a-part-of-dovecot.conf -------------------- Example of dovecot.conf (a part of) 
  a-part-of-logrotate.conf ------------------ Example of /etc/logrotate.conf (a part of) 
  a-part-of-sendmail.mc --------------------- Example of cf/sendmail.mc(a part of)
+ clamav-configure -------------------------- Example of configure for clamav
  dovecot.conf-example ---------------------- dovecot.conf example
  dovecot-configure ------------------------- Example of configure for dovecot
  dovecot-pkgsysconfdir.patch --------------- /usr/local/dovecot/etc/dovecot -> /usr/local/dovecot/etc
@@ -68,6 +69,9 @@ src/ --------------------------------------- Source files
   procmailrc.in ---------------------------- /usr/local/sendmail/etc/procmailrc
   queue-interval.in ------------------------ /usr/local/sendmail/etc/queue-interval
   relay-domains.in ------------------------- /usr/local/sendmail/etc/relay-domains
+  sid-options.in --------------------------- Define sid-milter options
+  sid-pass-domains.in ---------------------- Domains to always pass for sid-milter
+  sid-peer-hosts.in ------------------------ List of hosts to ignore for sid-milter
   virtuser-domains.in ---------------------- /usr/local/sendmail/etc/virtuser-domains
   virtusertable.in ------------------------- /usr/local/sendmail/etc/virtusertable
  sbin/ ------------------------------------- Source scripts for /usr/local/sendmail/sbin

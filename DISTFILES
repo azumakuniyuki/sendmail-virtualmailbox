@@ -23,8 +23,9 @@
   relay-domains
   sendmail.cf
   sendmail.mc ---------------------------- Copy of share/cf/cf/`hostname`.mc
-  sid-peer-hosts ------------------------- List of hosts to ignore for sid-milter
   sid-pass-domains ----------------------- Domains to alwasys passs for sid-milter
+  sid-peer-hosts ------------------------- List of hosts to ignore for sid-milter
+  sid-options ---------------------------- Command line options for sid-milter
   submit.cf
   submit.mc ------------------------------ Copy of share/cf/cf/submit.mc
   virtuser-domains

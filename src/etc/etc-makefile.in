@@ -27,7 +27,7 @@ aliases.db:
 	@test -f $< && $(MAKEMAP) hash $@ < $<
 
 %.cf: %.mc
-	@if test -f $(CFDIR)/m4/cf.m4; then \
+	if test -f $(CFDIR)/m4/cf.m4; then \
 		umask 022; \
 		test -e $@ && mv -f $@ $@.`date '+%F'`.bak; \
 		m4 $(CFDIR)/m4/cf.m4 $< > $@; \

@@ -37,28 +37,25 @@ sidcontrol()
 {
 	local whataction=$1
 	local procidfile="$SENDMAILROOT/var/run/sid-milter.pid"
-	local socketaddr='inet:8891@127.0.0.1'
+	local commandarg="$SENDMAILROOT/bin/sid-filter"
+	local daemonopts="`test -s $SENDMAILROOT/etc/sid-options && grep -v '^#' $SENDMAILROOT/etc/sid-options`"
 
 	if [ "${whataction}X" = "startX" ]; then
 
-		msg 'Starting sid-milter'
+		msg 'Starting sid-milter ... '
 		if [ -s "$procidfile" ]; then
 			msg ", $procidfile exists"
 			result NG
 			STATUS_CODE=$EX_GENERAL
 		else
-			local mtaoptions=''
-			local daemonopts="`test -s $SENDMAILROOT/etc/daemon-options && grep -v '^#' $SENDMAILROOT/etc/daemon-options`"
-			local mqinterval="`test -s $SENDMAILROOT/etc/queue-interval && head -1 $SENDMAILROOT/etc/queue-interval`"
-
-			[ -n "$SMLOG_LEVEL" ] && mtaoptions="$mtaoptions -OLogLevel=$SMLOG_LEVEL"
-			[ -n "$DEBUG_LEVEL" ] && mtaoptions="$mtaoptions -d$DEBUG_LEVEL"
-
-			( $SENDMAILROOT/bin/sid-filter -Aha $SENDMAILROOT/etc/sid-peer-hosts \
-				-d $SENDMAILROOT/etc/sid-pass-domains -r0 -T10 \
-				-P $procidfile -p $socketaddr && sleep 1 )
+			commangarg="$commandarg -a $SENDMAILROOT/etc/sid-peer-hosts"
+			commangarg="$commandarg -d $SENDMAILROOT/etc/sid-pass-domains"
+			commangarg="$commandarg -P $procidfile"
+			commangarg="$commandarg $daemonopts"
+			( $commandarg && sleep 1 )
 
 			if [ "$?" -eq "0" -a -s "$procidfile" ]; then
+				echo "$commandarg" >> $procidfile
 				result OK
 				STATUS_CODE=$EX_OK
 			else
@@ -69,7 +66,7 @@ sidcontrol()
 
 	elif [ "${whataction}X" = "stopX" ]; then
 
-		msg 'Stopping sid-milter'
+		msg 'Stopping sid-milter ... '
 		if [ -s "$procidfile" ]; then
 			( kill -$KILL_SIGNAL `head -1 $procidfile` && sleep 1 )
 			if [ "$?" -eq "0" -a ! -s "$procidfile" ]; then
@@ -87,9 +84,20 @@ sidcontrol()
 	fi
 }
 
+sidstatus()
+{
+	local procidfile="$SENDMAILROOT/var/run/sid-milter.pid"
+	if [ -f "$procidfile" ]; then
+		msg "sid-milter is running, pid = `head -n 1 $procidfile`"
+		echo > $STDERRORDEV
+		msg "command args = `tail -n 1 $procidfile`"
+		echo > $STDERRORDEV
+	fi
+}
+
 proclist()
 {
-	ps axuww | grep sbin/sid-filter | grep -v grep | sed 's| *$||g'
+	ps axuww | grep bin/sid-filter | grep -v grep | sed 's| *$||g'
 }
 
 msg()
@@ -154,34 +162,14 @@ help()
 	echo " $MYNAME [ OPTION [ARGV] ] COMMAND"
 	echo
 	echo '  COMMAND:'
-	echo '     start        : Start sendmail daemon.'
-	echo '     stop         : Stop sendmail.'
+	echo '     start        : Start sid-milter.'
+	echo '     stop         : Stop sid-milter.'
 	echo '     restart      : Restart ( stop & start )'
-	echo '     status,s     : Print sendmail status, content of pid file.'
-	echo '     ps           : Print sendmail processes.'
+	echo '     status,s     : Print sid-milter status, content of pid file.'
+	echo '     ps           : Print sid-milter processes.'
 	echo '     help,h       : Print this screen. '
 	echo 
-
-	echo '  OPTIONS:'
-	echo '   * boot options:'
-	echo '     -L <n>       : Specify LogLevel'
-	echo "     -v           : Print $MYNAME/sendmail version"
-	echo
 }
-
-init
-while getopts ":L:" opt; do
-	case $opt in
-		L)
-			# Specify LogLevel option(external only)
-			[ -n "$OPTARG" ] && SMLOG_LEVEL="$OPTARG"
-			;;
-		\?|*)
-			;;
-	esac
-done
-
-shift $( expr $OPTIND - 1 )
 
 
 #  ____ ____ ____ ____ 
@@ -189,6 +177,7 @@ shift $( expr $OPTIND - 1 )
 # ||__|||__|||__|||__||
 # |/__`|/__`|/__`|/__`|
 #
+init
 case "$1" in
 	#  ____ ____ ____ _________ ____ ____ ____ ____ ____ ____ ____ ____ 
 	# ||s |||u |||b |||       |||c |||o |||m |||m |||a |||n |||d |||s ||
@@ -213,6 +202,9 @@ case "$1" in
 		sidcontrol start
 		;;
 
+	status)
+		sidstatus
+		;;
 	stop|abort)
 		if [ "$1" = "abort" ]; then
 			KILL_SIGNAL=9	

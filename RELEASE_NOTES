@@ -14,27 +14,17 @@ __   _(_)_ __| |_ _   _  __ _| |_ __ ___   __ _(_) | |__   _____  __
              SENDMAIL-VIRTUALMAILBOX/RELEASE_NOTES
 -----------------------------------------------------------------------
 
-1.0.0		2011/06/xx
+1.0.0		2011/06/08
 
   New functionality: 
+    * Major update: version 1.0.0
     * Support configure script and make command  for automatically mak-
-      ing procmail, maildrop, and sendmail.
+      ing procmail, maildrop, mailx, sid-milter, and sendmail.
     * Sendmail wrapper script: sendmailctl (/usr/local/sbin/smctl).
     * Helper script for making virtual mailbox: sbin/make-vmailbox .
-    * procmail, maildrop, sendmail,  and their configuration files will
-      be installed into /usr/local/sendmail .
-    * Support and build heirloom-mailx and sid-milter.
-    * New command sidctl for sid-milter.
-
-  Assorted improvements and code cleanup:
-    * Build sendmail with Milter.
-
-  New files:
-    * build/mailx-localconfig.diff
-    * build/sid-milter-localconfig.diff
-    * src/sbin/sidctl.SH
-    * src/etc/sid-peer-hosts.in
-    * src/etc/sid-pass-domains.in
+    * procmail, maildrop, sendmail, mailx, sid-milter and their config-
+      uration files will be installed into /usr/local/sendmail .
+    * Helper script for controlling sid-milter: sidctl.
 
 -----------------------------------------------------------------------
 0.1.4		2011/06/03
