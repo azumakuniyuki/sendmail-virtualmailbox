@@ -1,0 +1,3 @@
+ LDFLAGS="-L/usr/local/sendmail/lib" \
+ CFLAGS="-I/usr/local/sendmail/include" \
+ /bin/sh ./configure --prefix=/usr/local/clamav --enable-milter

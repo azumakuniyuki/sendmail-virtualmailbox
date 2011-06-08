@@ -3,3 +3,4 @@ smsubmit:x:587:587:Sendmail Submission:/usr/local/sendmail/var/spool/cqueue:/sbi
 virtmail:x:660:660:Virtual Mailbox:/home/virtmail:/bin/sh
 dovecot:x:715:715:Dovecot IMAP Server:/usr/local/dovecot:/sbin/nologin
 dovenull:x:716:715:Dovecot Login:/usr/local/dovecot/var:/sbin/nologin
+clamav:x:7357:7357:ClamAV:/usr/local/clamav:/sbin/nologin
