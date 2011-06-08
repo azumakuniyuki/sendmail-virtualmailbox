@@ -42,12 +42,13 @@ build/ ------------------------------------- Base directory for making procmail,
  sid-milter-localconfig.diff --------------- Patch for sid-milter to change paths.
  submit-mc.in ------------------------------ /usr/local/sendmail/etc/submit.cf source
  virtmail.m4.in ---------------------------- source of cf/mailer/virtmail.m4
-dist/ -------------------------------------- Files for manual installation
+manual-operation/ -------------------------- Files for manual installation
 examples/ ---------------------------------- Some example configuration files
+ local-sendmail/ --------------------------- Files for manual operations to setup /usr/local/sendmail
+ usr-sbin-sendmail/ ------------------------ Files for manual operations to setup /usr/local/virtmail with /usr/sbin/sendmail
  a-part-of-aliases ------------------------- Example of /etc/mail/aliases
  a-part-of-dovecot.conf -------------------- Example of dovecot.conf (a part of) 
  a-part-of-logrotate.conf ------------------ Example of /etc/logrotate.conf (a part of) 
- a-part-of-sendmail.mc --------------------- Example of cf/sendmail.mc(a part of)
  clamav-configure -------------------------- Example of configure for clamav
  dovecot.conf-example ---------------------- dovecot.conf example
  dovecot-configure ------------------------- Example of configure for dovecot
