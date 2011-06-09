@@ -40,6 +40,7 @@ etc-makefile:
 	$(CP) $@.in $@
 
 install-am: $(sysconf_DATA)
+	test -d @sysconfdir@ || $(MKDIR) -p @sysconfdir@
 	for F in $(sysconf_DATA); do \
 		test -f @sysconfdir@/$$F || \
 			$(INSTALL) -vpm 0644 -o root -g root $$F.in $(instdir)/$$F ;\

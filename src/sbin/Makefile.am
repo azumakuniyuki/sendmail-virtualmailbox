@@ -14,6 +14,7 @@ $(bin_SCRIPTS):
 		-e 's|\([^:]\)//|\1/|g' > $@
 
 install-am:
+	test -d @sbindir@ || $(MKDIR) -p @sbindir@
 	$(INSTALL) -o root -g root -vpm 0755 $(bin_SCRIPTS) @sbindir@/
 	test -e /usr/local/sbin/smctl || \
 		$(LN) -fs @sbindir@/sendmailctl /usr/local/sbin/smctl
