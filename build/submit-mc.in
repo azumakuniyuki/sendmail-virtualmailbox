@@ -21,9 +21,9 @@ define(`__OSTYPE__',`')dnl dirty hack to keep proto.m4 from complaining
 define(`_USE_DECNET_SYNTAX_', `1')dnl support DECnet
 define(`confTIME_ZONE', `USE_TZ')dnl
 define(`confDONT_INIT_GROUPS', `True')dnl
-define(`STATUS_FILE',`-o __LOCALSTATEDIR__/tmp/smsubmit.st')dnl
-define(`confPID_FILE',`__LOCALSTATEDIR__/run/smsubmit.pid')dnl
-define(`MSP_QUEUE_DIR',`__LOCALSTATEDIR__/spool/cqueue')dnl
+define(`STATUS_FILE',`-o /var/spool/cqueue/smsubmit.st')dnl
+define(`confPID_FILE',`/var/run/smsubmit.pid')dnl
+define(`MSP_QUEUE_DIR',`/var/spool/cqueue')dnl
 dnl
 dnl If you use IPv6 only, change [127.0.0.1] to [IPv6:::1]
 FEATURE(`msp', `[127.0.0.1]')dnl
