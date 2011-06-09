@@ -143,8 +143,7 @@ dnl #  define(`STATUS_FILE',`-o CF/sendmail.st')	StatusFile(S)
 dnl #  define(`confUSERDB_SPEC',`CF/userdb.db')		UserDatabaseSpec
 define(`confDEAD_LETTER_DROP',`__LOCALSTATEDIR__/tmp/dead.letter')dnl
 define(`confHOST_STATUS_DIRECTORY',`__LOCALSTATEDIR__/hoststat')dnl
-define(`HELP_FILE',`__DATAROOTDIR__/data/helpfile')dnl
-define(`QUEUE_DIR',`SPOOL/mqueue/q.*')dnl
+define(`QUEUE_DIR',`SPOOL/queues/q.*')dnl
 define(`STATUS_FILE',`-o __LOCALSTATEDIR__/tmp/sendmail.st')dnl
 define(`confPID_FILE',`__LOCALSTATEDIR__/run/sendmail.pid')dnl
 
@@ -507,8 +506,8 @@ dnl #  define(`LUSER_RELAY',`mailer:relay.host') Relay unknown localuser
 dnl #  define(`LOCAL_RELAY',`local.mail.relay')	Relay local mail
 dnl #
 FEATURE(`mailertable',`hash -o CF/mailertable')dnl
-FEATURE(`local_procmail',`__LIBEXECDIR__/procmail')dnl
-define(`PROCMAIL_MAILER_PATH',`__LIBEXECDIR__/procmail')dnl
+FEATURE(`local_procmail',`__BINDIR__/procmail')dnl
+define(`PROCMAIL_MAILER_PATH',`__BINDIR__/procmail')dnl
 undefine(`BITNET_RELAY')dnl
 undefine(`DECNET_RELAY')dnl
 undefine(`FAX_RELAY')dnl
@@ -671,7 +670,7 @@ dnl #########################################################################
 dnl #
 dnl #  MAILER(`procmail')
 dnl #
-define(`VIRTMAIL_MAILER_PATH',`__LIBEXECDIR__/maildrop')dnl
+define(`VIRTMAIL_MAILER_PATH',`__BINDIR__/maildrop')dnl
 define(`VIRTMAIL_MAILER_USER',`__VIRTMAILUSER__')dnl
 MAILER(`local')
 MAILER(`smtp')

@@ -6,13 +6,13 @@
 # | |  | | (_| |   <  __/  _| | |  __/
 # |_|  |_|\__,_|_|\_\___|_| |_|_|\___|
 # ---------------------------------------------------------------------------
-SENDMAIL = __SBINDIR__/sendmail
-MAKEMAP  = __SBINDIR__/makemap
+SENDMAIL = /usr/sbin/sendmail
+MAKEMAP  = /usr/sbin/makemap
 DBFILES  = virtusertable.db access.db genericstable.db mailertable.db
-PIDFILE  = __LOCALSTATEDIR__/run/sendmail.pid
-SMCTL    = __SBINDIR__/sendmailctl
-CFDIR    = __DATAROOTDIR__/cf
-OPTIONS  = __SYSCONFDIR__/daemon-options
+PIDFILE  = /var/run/sendmail.pid
+SMCTL    = /usr/local/sbin/sendmailctl
+CFDIR    = /etc/mail/cf
+OPTIONS  = /etc/mail/daemon-options
 QINTERVAL= $(shell test -s queue-interval && head -1 queue-interval || echo 4m)
 
 all: $(DBFILES)

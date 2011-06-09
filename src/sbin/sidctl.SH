@@ -7,7 +7,6 @@
 # \__ \ | (_| | (__| |_| |
 # |___/_|\__,_|\___|\__|_|
 #                         
-readonly SENDMAILROOT='__PREFIX__'
 readonly MYNAME="`basename $0`"
 
 KILL_SIGNAL=15
@@ -36,9 +35,9 @@ EX_NOPERM=77	# permission denied
 sidcontrol()
 {
 	local whataction=$1
-	local procidfile="$SENDMAILROOT/var/run/sid-milter.pid"
-	local commandarg="$SENDMAILROOT/bin/sid-filter"
-	local daemonopts="`test -s $SENDMAILROOT/etc/sid-options && grep -v '^#' $SENDMAILROOT/etc/sid-options`"
+	local procidfile="/var/run/sid-milter.pid"
+	local commandarg="/usr/bin/sid-filter"
+	local daemonopts="`test -s /etc/mail/sid-options && grep -v '^#' /etc/mail/sid-options`"
 
 	if [ "${whataction}X" = "startX" ]; then
 
@@ -48,8 +47,8 @@ sidcontrol()
 			result NG
 			STATUS_CODE=$EX_GENERAL
 		else
-			commandarg="$commandarg -a $SENDMAILROOT/etc/sid-peer-hosts"
-			commandarg="$commandarg -d $SENDMAILROOT/etc/sid-pass-domains"
+			commandarg="$commandarg -a /etc/mail/sid-peer-hosts"
+			commandarg="$commandarg -d /etc/mail/sid-pass-domains"
 			commandarg="$commandarg -P $procidfile"
 			commandarg="$commandarg $daemonopts"
 			( $commandarg && sleep 1 )
@@ -86,7 +85,7 @@ sidcontrol()
 
 sidstatus()
 {
-	local procidfile="$SENDMAILROOT/var/run/sid-milter.pid"
+	local procidfile="/var/run/sid-milter.pid"
 	if [ -f "$procidfile" ]; then
 		msg "sid-milter is running, pid = `head -n 1 $procidfile`"
 		echo > $STDERRORDEV
@@ -145,12 +144,12 @@ result()
 
 init()
 {
-	export PATH='__SBINDIR__:__BINDIR__:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
+	export PATH='/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 	export LANG='C'
-	if [ -x "$SENDMAILROOT/bin/sid-filter" ]; then 
-		SIDFILTER="$SENDMAILROOT/bin/sid-filter"
+	if [ -x "/usr/bin/sid-filter" ]; then 
+		SIDFILTER="/usr/bin/sid-filter"
 	else
-		echo "Cannot execute $SENDMAILROOT/bin/sid-filter" > $STDERRORDEV
+		echo "Cannot execute /usr/bin/sid-filter" > $STDERRORDEV
 		exit $EX_GENERAL
 	fi
 }

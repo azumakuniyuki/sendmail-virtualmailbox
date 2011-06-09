@@ -1,9 +1,9 @@
 dnl #                                               -*- Autoconf -*-
 dnl # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([sendmail-virtualmailbox], [1.0.0], [azumakuniyuki@gmail.com])
+AC_INIT([sendmail-virtualmailbox], [1.1.0], [azumakuniyuki@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
-AC_PREFIX_DEFAULT(/usr/local/sendmail)
+AC_PREFIX_DEFAULT(/usr/local/virtmail)
 AC_CANONICAL_HOST
 
 BUILDROOT=`pwd`
@@ -86,14 +86,12 @@ AC_ARG_WITH([virtmail-home],
 		[--virtualmailbox-home=DIR],
 		[virtual mailbox home, [/home/$VIRTMAILUSER]]),
 	[VIRTMAILHOME=$withval],[VIRTMAILHOME=/home/$VIRTMAILUSER])
- AC_SUBST(VIRTMAILHOME)
+AC_SUBST(VIRTMAILHOME)
 
-#AC_ARG_WITH(binaries,
-#	AC_HELP_STRING(
-#		[--with-binaries],
-#		[Build sendmail, procmail, and maildrop [yes]] ),
-#	[WITH_BINARIES="$withval"], [WITH_BINARIES="yes"])
-#AC_SUBST(WITH_BINARIES)
+#AC_ARG_ENABLE(local-sendmail,
+#	AC_HELP_STRING( [--enable-local-sendmail], [Enable local-sendmail(default=no)] ),
+#	[enable_localsendmail="$enableval"], [enable_localsendmail="no"])
+#	AM_CONDITIONAL([LOCALSENDMAIL], [test "x$enable_localsendmail" = "xyes"])
 
 # Check OS
 case $host_os in

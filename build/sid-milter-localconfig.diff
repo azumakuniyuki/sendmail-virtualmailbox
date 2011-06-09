@@ -6,46 +6,13 @@
  dnl and the libmilter include files:
 -dnl APPENDDEF(`confINCDIRS', `-I/usr/local/sendmail/include')
 -dnl APPENDDEF(`confLIBDIRS', `-L/usr/local/sendmail/lib')
-+APPENDDEF(`confINCDIRS', `-I__PREFIX__/include')
-+APPENDDEF(`confLIBDIRS', `-L__PREFIX__/lib')
++APPENDDEF(`confINCDIRS', `-I/usr/include -I/usr/local/include')
++APPENDDEF(`confLIBDIRS', `-L/usr/lib -L/usr/local/lib')
  
  
  bldPRODUCT_START(`executable', `sid-filter')
 --- devtools/M4/UNIX/defines.m4	2006-10-06 14:44:44.000000000 +0900
-+++ devtools/M4/UNIX/defines.m4	2011-06-08 05:05:43.000000000 +0900
-@@ -74,25 +74,25 @@
- LIBS= ${LIBADD} ifdef(`confLIBS', `confLIBS') ifdef(`conf_'bldCURRENT_PRD`_LIB_POST', `conf_'bldCURRENT_PRD`_LIB_POST') 
- 
- # location of sendmail binary (usually /usr/sbin or /usr/lib)
--BINDIR=	ifdef(`confMBINDIR', `confMBINDIR', `/usr/sbin')
-+BINDIR=	ifdef(`confMBINDIR', `confMBINDIR', `/sbin')
- 
- # location of "user" binaries (usually /usr/bin or /usr/ucb)
--UBINDIR=ifdef(`confUBINDIR', `confUBINDIR', `/usr/bin')
-+UBINDIR=ifdef(`confUBINDIR', `confUBINDIR', `/bin')
- 
- # location of "root" binaries (usually /usr/sbin or /usr/etc)
--SBINDIR=ifdef(`confSBINDIR', `confSBINDIR', `/usr/sbin')
-+SBINDIR=ifdef(`confSBINDIR', `confSBINDIR', `/sbin')
- 
- # location of "root" binaries (usually /usr/sbin or /usr/etc)
--MBINDIR=ifdef(`confMBINDIR', `confMBINDIR', `/usr/sbin')
-+MBINDIR=ifdef(`confMBINDIR', `confMBINDIR', `/sbin')
- 
- # location of "libexec" binaries (usually /usr/libexec or /usr/etc)
--EBINDIR=ifdef(`confEBINDIR', `confEBINDIR', `/usr/libexec')
-+EBINDIR=ifdef(`confEBINDIR', `confEBINDIR', `/libexec')
- 
- # where to install inc`'lude files (usually /usr/inc`'lude)
--INCLUDEDIR=ifdef(`confINCLUDEDIR', `confINCLUDEDIR', `/usr/inc`'lude')
-+INCLUDEDIR=ifdef(`confINCLUDEDIR', `confINCLUDEDIR', `/inc`'lude')
- 
- # where to install library files (usually /usr/lib)
--LIBDIR=ifdef(`confLIBDIR', `confLIBDIR', `/usr/lib')
-+LIBDIR=ifdef(`confLIBDIR', `confLIBDIR', `/lib')
- 
- # additional .c files needed
- SRCADD= ifdef(`confSRCADD', `confSRCADD')
++++ devtools/M4/UNIX/defines.m4.1	2011-06-10 04:18:08.000000000 +0900
 @@ -147,11 +147,11 @@
  
  # Setgid binary ownership/permissions
@@ -60,30 +27,6 @@
  
  # MTA binary ownership/permissions
  MBINOWN=ifdef(`confMBINOWN', `confMBINOWN', `root')
---- devtools/M4/UNIX/manpage.m4	2006-09-08 07:13:07.000000000 +0900
-+++ devtools/M4/UNIX/manpage.m4	2011-06-08 05:07:12.000000000 +0900
-@@ -28,8 +28,8 @@
- MANOWN=	ifdef(`confMANOWN', `confMANOWN', `bin')
- MANGRP=	ifdef(`confMANGRP', `confMANGRP', `bin')
- MANMODE=ifdef(`confMANMODE', `confMANMODE', `444')
--MANROOT=ifdef(`confMANROOT', `confMANROOT', `/usr/share/man/cat')
--MANROOTMAN=ifdef(`confMANROOTMAN', `confMANROOTMAN', `/usr/share/man/man')
-+MANROOT=ifdef(`confMANROOT', `confMANROOT', `/share/man/cat')
-+MANROOTMAN=ifdef(`confMANROOTMAN', `confMANROOTMAN', `/share/man/man')
- MAN1=	${MANROOT}ifdef(`confMAN1', `confMAN1', `1')
- MAN1MAN=${MANROOTMAN}ifdef(`confMAN1', `confMAN1', `1')
- MAN1EXT=ifdef(`confMAN1EXT', `confMAN1EXT', `1')
---- devtools/M4/UNIX/sharedlib.m4	2006-09-06 07:56:53.000000000 +0900
-+++ devtools/M4/UNIX/sharedlib.m4	2011-06-08 05:08:36.000000000 +0900
-@@ -20,7 +20,7 @@
- SHAREDLIB_EXT= ifdef(`confSHAREDLIB_EXT', `confSHAREDLIB_EXT', `.so')
- SHAREDLIB= bldCURRENT_PRODUCT${SHAREDLIB_EXT}${SHAREDLIB_SUFFIX}
- SHAREDLIB_LINK= bldCURRENT_PRODUCT${SHAREDLIB_EXT}
--SHAREDLIBDIR= ifdef(`confSHAREDLIBDIR',`confSHAREDLIBDIR',`/usr/lib/')
-+SHAREDLIBDIR= ifdef(`confSHAREDLIBDIR',`confSHAREDLIBDIR',`/lib/')
- DEPLIBS= ifdef(`confDEPLIBS', `confDEPLIBS', `') ${bldCURRENT_PRODUCT`SMDEPLIBS'}
- 
- CONFIG_SONAME= ifdef(`confSONAME', `confSONAME ${SHAREDLIB}', `')
 --- devtools/OS/GNU	2002-03-22 08:59:25.000000000 +0900
 +++ devtools/OS/GNU	2011-06-08 05:41:23.000000000 +0900
 @@ -7,7 +7,7 @@
@@ -105,7 +48,7 @@
 +define(`confMANROOT', `/share/man/man')
  define(`confLIBS', `-ldl')
 -define(`confEBINDIR', `/usr/sbin')
-+define(`confEBINDIR', `/sbin')
++define(`confEBINDIR', `/usr/sbin')
  APPENDDEF(`confLIBSEARCH', `crypt nsl')
  
  define(`confLD', `ld')

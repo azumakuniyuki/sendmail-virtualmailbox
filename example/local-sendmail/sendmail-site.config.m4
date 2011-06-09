@@ -3,8 +3,13 @@ dnl ############################################################################
 dnl # Build Macro                                                              #
 dnl ############################################################################
 dnl #
+APPENDDEF(`confENVDEF',`-D_PATH_SENDMAILCF=\"/usr/local/sendmail/etc/sendmail.cf\"')
+APPENDDEF(`confENVDEF',`-D_DIR_SENDMAILCF=\"/usr/local/sendmail/etc/\"')
 dnl # APPENDDEF(`confENVDEF',`-D_PATH_SENDMAILCF=\"/etc/mail/sendmail.cf\"')
 dnl # APPENDDEF(`confENVDEF',`-D_DIR_SENDMAILCF=\"/etc/mail/\"')
+APPENDDEF(`confENVDEF',`-D_PATH_SENDMAILPID=\"/usr/local/sendmail/var/run/sendmail.pid\"')
+APPENDDEF(`conf_smrsh_ENVDEF', `-DCMDDIR="\"/usr/local/sendmail/var/adm/sm.bin\""')
+APPENDDEF(`conf_smrsh_ENVDEF', `-DPATH="\"/bin:/usr/bin:/usr/local/bin:__BINDIR__\""')
 dnl # APPENDDEF(`confENVDEF',`-D_PATH_SENDMAILPID=\"/etc/mail/sendmail.pid\"')
 dnl # APPENDDEF(`confENVDEF',`-D_PATH_PATH=\"/etc/hosts\"')
 dnl # APPENDDEF(`confENVDEF',`-DSASL')
@@ -27,17 +32,17 @@ dnl ############################################################################
 dnl # Install Directory                                                        # 
 dnl ############################################################################
 dnl #
-dnl # define(`confHFDIR',`/share/data')dnl		# helpfile directory
-dnl # define(`confSTDIR',`/var/tmp')dnl			# statistics directory
-dnl # define(`confEBINDIR',`/sbin/')dnl			# smrsh,mail.local
-dnl # define(`confMBINDIR',`/sbin/')dnl			# sendmail
-dnl # define(`confSBINDIR',`/sbin/')dnl			# makemap,editmap,mailstats,praliases
-dnl # define(`confUBINDIR',`/bin/')dnl			# newaliases,mailq,hoststat,purgestat,vacation,rmail
-dnl # define(`confINCLUDEDIR',`/include/')dnl		# #include file 
-dnl # define(`confLIBDIR',`/lib/')dnl			# lib 
-dnl # define(`confMANROOTMAN',`__DATAROOTDIR__')dnl	# manual root directory
-dnl # define(`confMANROOT',`__DATAROOTDIR__/man/man')dnl # manual root directory
-dnl # define(`confMSP_QUEUE_DIR',`/var/spool/cqueue')dnl
+define(`confHFDIR',`/share/data')dnl		# helpfile directory
+define(`confSTDIR',`/var/tmp')dnl		# statistics directory
+define(`confEBINDIR',`/sbin/')dnl		# smrsh,mail.local
+define(`confMBINDIR',`/sbin/')dnl		# sendmail
+define(`confSBINDIR',`/sbin/')dnl		# makemap,editmap,mailstats,praliases
+define(`confUBINDIR',`/bin/')dnl		# newaliases,mailq,hoststat,purgestat,vacation,rmail
+define(`confINCLUDEDIR',`/include/')dnl		# #include file 
+define(`confLIBDIR',`/lib/')dnl			# lib 
+define(`confMANROOTMAN',`/usr/share')dnl	# manual root directory
+define(`confMANROOT',`/usr/shamre/man/man')dnl # manual root directory
+define(`confMSP_QUEUE_DIR',`/var/spool/cqueue')dnl
 
 
 dnl ############################################################################
@@ -71,7 +76,7 @@ dnl # define(`confSBINMODE'.`')			dnl# makemap,editmap...
 dnl # define(`confUBINMODE',`')			dnl# newaliases,mailq...
 dnl # define(`confSTMODE',`0600')		dnl# statistics permission
 dnl #
-define(`confGBINGRP',`__SMSUBMITUSER__')	dnl# setUID sendmail group
+define(`confGBINGRP',`smsubmit')		dnl# setUID sendmail group
 dnl # define(`confMBINGRP',`bin')		dnl# sendmail
 dnl # define(`confSBINGRP'.`')			dnl# makemap,editmap...
 dnl # define(`confUBINGRP',`')			dnl# newaliases,mailq...
@@ -80,5 +85,5 @@ dnl # define(`confGBINOWN',`sendmail')		dnl# setUID sendmail owner
 dnl # define(`confMBINOWN',`root')		dnl# sendmail
 dnl # define(`confSBINOWN'.`')			dnl# makemap,editmap...
 dnl # define(`confUBINOWN',`')			dnl# newaliases,mailq...
-define(`confMSPQOWN',`__SMSUBMITUSER__')	dnl# clientmqueue/* owner
+define(`confMSPQOWN',`smsubmit')		dnl# clientmqueue/* owner
 dnl #

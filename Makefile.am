@@ -1,6 +1,12 @@
 ### $Id: Makefile.am,v 1.2 2009/04/29 13:53:25 ak Exp $
 ### Makefile.am -- makefile(GNU) for sendmail-virtualmailbox
 SUBDIRS = build src
+if LOCALSENDMAIL
+LSTATEDIR = @localstatedir@
+else
+LSTATEDIR = /var
+endif
+
 .PHONY: clean
 all-am: Makefile
 install-am: maildirs lstatedirs queuedirs install-example message
@@ -18,13 +24,13 @@ maildirs:
 	)
 
 queuedirs:
-	test -d @localstatedir@/spool/mqueue || ( \
-		$(MKDIR) -pm 0700 @localstatedir@/spool/mqueue; \
-		$(MKDIR) -pm 0700 @localstatedir@/spool/mqueue/q.0 ;\
-		$(MKDIR) -pm 0700 @localstatedir@/spool/mqueue/q.1 ;\
-		$(MKDIR) -pm 0700 @localstatedir@/spool/mqueue/q.2 ;\
-		$(MKDIR) -pm 0700 @localstatedir@/spool/mqueue/q.3 ;\
-		$(CHOWN) -R root:root @localstatedir@/spool/mqueue ;\
+	test -d $(LSTATEDIR)/spool/queues || ( \
+		$(MKDIR) -pm 0700 $(LSTATEDIR)/spool/queues; \
+		$(MKDIR) -pm 0700 $(LSTATEDIR)/spool/queues/q.0 ;\
+		$(MKDIR) -pm 0700 $(LSTATEDIR)/spool/queues/q.1 ;\
+		$(MKDIR) -pm 0700 $(LSTATEDIR)/spool/queues/q.2 ;\
+		$(MKDIR) -pm 0700 $(LSTATEDIR)/spool/queues/q.3 ;\
+		$(CHOWN) -R root:root $(LSTATEDIR)/spool/queues ;\
 	)
 
 	test -d @localstatedir@/spool/cqueue || ( \
@@ -33,8 +39,8 @@ queuedirs:
 	)
 
 lstatedirs:
-	$(MKDIR) -pm 0755 @localstatedir@/log
-	$(MKDIR) -pm 0755 @localstatedir@/run
+	test -d $(LSTATEDIR)/log || $(MKDIR) -pm 0755 $(LSTATEDIR)/log
+	test -d $(LSTATEDIR)/run || $(MKDIR) -pm 0755 $(LSTATEDIR)/run
 
 sendmail-cf:
 	cd ./build && $(MAKE) sendmail.cf

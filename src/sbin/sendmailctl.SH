@@ -7,9 +7,7 @@
 # \__ \  __/ | | | (_| | | | | | | (_| | | | (__| |_| |
 # |___/\___|_| |_|\__,_|_| |_| |_|\__,_|_|_|\___|\__|_|
 #
-readonly SYSTEMNAME='__SYSTEMNAME__'
 readonly SYSVERSION='__SYSVERSION__'
-readonly SENDMAILROOT='__PREFIX__'
 readonly MYNAME="`basename $0`"
 
 KILL_SIGNAL=15
@@ -38,7 +36,7 @@ EX_NOPERM=77	# permission denied
 smcontrol()
 {
 	local whataction=$1
-	local procidfile="$SENDMAILROOT/var/run/sendmail.pid"
+	local procidfile='/var/run/sendmail.pid'
 
 	if [ "${whataction}X" = "startX" ]; then
 
@@ -49,14 +47,14 @@ smcontrol()
 			STATUS_CODE=$EX_GENERAL
 		else
 			local mtaoptions=''
-			local daemonopts="`test -s $SENDMAILROOT/etc/daemon-options && grep -v '^#' $SENDMAILROOT/etc/daemon-options`"
-			local mqinterval="`test -s $SENDMAILROOT/etc/queue-interval && head -1 $SENDMAILROOT/etc/queue-interval`"
+			local daemonopts="`test -s /etc/mail/daemon-options && grep -v '^#' /etc/mail/daemon-options`"
+			local mqinterval="`test -s /etc/mail/queue-interval && head -1 /etc/mail/queue-interval`"
 
 			[ -n "$SMLOG_LEVEL" ] && mtaoptions="$mtaoptions -OLogLevel=$SMLOG_LEVEL"
 			[ -n "$DEBUG_LEVEL" ] && mtaoptions="$mtaoptions -d$DEBUG_LEVEL"
 
 			[ -z "$mqinterval" ] && mqinterval='6m'
-			( $SENDMAILROOT/sbin/sendmail -bd -q$mqinterval $daemonopts $mtaoptions && sleep 1 )
+			( /usr/sbin/sendmail -bd -q$mqinterval $daemonopts $mtaoptions && sleep 1 )
 
 			if [ "$?" -eq "0" -a -s "$procidfile" ]; then
 				result OK
@@ -91,8 +89,8 @@ makemaps()
 {
 	for M in access genericstable virtusertable mailertable; do
 		msg "makemap $M.db ... "
-		if [ -f "$SENDMAILROOT/etc/$M" ]; then
-			$SENDMAILROOT/sbin/makemap hash $SENDMAILROOT/etc/$M.db < $SENDMAILROOT/etc/$M > /dev/null 2>&1
+		if [ -f "/etc/mail/$M" ]; then
+			/usr/sbin/makemap hash /etc/mail/$M.db < /etc/mail/$M > /dev/null 2>&1
 			if [ "$?" -eq "0" ]; then
 				result OK
 				STATUS_CODE=$EX_OK
@@ -110,9 +108,9 @@ makemaps()
 makealiases()
 {
 	msg 'Running newaliases ... '
-	if [ -f "$SENDMAILROOT/etc/aliases" ]; then
-		msg ", build $SENDMAILROOT/etc/aliases"
-		$SENDMAILROOT/sbin/sendmail -bi > /dev/null 2>&1
+	if [ -f "/etc/mail/aliases" ]; then
+		msg ", build /etc/mail/aliases"
+		/usr/sbin/sendmail -bi > /dev/null 2>&1
 		if [ "$?" -eq "0" ]; then
 			result OK
 			STATUS_CODE=$EX_OK
@@ -129,7 +127,7 @@ makealiases()
 printqueues()
 {
 	queueswitch="$1"
-	sendmailcmd="$SENDMAILROOT/sbin/sendmail"
+	sendmailcmd="/usr/sbin/sendmail"
 	case $queueswitch in
 		L)
 			$sendmailcmd -bp -qL -v
@@ -156,7 +154,7 @@ printqueues()
 
 sendmailstatus()
 {
-	local procidfile="$SENDMAILROOT/var/run/sendmail.pid"
+	local procidfile="/var/run/sendmail.pid"
 	if [ -f "$procidfile" ]; then
 		msg "sendmail is running, pid = `head -n 1 $procidfile`"
 		echo > $STDERRORDEV
@@ -181,7 +179,7 @@ cleandirtyqueus()
 	# Clean up dirty queues.
 	local date_expire=1
 	local queue_names=''
-	local queue_spool="$SENDMAILROOT/var/spool"
+	local queue_spool="/var/spool/queues"
 
 	# Delete fake queues
 	queue_names=`find $queue_spool -type f \
@@ -236,12 +234,12 @@ result()
 
 init()
 {
-	export PATH='__SBINDIR__:__BINDIR__:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
+	export PATH='/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 	export LANG='C'
-	if [ -x "$SENDMAILROOT/sbin/sendmail" ]; then 
-		SENDMAIL="$SENDMAILROOT/sbin/sendmail"
+	if [ -x "/usr/sbin/sendmail" ]; then 
+		:
 	else
-		echo "Cannot execute $SENDMAILROOT/sbin/sendmail" > $STDERRORDEV
+		echo "Cannot execute /usr/sbin/sendmail" > $STDERRORDEV
 		exit $EX_GENERAL
 	fi
 }
@@ -353,7 +351,7 @@ while getopts ":d:L:Mv" opt; do
 			;;
 		v)
 			# Print my version.
-			SM_VERSION="`$SENDMAILROOT/sbin/sendmail -d0.101 root < /dev/null 2> /dev/null | awk '{print $2}'`"
+			SM_VERSION="`/usr/sbin/sendmail -d0.101 root < /dev/null 2> /dev/null | awk '{print $2}'`"
 			echo -n "$SYSVERSION"
 			test -n "$SM_VERSION" && echo -n "/$SM_VERSION"
 			echo
