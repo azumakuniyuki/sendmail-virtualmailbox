@@ -49,7 +49,7 @@ install-am: $(sysconf_DATA)
 	for F in $(sendmail_CONF); do \
 		test -f /etc/mail/$$F || \
 			$(INSTALL) -vpm 0644 -o root -g root $$F.in /etc/mail/$$F ;\
-		($CP) $$F.in @datarootdir@/example/$$F ;\
+		$(CP) $$F.in @datarootdir@/example/$$F ;\
 	done
 
 .PHONY: clean

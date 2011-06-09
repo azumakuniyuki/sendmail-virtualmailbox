@@ -548,6 +548,9 @@ build-sid-milter: $(SI_DISTDIR) patch-sid-milter
 	fi
 
 install-sid-milter: build-sid-milter
+	for S in 1 2 3 4 5 6 7 8; do \
+		test -d /usr/local/share/man/man$$S || $(MKDIR) -p /usr/local/share/man/man$$S ;\
+	done
 	cd $(SI_DISTDIR) && /bin/sh ./Build install
 
 .PHONY: clean
