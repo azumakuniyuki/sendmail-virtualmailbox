@@ -1,24 +1,16 @@
 
-/usr/local/sbin/smctl -------------------- Symbolic link to /usr/local/sendmail/sbin/sendmailctl
-/usr/local/sendmail ---------------------- Base directory of sendmail-virtualmailbox 
- bin/ ------------------------------------ Commands
-  hoststat ------------------------------- Symbolic link to /usr/local/sendmail/sbin/sendmail
-  mailq ---------------------------------- Symbolic link to /usr/local/sendmail/sbin/sendmail
-  mailx ---------------------------------- Heirloom mailx binary
-  newaliases ----------------------------- Symbolic link to /usr/local/sendmail/sbin/sendmail
-  purgestat ------------------------------ Symbolic link to /usr/local/sendmail/sbin/sendmail
-  sid-filter ----------------------------- Milter: SID Filter command
-  vacation
- etc/ ------------------------------------ Configuration files
+/etc/mail/
+  cf/ ------------------------------------ sendmail-cf source files
+  cf/cf/`hostname`.mc -------------------- etc/sendmail.cf source
+  cf/cf/`hostname`.cf -------------------- Same as etc/sendmail.cf
+  cf/mailer/virtmail.m4 ------------------ Virtual mailbox mailer
   Makefile
   access
   aliases
   daemon-options ------------------------- Additional options for sendmail -bd
   generics-domains
   local-host-names
-  maildroprc ----------------------------- maildrop configuration file
   mailertable
-  procmailrc ----------------------------- procmail configuration file
   queue-interval ------------------------- Queue interval for sendmail -bd -q*
   relay-domains
   sendmail.cf
@@ -31,45 +23,47 @@
   virtuser-domains
   virtusertable
   genericstable
- include/ -------------------------------- Header files
- lib/libmilter.a ------------------------- Milter library
- libexec/ -------------------------------- Binaries of procmail and maildrop
-  maildrop ------------------------------- maildrop as a MDA for virtual mailbox
+
+/usr/lib/libmilter.a --------------------- Milter library
+
+/usr/local/
+  bin/sid-filter ------------------------- sid-milter command
+  include/libmilter ---------------------- Milter header files
+  include/libsmdb
+  include/sendmail
+  include/sm
+  sbin/smctl ----------------------------- Symbolic link to /usr/local/virtmail/sbin/sendmailctl
+
+/usr/local/virtmail ---------------------- Base directory of sendmail-virtualmailbox 
+ bin/ ------------------------------------ Commands
   procmail ------------------------------- procmail as a MDA for local mailbox
+  sid-filter ----------------------------- Symbolic link to /usr/local/bin/sid-filter
+ etc/ ------------------------------------ Configuration files
+  maildroprc ----------------------------- maildrop configuration file
+  procmailrc ----------------------------- procmail configuration file
  sbin/ ----------------------------------- System commands
   make-vmailbox -------------------------- Helper script for making virtual mailbox
-  sendmail ------------------------------- sendmail binary
-  editmap
-  smrsh
-  praliases
-  mailstats
   sendmailctl ---------------------------- Helper script for controlling sendmail
   sidctl --------------------------------- Helper script for controlling sid-milter
-  makemap
  share/ ---------------------------------- Data
-  cf/ ------------------------------------ sendmail-cf source files
-  cf/cf/`hostname`.mc -------------------- etc/sendmail.cf source
-  cf/cf/`hostname`.cf -------------------- Same as etc/sendmail.cf
-  cf/mailer/virtmail.m4 ------------------ Virtual mailbox mailer
-  data/helpfile -------------------------- sendmail.hf
   example/a-part-of-dovecot.conf --------- Example of dovecot.conf
   example/a-part-of-aliases -------------- Example of etc/aliases
   example/a-part-of-logrotate.conf ------- Example of /etc/logrotate.conf
   example/dovecot-virtuser-passwd -------- Example of dovecot virtual user password file
-  example/virtusertable ------------------ Example of etc/virtusertable
   example/a-part-of-sendmail.mc ---------- A part of sendmail.mc
   example/etc-group ---------------------- Required groups for /etc/groups
   example/etc-passwd --------------------- Required users for /etc/passwd
   maildrop/html/ ------------------------- maildrop HTML documents
   man/man*/ ------------------------------ Manual pages
- var/ ------------------------------------ Local state directory
-  adm/sm.bin/ ---------------------------- Directory for smrsh
-  hoststat/ ------------------------------ Host status directory
+
+/var/ ------------------------------------ Local state directory
+  spoo/hoststat/ ------------------------- Host status directory
   log/maildrop-virtual.log --------------- maildrop log
   log/procmail-local.log ----------------- procmail log
   run/sendmail.pid ----------------------- Sendmail's process id
+  run/smsubmit.pid
   spool/cqueue --------------------------- Mail queue directory for submission
-  spool/mqueue --------------------------- Mail queue directory
+  spool/queues/q.* ----------------------- Mail queue directory
   tmp/statistics ------------------------- sendmail.st
 
 

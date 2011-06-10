@@ -198,6 +198,7 @@ sendmail.cf: $(SM_DISTDIR) sendmail.mc virtmail.m4
 install-sendmail: $(SM_DISTDIR)
 	cd $(SM_DISTDIR) && ( /bin/sh ./Build install )
 	cd $(SM_DISTDIR)/libmilter && /bin/sh ./Build install
+	test -d /var/spool/hoststat || $(MKDIR) -p /var/spool/hoststat
 	test -e /usr/sbin/smtpd || $(LN) -s /usr/sbin/sendmail /usr/sbin/smtpd
 	test -f /etc/mail/aliases || \
 		$(INSTALL) -o root -g root -vpm 0644 $(SM_DISTDIR)/sendmail/aliases /etc/mail/
@@ -246,6 +247,7 @@ install-sid-milter: build-sid-milter
 		test -d /usr/local/share/man/man$$S || $(MKDIR) -p /usr/local/share/man/man$$S ;\
 	done
 	cd $(SI_DISTDIR) && /bin/sh ./Build install
+	$(LN) -fs /usr/local/bin/sid-filter @bindir@/sid-filter
 
 .PHONY: clean
 clean-am:

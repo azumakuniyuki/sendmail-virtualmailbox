@@ -14,13 +14,13 @@ $Id: README,v 1.2 2010/02/02 11:47:18 ak Exp $
  feature to sendmail. It require the following:
 
  PROGRAMS
- * sendmail: It is installed into /usr/local/sendmail
+ * sendmail: It is installed into /usr/sbin/sendmail
  * procmail: It delivers email to a local user(has UNIX account)'s Maildir/
  * maildrop: It delivers email to a virtual user(has NO UNIX account)'s Maildir/
 
  USERS AND GROUPS
  * sendmail: O DefaultUser=sendmail
- * smsubmit: Owner of /usr/local/sendmail/var/spool/cqueue (submission)
+ * smsubmit: Owner of /var/spool/cqueue (submission)
  * virtmail: Owner of virtual mailbox direcotry: --virtualmailbox-home=DIR
 --------------------------------------------------------------------------------
 
@@ -34,7 +34,6 @@ TODO --------------------------------------- Not implemented or tested yet
 configure ---------------------------------- configure script for making sendmail-virtualmailbox
 build/ ------------------------------------- Base directory for making procmail, maildrop, and sendamil
  maildrop-configure.sh --------------------- Configure script source for making maidrop
- mailx-localconfig.diff -------------------- Patch for heirloom-mailx to change paths.
  procmail-conflict-types-for-getline.patch - Patch for the error 'Conflicting types for getline' 
  procmail-localconfig.diff ----------------- Patch for procmail to change paths.
  sendmail-mc.in ---------------------------- /usr/local/sendmail/etc/sendmail.cf source
@@ -58,25 +57,26 @@ examples/ ---------------------------------- Some example configuration files
  etc-group --------------------------------- Required groups for sendmail-virtualmailbox
 src/ --------------------------------------- Source files
  etc/ -------------------------------------- Source files for /usr/local/sendmail/etc
-  access.in -------------------------------- /usr/local/sendmail/etc/access
-  daemon-options.in ------------------------ /usr/local/sendmail/etc/daemon-options
-  etc-makefile.in -------------------------- /usr/local/sendmail/etc/Makefile
-  generics-domains.in ---------------------- /usr/local/sendmail/etc/generics-domains
-  genericstable.in ------------------------- /usr/local/sendmail/etc/genericstable
-  local-host-names.in ---------------------- /usr/local/sendmail/etc/local-host-names
-  maildroprc.in ---------------------------- /usr/local/sendmail/etc/maildroprc
-  mailertable.in --------------------------- /usr/local/sendmail/etc/mailertable
-  procmailrc.in ---------------------------- /usr/local/sendmail/etc/procmailrc
-  queue-interval.in ------------------------ /usr/local/sendmail/etc/queue-interval
-  relay-domains.in ------------------------- /usr/local/sendmail/etc/relay-domains
+  access.in -------------------------------- /etc/mail/access
+  daemon-options.in ------------------------ /etc/mail/daemon-options
+  etc-makefile.in -------------------------- /etc/mail/Makefile
+  generics-domains.in ---------------------- /etc/mail/generics-domains
+  genericstable.in ------------------------- /etc/mail/genericstable
+  local-host-names.in ---------------------- /etc/mail/local-host-names
+  maildroprc.in ---------------------------- /usr/local/virtmail/etc/maildroprc
+  mailertable.in --------------------------- /etc/mail/mailertable
+  procmailrc.in ---------------------------- /usr/local/virtmail/etc/procmailrc
+  queue-interval.in ------------------------ /etc/mail/queue-interval
+  relay-domains.in ------------------------- /etc/mail/relay-domains
   sid-options.in --------------------------- Define sid-milter options
   sid-pass-domains.in ---------------------- Domains to always pass for sid-milter
   sid-peer-hosts.in ------------------------ List of hosts to ignore for sid-milter
-  virtuser-domains.in ---------------------- /usr/local/sendmail/etc/virtuser-domains
-  virtusertable.in ------------------------- /usr/local/sendmail/etc/virtusertable
+  virtuser-domains.in ---------------------- /etc/mail/virtuser-domains
+  virtusertable.in ------------------------- /etc/mail/virtusertable
  sbin/ ------------------------------------- Source scripts for /usr/local/sendmail/sbin
-  make-vmailbox.SH ------------------------- /usr/local/sendmail/sbin/make-vmailbox
-  sendmailctl.SH --------------------------- /usr/local/sendmail/sbin/sendmailctl, /usr/local/sbin/smctl
+  make-vmailbox.SH ------------------------- /usr/local/virtmail/sbin/make-vmailbox
+  sendmailctl.SH --------------------------- /usr/local/virtmail/sbin/sendmailctl, /usr/local/sbin/smctl
+  sidctl.SH -------------------------------- /usr/local/virtmail/sbin/sidctl
 
 virtmail.m4 has been tested at the followings:
  sendmail) 8.13.8, 8.14.3 - 8.14.5
