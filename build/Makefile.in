@@ -467,23 +467,21 @@ sendmail.mc:
 		-e "s|__TARGET_HOSTNAME__|$(TARGET_HOSTNAME)|g" \
 		-e "s|__TARGET_DOMAINNAME__|$(TARGET_DOMAINNAME)|g" \
 		-e 's|__PREFIX__|@prefix@|g' \
-		-e "s|__SYSCONFDIR__|$(SM_SYSCONFDIR)|g" \
 		-e 's|__BINDIR__|@bindir@|g' \
 		-e 's|__SBINDIR__|@sbindir@|g' \
-		-e "s|__LOCALSTATEDIR__|$(SM_LSTATEDIR)|g" \
 		-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
 		-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \
 		-e "s|__VIRTMAILUSER__|$(VIRTMAILUSER)|g" \
 		-e 's|\([^:]\)//|\1/|g' > $@
 	$(CP) sendmail.mc $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).mc
 	$(CAT) submit-mc.in | $(SED) \
-		-e "s|__LOCALSTATEDIR__|$(SM_LSTATEDIR)|g" \
+		-e 's|__LOCALSTATEDIR__|@localstatedir@|g' \
 		-e 's|\([^:]\)//|\1/|g' > submit.mc
 	$(CP) submit.mc $(SM_DISTDIR)/cf/cf/submit.mc
 
 virtmail.m4:
 	$(CAT) $@.in | $(SED) \
-		-e "s|__SYSCONFDIR__|$(SM_SYSCONFDIR)|g" \
+		-e "s|__SYSCONFDIR__|@sysconfdir@|g" \
 		-e 's|__BINDIR__|@bindir@|g' \
 		-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
 		-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \

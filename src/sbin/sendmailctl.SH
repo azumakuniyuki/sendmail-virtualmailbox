@@ -8,6 +8,7 @@
 # |___/\___|_| |_|\__,_|_| |_| |_|\__,_|_|_|\___|\__|_|
 #
 readonly SYSVERSION='__SYSVERSION__'
+readonly SMUSER='__SENDMAILUSER__'
 readonly MYNAME="`basename $0`"
 
 KILL_SIGNAL=15
@@ -112,6 +113,8 @@ makealiases()
 		msg ", build /etc/mail/aliases"
 		/usr/sbin/sendmail -bi > /dev/null 2>&1
 		if [ "$?" -eq "0" ]; then
+			chown root.$SMUSER /etc/mail/aliases.db
+			chmod 0640 /etc/mail/alases.db
 			result OK
 			STATUS_CODE=$EX_OK
 		else
