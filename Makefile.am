@@ -24,13 +24,15 @@ queuedirs:
 		$(MKDIR) -pm 0700 /var/spool/queues/q.1 ;\
 		$(MKDIR) -pm 0700 /var/spool/queues/q.2 ;\
 		$(MKDIR) -pm 0700 /var/spool/queues/q.3 ;\
-		$(CHOWN) -R root:root /var/spool/queues ;\
+		$(CHOWN) -R root:$(SENDMAILUSER) /var/spool/queues ;\
 	)
 
 	test -d @localstatedir@/spool/cqueue || ( \
 		$(MKDIR) -pm 0770 /var/spool/cqueue ;\
 		$(CHOWN) -R $(SMSUBMITUSER):$(SMSUBMITUSER) /var/spool/cqueue ;\
 	)
+
+	test -d /usr/adm/sm.bin || $(MKDIR) -pm 0751 /usr/adm/sm.bin
 
 sendmail-cf:
 	cd ./build && $(MAKE) sendmail.cf

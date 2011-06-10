@@ -1,4 +1,4 @@
-sendmail:x:525:
+sendmail:x:525:sendmail,smsubmit
 smsubmit:x:587:
 virtmail:x:660:
 dovecot:x:715:

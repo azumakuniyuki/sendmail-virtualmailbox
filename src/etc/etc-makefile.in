@@ -21,16 +21,21 @@ userdb.db: userdb
 	@ $(MAKEMAP) btree $@ < $<
 
 aliases.db:
-	@ $(SENDMAIL) -bi
+	@test -s $@ || \
+		( touch $@ && chown root.__SENDMAILUSER__ $@ && chmod 0640 $@ )
+	$(SENDMAIL) -bi
 
 %.db: %
 	@test -f $< && $(MAKEMAP) hash $@ < $<
+	chown root.__SENDMAILUSER__ $@ && chmod 640 $@
 
 %.cf: %.mc
 	if test -f $(CFDIR)/m4/cf.m4; then \
 		umask 022; \
 		test -e $@ && mv -f $@ $@.`date '+%F'`.bak; \
 		m4 $(CFDIR)/m4/cf.m4 $< > $@; \
+		chown root.__SENDMAILUSER__ $@; \
+		chmod 0640 $@; \
 	fi
 
 clean:
