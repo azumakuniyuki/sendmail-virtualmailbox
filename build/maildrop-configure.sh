@@ -4,7 +4,7 @@
 	--bindir=__BINDIR__ \
 	--sysconfdir=__SYSCONFDIR__ \
 	--localstatedir=__LOCALSTATEDIR__ \
-	--enable-sendmail=__PREFIX__/sbin/sendmail \
+	--enable-sendmail=/usr/sbin/sendmail \
 	--enable-keep-fromline=1 \
 	--enable-unicode \
 	--with-etcdir=__SYSCONFIDIR__

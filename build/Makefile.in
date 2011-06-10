@@ -420,6 +420,7 @@ check-virtmail-user:
 
 install-maildrop: check-virtmail-user build-maildrop
 	cd $(MD_DISTDIR) && $(MAKE) install-strip
+	$(CHOWN) root.$(SENDMAILUSER) @bindir@/lockmail @bindir@/maildrop
 
 	test -d @sysconfdir@/rcs || $(MKDIR) -p @sysconfdir@/rcs
 	if [ -f /var/log/maildrop-virtual.log ]; then \

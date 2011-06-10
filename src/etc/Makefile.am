@@ -49,18 +49,18 @@ install-am: $(sysconf_DATA) $(sendmail_CONF) $(other_CONF)
 	test -d @sysconfdir@ || $(MKDIR) -p @sysconfdir@
 	for F in $(sysconf_DATA); do \
 		test -s @sysconfdir@/$$F || \
-			$(INSTALL) -vpm 0644 -o root -g root $$F.in $(instdir)/$$F ;\
+			$(INSTALL) -vpm 0644 -o root -g root $$F $(instdir)/$$F ;\
 	done
 	test -s /etc/mail/Makefile || $(CP) etc-makefile.in /etc/mail/Makefile
 	test -d @datarootdir@/example || $(MKDIR) -p @datarootdir@/example
 	for F in $(sendmail_CONF); do \
 		test -s /etc/mail/$$F || \
-			$(INSTALL) -vpm 0640 -o root -g $(SENDMAILUSER) $$F.in /etc/mail/$$F ;\
+			$(INSTALL) -vpm 0640 -o root -g $(SENDMAILUSER) $$F /etc/mail/$$F ;\
 		$(CP) $$F.in @datarootdir@/example/$$F ;\
 	done
 
 .PHONY: clean
 clean:
-	rm -f $(sysconf_DATA) etc-Makefile.in
+	rm -f $(sysconf_DATA) etc-Makefile.in $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF)
 
 
