@@ -366,6 +366,7 @@ $(sendmail_MAPS):
 		-e "s|__TARGET_DOMAINNAME__|$(TARGET_DOMAINNAME)|g" \
 		-e 's|__DATAROOTDIR__|@datarootdir@|g' \
 		-e "s|__VIRTMAILHOME__|$(VIRTMAILHOME)|g" \
+		-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \
 		-e 's|\([^:]\)//|\1/|g' > $@
 
 $(sendmail_CONF):

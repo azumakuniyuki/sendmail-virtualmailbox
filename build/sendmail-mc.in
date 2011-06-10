@@ -142,7 +142,7 @@ dnl #  define(`QUEUE_DIR',`SPOOL/queues/q.*')		QueueDirectory
 dnl #  define(`STATUS_FILE',`-o CF/sendmail.st')	StatusFile(S)
 dnl #  define(`confUSERDB_SPEC',`CF/userdb.db')		UserDatabaseSpec
 define(`confDEAD_LETTER_DROP',`/var/tmp/dead.letter')dnl
-define(`confHOST_STATUS_DIRECTORY',`/var/spool/hoststat')dnl
+define(`confHOST_STATUS_DIRECTORY',`SPOOL/hoststat')dnl
 define(`QUEUE_DIR',`SPOOL/queues/q.*')dnl
 define(`STATUS_FILE',`-o /var/tmp/sendmail.st')dnl
 define(`confPID_FILE',`/var/run/sendmail.pid')dnl
@@ -382,7 +382,7 @@ dnl #  define(`confLOG_LEVEL',`15')			LogLevel(L)
 dnl #  define(`confREJECT_LOG_INTERVAL',`3h')		RejectLogInterval
 dnl #  define(`confCOPY_ERRORS_TO',`postmaster')	PostmasterCopy(P)
 dnl #
-define(`confCONTROL_SOCKET_NAME',`/tmp/.sendmailctl.sock')
+define(`confCONTROL_SOCKET_NAME',`SPOOL/queues/.sendmail.sock')
 define(`confCOPY_ERRORS_TO',`postmaster')
 
 
