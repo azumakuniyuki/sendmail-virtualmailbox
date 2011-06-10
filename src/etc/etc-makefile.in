@@ -15,7 +15,7 @@ CFDIR    = /etc/mail/cf
 OPTIONS  = /etc/mail/daemon-options
 QINTERVAL= $(shell test -s queue-interval && head -1 queue-interval || echo 4m)
 
-all: $(DBFILES)
+all: $(DBFILES) aliases.db
 
 userdb.db: userdb
 	@ $(MAKEMAP) btree $@ < $<
@@ -27,10 +27,10 @@ aliases.db:
 
 %.db: %
 	@test -f $< && $(MAKEMAP) hash $@ < $<
-	chown root.__SENDMAILUSER__ $@ && chmod 640 $@
+	@chown root.__SENDMAILUSER__ $@ && chmod 640 $@
 
 %.cf: %.mc
-	if test -f $(CFDIR)/m4/cf.m4; then \
+	@if test -f $(CFDIR)/m4/cf.m4; then \
 		umask 022; \
 		test -e $@ && mv -f $@ $@.`date '+%F'`.bak; \
 		m4 $(CFDIR)/m4/cf.m4 $< > $@; \
