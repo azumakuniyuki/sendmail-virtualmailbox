@@ -146,8 +146,9 @@ build-sendmail: $(SM_DISTDIR) check-sendmail-user
 			-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \
 			-e "s|__VIRTMAILUSER__|$(VIRTMAILUSER)|g" \
 			-e 's|\([^:]\)//|\1/|g' > site.config.m4 ;\
+		$(CP) site.config.m4 $(SM_DISTDIR)/devtools/Site/ ;\
 		cd $(SM_DISTDIR) && ( \
-			/bin/sh ./Build -c -f ../site.config.m4 && \
+			/bin/sh ./Build -c && \
 			cd ./libmilter && /bin/sh ./Build -c && \
 			$(TOUCH) $(BUILDROOT)/build/sendmail-build-ok ;\
 		) ;\
