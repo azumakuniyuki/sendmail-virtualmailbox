@@ -492,12 +492,12 @@ virtmail.m4:
 sendmail.cf: $(SM_DISTDIR) sendmail.mc virtmail.m4
 	$(CP) virtmail.m4 $(SM_DISTDIR)/cf/mailer/
 	$(M4) $(SM_DISTDIR)/cf/m4/cf.m4 sendmail.mc > $@
-	$(ECHO) "### $*.mc ###" >> $@
+	$(ECHO) '### sendmail.mc ###' >> $@
 	$(SED) -e 's|^|# |' sendmail.mc >> $@
 	test -f $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).cf || \
 		$(CP) sendmail.cf $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).cf
 	$(M4) $(SM_DISTDIR)/cf/m4/cf.m4 submit.mc > submit.cf
-	$(ECHO) "### $*.mc ###" >> submit.cf
+	$(ECHO) '### submit.mc ###' >> submit.cf
 	$(SED) -e 's|^|# |' submit.mc >> submit.cf
 
 install-sendmail: $(SM_DISTDIR)
@@ -516,7 +516,7 @@ install-sendmail: $(SM_DISTDIR)
 install-cf: sendmail.cf
 	for CF in sendmail.cf sendmail.mc submit.cf submit.mc; do \
 		test -f /etc/mail/$$CF && $(CP) /etc/mail/$$CF /etc/mail/$$CF.bak ;\
-		$(INSTALL) -vpm 0640 -g root -o root $$CF /etc/mail/ ;\
+		$(INSTALL) -vpm 0640 -o root -g $(SENDMAILUSER) $$CF /etc/mail/ ;\
 	done
 
 get-sid-milter: $(SI_DISTDIR)

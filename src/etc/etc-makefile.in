@@ -34,10 +34,8 @@ aliases.db:
 		umask 022; \
 		test -e $@ && mv -f $@ $@.`date '+%F'`.bak; \
 		m4 $(CFDIR)/m4/cf.m4 $< > $@; \
-		echo "### $*.mc ###" >> $@
-		sed -e 's|^|# |' %< >> $@
-		chown root.__SENDMAILUSER__ $@; \
-		chmod 0640 $@; \
+		echo "### $*.mc ###" >> $@; \
+		sed -e 's|^|# |' %< >> $@; \
 	fi
 
 clean:
