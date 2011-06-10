@@ -36,7 +36,7 @@ sidcontrol()
 {
 	local whataction=$1
 	local procidfile="/var/run/sid-milter.pid"
-	local commandarg="/usr/bin/sid-filter"
+	local commandarg="/usr/local/bin/sid-filter"
 	local daemonopts="`test -s /etc/mail/sid-options && grep -v '^#' /etc/mail/sid-options`"
 
 	if [ "${whataction}X" = "startX" ]; then
@@ -146,10 +146,10 @@ init()
 {
 	export PATH='/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 	export LANG='C'
-	if [ -x "/usr/bin/sid-filter" ]; then 
+	if [ -x "/usr/local/bin/sid-filter" ]; then 
 		SIDFILTER="/usr/bin/sid-filter"
 	else
-		echo "Cannot execute /usr/bin/sid-filter" > $STDERRORDEV
+		echo "Cannot execute /usr/local/bin/sid-filter" > $STDERRORDEV
 		exit $EX_GENERAL
 	fi
 }
