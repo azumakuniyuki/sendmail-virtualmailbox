@@ -349,7 +349,7 @@ uninstall-am: uninstall-sysconfDATA
 	uninstall-am uninstall-sysconfDATA
 
 
-all-am: $(sysconf_DATA) etc-makefile $(sendmail_CONF) $(other_CONF)
+all-am: $(sysconf_DATA) etc-makefile $(sendmail_CONF) $(sendmail_MAPS) $(other_CONF)
 $(sysconf_DATA):
 	$(CAT) $@.in | $(SED) \
 		-e "s|__TARGET_FQDN__|$(TARGET_FQDN)|g" \

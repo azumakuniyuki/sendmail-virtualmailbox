@@ -7,7 +7,7 @@ sendmail_CONF = virtuser-domains relay-domains local-host-names generics-domains
 other_CONF = queue-interval daemon-options sid-peer-hosts sid-pass-domains sid-options
 instdir = @sysconfdir@
 
-all-am: $(sysconf_DATA) etc-makefile $(sendmail_CONF) $(other_CONF)
+all-am: $(sysconf_DATA) etc-makefile $(sendmail_CONF) $(sendmail_MAPS) $(other_CONF)
 $(sysconf_DATA):
 	$(CAT) $@.in | $(SED) \
 		-e "s|__TARGET_FQDN__|$(TARGET_FQDN)|g" \
