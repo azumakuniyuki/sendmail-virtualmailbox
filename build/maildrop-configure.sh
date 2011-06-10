@@ -7,4 +7,4 @@
 	--enable-sendmail=/usr/sbin/sendmail \
 	--enable-keep-fromline=1 \
 	--enable-unicode \
-	--with-etcdir=__SYSCONFIDIR__
+	--with-etcdir=__SYSCONFDIR__
