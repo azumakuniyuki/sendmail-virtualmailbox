@@ -11,7 +11,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 --------------------------------------------------------------------------------
  * procmail delivers email to local user's Maildir (NOT virtual mailbox)
  * maildrop delivers email to virutal user's mailbox (NO unix account)
- * sendmail is installed into /usr/local/sendmail with MILTER
+ * sendmail is installed into /usr/sbin/sendmail with MILTER
 --------------------------------------------------------------------------------
 
  01. Add users and groups
@@ -25,7 +25,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       # ./configure
 
       Default values are:
-        --prefix=/usr/local/sendmail
+        --prefix=/usr/local/virtmail
         --sendmail-user=sendmail
         --submit-user=smsubmit
         --virtualmailbox-user=virtmail
@@ -33,22 +33,13 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
         --hostname=`hostname | cut -d. -f1`
         --domainname=`hostname | cut -d. -f2,3,4,5,6,7,8,9`
 
-     If you want to install into another location, for example:
-
-      # ./configure \
-         --prefix=/usr/local/smmta \
-         --sendmail-user=smmta \
-         --submit-user=smmsp \
-         --virtualmailbox-user=mail \
-         --virtualmailbox-home=/var/spool/vmailbox
-
 --------------------------------------------------------------------------------
  03. Run make command
 
       # make && make install
       
-      After you run ``make'', procmail, maildrop, heirloom-mailx, sendmail, and
-      sid-milter are automatically downloaded and built.
+      After you run ``make'', procmail, maildrop, sendmail, and sid-milter are
+      automatically downloaded and built.
 
 --------------------------------------------------------------------------------
  04. Install sendmail.cf and sendmail.mc
@@ -57,21 +48,21 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 
       ``make'' create sendmail.mc and sendmail.cf at ./build directory.
       When you run ``make install-cf'', ./build/sendmail.(cf|mc) are installed
-      into /usr/local/sendmail/etc/ and existing sendmail.cf will be copied as
+      into /etc/mail/ and existing sendmail.cf will be copied as
       sendmail.cf.bak .
 
       sendmail.mc and sendmail.cf in ./build directory are also installed into
-      /usr/local/sendmail/share/cf/cf as `hostname`.(mc|cf)
+      /etc/mail/cf/cf as `hostname`.(mc|cf)
 
 --------------------------------------------------------------------------------
  05. Edit configuration files
 
       Edit virtuser-domains, virtusertable, and other sendmail configuration
-      files in /usr/local/sendmail/etc directory.
+      files in /etc/mail directory. See also /usr/local/virtmail/share/example.
 
-      If you want to change sendmail.cf, edit sendmail.mc in /usr/local/sendmail
-      /etc/ directory and run ``make sendmail.cf'', or edit `hostname`.mc in 
-      /usr/local/sendmail/share/cf/cf/ directory and run ``make `hostname`.cf''.
+      If you want to change sendmail.cf, edit sendmail.mc in /etc/mail directory
+      and run ``make sendmail.cf'', or edit `hostname`.mc in /etc/mail/cf/cf di-
+      rectory and run ``make `hostname`.cf''.
 
 --------------------------------------------------------------------------------
  06. Create local user's mailbox
@@ -89,7 +80,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  07. Create virtual user's mailbox
 
       Virtual user's mailbox directory is /home/virtmail by default. 
-      /usr/local/sendmail/sbin/make-vmailbox script is useful to create virtual
+      /usr/local/virtmail/sbin/make-vmailbox script is useful to create virtual
       mailbox like the following:
 
       # make-vmailbox hoge@example.jp foo@example.org

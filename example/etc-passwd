@@ -1,5 +1,5 @@
-sendmail:x:525:525:Sendmail:/usr/local/sendmail/var/spool/mqueue:/sbin/nologin
-smsubmit:x:587:587:Sendmail Submission:/usr/local/sendmail/var/spool/cqueue:/sbin/nologin
+sendmail:x:525:525:Sendmail:/var/spool/queues:/sbin/nologin
+smsubmit:x:587:587:Sendmail Submission:/var/spool/cqueue:/sbin/nologin
 virtmail:x:660:660:Virtual Mailbox:/home/virtmail:/bin/sh
 dovecot:x:715:715:Dovecot IMAP Server:/usr/local/dovecot:/sbin/nologin
 dovenull:x:716:715:Dovecot Login:/usr/local/dovecot/var:/sbin/nologin

@@ -63,6 +63,6 @@ protocol pop3 {
 
 protocol lda {
   #postmaster_address = postmaster@
-  sendmail_path = /usr/local/sendmail/sbin/sendmail
+  sendmail_path = /usr/sbin/sendmail
 }
 
