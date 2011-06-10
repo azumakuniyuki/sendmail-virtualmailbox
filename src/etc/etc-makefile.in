@@ -34,7 +34,7 @@ aliases.db:
 	fi
 
 clean:
-	rm -f *.db *~
+	rm -f *.db *~ *.bak
 
 start:
 	@/bin/sh $(SMCTL) start
