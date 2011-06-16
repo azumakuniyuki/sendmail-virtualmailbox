@@ -24,6 +24,8 @@ define(`confDONT_INIT_GROUPS', `True')dnl
 define(`STATUS_FILE',`-o /var/spool/cqueue/smsubmit.st')dnl
 define(`confPID_FILE',`/var/run/smsubmit.pid')dnl
 define(`MSP_QUEUE_DIR',`/var/spool/cqueue')dnl
+define(`confTRUSTED_USER',`__SMSUBMITUSER__')dnl
+define(`confRUN_AS_USER',`__SMSUBMITUSER__:__SMSUBMITUSER__')dnl
 dnl
 dnl If you use IPv6 only, change [127.0.0.1] to [IPv6:::1]
 FEATURE(`msp', `[127.0.0.1]')dnl

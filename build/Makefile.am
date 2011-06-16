@@ -171,6 +171,7 @@ sendmail.mc:
 	$(CP) sendmail.mc $(SM_DISTDIR)/cf/cf/$(TARGET_FQDN).mc
 	$(CAT) submit-mc.in | $(SED) \
 		-e 's|__LOCALSTATEDIR__|@localstatedir@|g' \
+		-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
 		-e 's|\([^:]\)//|\1/|g' > submit.mc
 	$(CP) submit.mc $(SM_DISTDIR)/cf/cf/submit.mc
 
