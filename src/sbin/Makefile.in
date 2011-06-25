@@ -163,6 +163,7 @@ top_srcdir = @top_srcdir@
 # This is the auto-Makefile for src/sbin/, is processed by 
 # automake to create Makefile.in.
 bin_SCRIPTS = make-vmailbox sendmailctl sidctl
+perlscripts = mailbox-to-maildir
 instdir = @sbindir@
 all: all-am
 
@@ -342,7 +343,12 @@ uninstall-am: uninstall-binSCRIPTS
 	pdf-am ps ps-am uninstall uninstall-am uninstall-binSCRIPTS
 
 
-$(bin_SCRIPTS):
+$(perlscripts):
+	$(CAT) $@.PL | $(SED) \
+		-e "s|__SYSVERSION__|$(SYSVERSION)|g" \
+		-e 's|\([^:]\)//|\1/|g' > $@
+
+$(bin_SCRIPTS): $(perlscripts)
 	$(CAT) $@.SH | $(SED) \
 		-e "s|__SYSVERSION__|$(SYSVERSION)|g" \
 		-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
@@ -356,10 +362,12 @@ install-am:
 	$(INSTALL) -o root -g root -vpm 0755 $(bin_SCRIPTS) @sbindir@/
 	test -e /usr/local/sbin/smctl || \
 		$(LN) -fs @sbindir@/sendmailctl /usr/local/sbin/smctl
+	$(INSTALL) -o root -g root -vpm 0755 $(perlscripts) @sbindir@/
 
 .PHONY: clean
 clean:
 	rm -f $(bin_SCRIPTS)
+	rm -f $(perlscripts)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
