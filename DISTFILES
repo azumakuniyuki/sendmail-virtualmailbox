@@ -42,6 +42,7 @@
   maildroprc ----------------------------- maildrop configuration file
   procmailrc ----------------------------- procmail configuration file
  sbin/ ----------------------------------- System commands
+  mailbox-to-maildir --------------------- Convert from mbox to Maildir/
   make-vmailbox -------------------------- Helper script for making virtual mailbox
   sendmailctl ---------------------------- Helper script for controlling sendmail
   sidctl --------------------------------- Helper script for controlling sid-milter
