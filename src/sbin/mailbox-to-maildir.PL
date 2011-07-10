@@ -89,10 +89,10 @@ sub parseOptions
 	}
 
 	$GetDate = q(Date) if( defined($_opt_date) && lc($_opt_date) eq 'date' );
-	$Mailbox = defined($ARGV[0]) ? $ARGV[0] : '/var/mail/'.$ENV{'USER'};
-	$Maildir = defined($ARGV[1]) ? $ARGV[1] : $ENV{'HOME'}.'/Maildir';
+	$Mailbox = defined($ARGV[0]) ? $ARGV[0] : q();
+	$Maildir = defined($ARGV[1]) ? $ARGV[1] : q();
 
-
+	do { help(); exit(1); } if( ! $Mailbox || ! $Maildir );
 	e( $Mailbox." does not exist" ) unless( -e $Mailbox );
 	e( $Mailbox." is not a file" ) unless( -f $Mailbox );
 	e( $Mailbox." is not readable" ) unless( -r $Mailbox );
