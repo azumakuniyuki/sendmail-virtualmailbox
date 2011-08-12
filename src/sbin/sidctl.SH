@@ -68,7 +68,8 @@ sidcontrol()
 		msg 'Stopping sid-milter ... '
 		if [ -s "$procidfile" ]; then
 			( kill -$KILL_SIGNAL `head -1 $procidfile` && sleep 1 )
-			if [ "$?" -eq "0" -a ! -s "$procidfile" ]; then
+			if [ "$?" -eq "0" ]; then
+				/bin/rm -f $procidfile 2> /dev/null
 				result OK
 				STATUS_CODE=$EX_OK
 			else
