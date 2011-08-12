@@ -2,7 +2,7 @@
 ### Makefile.am -- makefile(GNU) for sendmail-virtualmailbox/build
 SM_VERSION = 8.14.5
 PM_VERSION = 3.22
-MD_VERSION = 2.5.3
+MD_VERSION = 2.5.4
 SI_VERSION = 1.0.0
 
 SM_ARCHIVE = sendmail.$(SM_VERSION).tar.gz
