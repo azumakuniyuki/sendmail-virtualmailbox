@@ -2274,7 +2274,7 @@ BUILDROOT=`pwd`
 
 
 SYSTEMNAME=sendmail-virtualmailbox
-SYSVERSION=1.1.5
+SYSVERSION=1.1.6
 
 
 
