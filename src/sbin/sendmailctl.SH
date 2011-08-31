@@ -88,7 +88,7 @@ smcontrol()
 
 makemaps()
 {
-	for M in access genericstable virtusertable mailertable; do
+	for M in access genericstable virtusertable mailertable authinfo; do
 		msg "makemap $M.db ... "
 		if [ -f "/etc/mail/$M" ]; then
 			/usr/sbin/makemap hash /etc/mail/$M.db < /etc/mail/$M > /dev/null 2>&1
