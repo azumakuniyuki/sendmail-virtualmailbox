@@ -638,6 +638,7 @@ dnl #  FEATURE(`authinfo')
 dnl #  define(`confAUTH_OPTIONS',`A')
 dnl #  define(`confDEF_AUTH_INFO',`CF/default-auth-info')
 dnl #
+FEATURE(`authinfo')
 TRUST_AUTH_MECH(`LOGIN PLAIN CRAM-MD5 DIGEST-MD5')
 
 
