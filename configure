@@ -2430,6 +2430,11 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$SHELL" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find sh program" >&5
+echo "$as_me: error: *** Cannot find sh program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 { echo "$as_me:$LINENO: checking whether ln -s works" >&5
 echo $ECHO_N "checking whether ln -s works... $ECHO_C" >&6; }
@@ -2484,6 +2489,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$CP" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find cp program" >&5
+echo "$as_me: error: *** Cannot find cp program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "m4", so it can be a program name with args.
 set dummy m4; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -2525,6 +2536,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$M4" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find m4 program" >&5
+echo "$as_me: error: *** Cannot find m4 program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "ln", so it can be a program name with args.
 set dummy ln; ac_word=$2
@@ -2568,6 +2585,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$LN" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find ln program" >&5
+echo "$as_me: error: *** Cannot find ln program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "cat", so it can be a program name with args.
 set dummy cat; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -2609,6 +2632,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$CAT" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find cat program" >&5
+echo "$as_me: error: *** Cannot find cat program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "tar", so it can be a program name with args.
 set dummy tar; ac_word=$2
@@ -2652,6 +2681,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$TAR" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find tar program" >&5
+echo "$as_me: error: *** Cannot find tar program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "echo", so it can be a program name with args.
 set dummy echo; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -2693,6 +2728,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$ECHO" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find echo program" >&5
+echo "$as_me: error: *** Cannot find echo program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "perl", so it can be a program name with args.
 set dummy perl; ac_word=$2
@@ -2736,6 +2777,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$PERL" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find perl program" >&5
+echo "$as_me: error: *** Cannot find perl program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "chmod", so it can be a program name with args.
 set dummy chmod; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -2777,6 +2824,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$CHMOD" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find chmod program" >&5
+echo "$as_me: error: *** Cannot find chmod program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "chown", so it can be a program name with args.
 set dummy chown; ac_word=$2
@@ -2820,6 +2873,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$CHOWN" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find chown program" >&5
+echo "$as_me: error: *** Cannot find chown program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "mkdir", so it can be a program name with args.
 set dummy mkdir; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -2861,6 +2920,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$MKDIR" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find mkdir program" >&5
+echo "$as_me: error: *** Cannot find mkdir program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "patch", so it can be a program name with args.
 set dummy patch; ac_word=$2
@@ -2904,6 +2969,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$PATCH" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find patch program" >&5
+echo "$as_me: error: *** Cannot find patch program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "strip", so it can be a program name with args.
 set dummy strip; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -2945,6 +3016,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$STRIP" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find strip program" >&5
+echo "$as_me: error: *** Cannot find strip program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "touch", so it can be a program name with args.
 set dummy touch; ac_word=$2
@@ -2988,6 +3065,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$TOUCH" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find touch program" >&5
+echo "$as_me: error: *** Cannot find touch program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "gunzip", so it can be a program name with args.
 set dummy gunzip; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -3029,6 +3112,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$GUNZIP" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find gunzip program" >&5
+echo "$as_me: error: *** Cannot find gunzip program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "bunzip2", so it can be a program name with args.
 set dummy bunzip2; ac_word=$2
@@ -3072,6 +3161,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$BUNZIP2" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find bunzip2 program" >&5
+echo "$as_me: error: *** Cannot find bunzip2 program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "install", so it can be a program name with args.
 set dummy install; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -3113,6 +3208,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$INSTALL" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find install program" >&5
+echo "$as_me: error: *** Cannot find install program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "useradd", so it can be a program name with args.
 set dummy useradd; ac_word=$2
@@ -3156,6 +3257,12 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$USERADD" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find useradd program" >&5
+echo "$as_me: error: *** Cannot find useradd program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
 # Extract the first word of "groupadd", so it can be a program name with args.
 set dummy groupadd; ac_word=$2
 { echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -3197,6 +3304,12 @@ else
 echo "${ECHO_T}no" >&6; }
 fi
 
+
+if test "x$GROUPADD" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find groupadd program" >&5
+echo "$as_me: error: *** Cannot find groupadd program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 # Extract the first word of "basename", so it can be a program name with args.
 set dummy basename; ac_word=$2
@@ -3240,6 +3353,11 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
+if test "x$BASENAME" = xno; then
+	{ { echo "$as_me:$LINENO: error: *** Cannot find basename program" >&5
+echo "$as_me: error: *** Cannot find basename program" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 for ac_prog in grep egrep
 do
@@ -3288,7 +3406,7 @@ fi
 done
 test -n "$GREP" || GREP="no"
 
-if test "x$GREP" = x; then
+if test "x$GREP" = xno; then
 	{ { echo "$as_me:$LINENO: error: *** Cannot find grep program(grep, egrep)" >&5
 echo "$as_me: error: *** Cannot find grep program(grep, egrep)" >&2;}
    { (exit 1); exit 1; }; }
@@ -3336,7 +3454,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-if test "x$FIND" = x; then
+if test "x$FIND" = xno; then
 	{ { echo "$as_me:$LINENO: error: *** Cannot find find program" >&5
 echo "$as_me: error: *** Cannot find find program" >&2;}
    { (exit 1); exit 1; }; }
@@ -3384,7 +3502,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-if test "x$SED" = x; then
+if test "x$SED" = xno; then
 	{ { echo "$as_me:$LINENO: error: *** Cannot find sed program" >&5
 echo "$as_me: error: *** Cannot find sed program" >&2;}
    { (exit 1); exit 1; }; }
@@ -3432,7 +3550,7 @@ echo "${ECHO_T}no" >&6; }
 fi
 
 
-if test "x$WGET" = x; then
+if test "x$WGET" = xno; then
 	{ { echo "$as_me:$LINENO: error: *** Cannot find wget program" >&5
 echo "$as_me: error: *** Cannot find wget program" >&2;}
    { (exit 1); exit 1; }; }
