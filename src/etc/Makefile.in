@@ -400,28 +400,28 @@ install-am: $(sysconf_DATA) $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF) etc-
 		test -s /etc/mail/$$M || \
 			$(INSTALL) -vpm 0644 -o root -g root $$M /etc/mail/$$M ;\
 	done
-	test -s /etc/mail/Makefile || $(CP) etc-makefile /etc/mail/Makefile
+	$(CP) etc-makefile /etc/mail/Makefile
 	test -d @datarootdir@/example || $(MKDIR) -p @datarootdir@/example
 	for M in $(sendmail_MAPS); do \
 		test -s /etc/mail/$$M || \
 			$(INSTALL) -vpm 0644 -o root -g $(SENDMAILUSER) $$M /etc/mail/$$M ;\
-		$(CP) $$M.in @datarootdir@/example/$$M ;\
+		$(CP) $$M @datarootdir@/example/$$M ;\
 	done
 	test -s /etc/mail/authinfo && chmod 0600 /etc/mail/authinfo
 	for C in $(sendmail_CONF); do \
 		test -s /etc/mail/$$C || \
 			$(INSTALL) -vpm 0640 -o root -g $(SENDMAILUSER) $$C /etc/mail/$$C ;\
-		$(CP) $$C.in @datarootdir@/example/$$C ;\
+		$(CP) $$C @datarootdir@/example/$$C ;\
 	done
 	for O in $(other_CONF); do \
 		test -s /etc/mail/$$O || \
 			$(INSTALL) -vpm 0644 -o root -g $(SENDMAILUSER) $$O /etc/mail/$$O ;\
-		$(CP) $$O.in @datarootdir@/example/$$O ;\
+		$(CP) $$O @datarootdir@/example/$$O ;\
 	done
 
 .PHONY: clean
 clean:
-	rm -f $(sysconf_DATA) etc-Makefile.in $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF)
+	rm -f $(sysconf_DATA) etc-Makefile $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
