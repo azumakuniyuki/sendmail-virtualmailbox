@@ -1,7 +1,7 @@
 dnl #                                               -*- Autoconf -*-
 dnl # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([sendmail-virtualmailbox], [1.1.6], [azumakuniyuki@gmail.com])
+AC_INIT([sendmail-virtualmailbox], [1.1.7], [azumakuniyuki@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 AC_PREFIX_DEFAULT(/usr/local/virtmail)
 AC_CANONICAL_HOST
@@ -10,7 +10,7 @@ BUILDROOT=`pwd`
 AC_SUBST(BUILDROOT)
 
 SYSTEMNAME=sendmail-virtualmailbox
-SYSVERSION=1.1.6
+SYSVERSION=1.1.7
 AC_SUBST(SYSTEMNAME)
 AC_SUBST(SYSVERSION)
 
@@ -20,42 +20,42 @@ AC_PROG_MAKE_SET
 AC_PATH_PROG(SHELL, sh, :, /bin:/usr/bin:/usr/local/bin)
 
 AC_PROG_LN_S
-AC_PATH_PROG(CP, cp, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(M4, m4, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(LN, ln, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(CAT, cat, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(TAR, tar, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(ECHO, echo, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(PERL, perl, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(CHMOD, chmod, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(CHOWN, chown, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(MKDIR, mkdir, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(PATCH, patch, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(STRIP, strip, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(TOUCH, touch, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(GUNZIP, gunzip, :, /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin)
-AC_PATH_PROG(BUNZIP2, bunzip2, :, /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin)
-AC_PATH_PROG(INSTALL, install, :, /bin:/usr/bin:/usr/local/bin)
-AC_PATH_PROG(USERADD, useradd, :, /bin:/usr/bin:/sbin:/usr/sbin:)
-AC_PATH_PROG(GROUPADD, groupadd, :, /bin:/usr/bin:/sbin:/usr/sbin:)
-AC_PATH_PROG(BASENAME, basename, :, /bin:/usr/bin:/sbin:/usr/sbin:)
+AC_PATH_PROG(CP, cp, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(M4, m4, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(LN, ln, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(CAT, cat, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(TAR, tar, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(ECHO, echo, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(PERL, perl, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(CHMOD, chmod, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(CHOWN, chown, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(MKDIR, mkdir, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(PATCH, patch, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(STRIP, strip, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(TOUCH, touch, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(GUNZIP, gunzip, no, /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin)
+AC_PATH_PROG(BUNZIP2, bunzip2, no, /bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin)
+AC_PATH_PROG(INSTALL, install, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(USERADD, useradd, no, /bin:/usr/bin:/sbin:/usr/sbin:)
+AC_PATH_PROG(GROUPADD, groupadd, no, /bin:/usr/bin:/sbin:/usr/sbin:)
+AC_PATH_PROG(BASENAME, basename, no, /bin:/usr/bin:/sbin:/usr/sbin:)
 
-AC_PATH_PROGS(GREP, grep egrep, :, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROGS(GREP, grep egrep, no, /bin:/usr/bin:/usr/local/bin)
 if test "x$GREP" = x; then
 	AC_MSG_ERROR([*** Cannot find grep program(grep, egrep)])
 fi
 
-AC_PATH_PROG(FIND, find, :, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(FIND, find, no, /bin:/usr/bin:/usr/local/bin)
 if test "x$FIND" = x; then
 	AC_MSG_ERROR([*** Cannot find find program])
 fi
 
-AC_PATH_PROG(SED, sed, :, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(SED, sed, no, /bin:/usr/bin:/usr/local/bin)
 if test "x$SED" = x; then
 	AC_MSG_ERROR([*** Cannot find sed program])
 fi
 
-AC_PATH_PROG(WGET, wget ftp curl, :, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(WGET, wget ftp curl, no, /bin:/usr/bin:/usr/local/bin)
 if test "x$WGET" = x; then
 	AC_MSG_ERROR([*** Cannot find wget program])
 fi
