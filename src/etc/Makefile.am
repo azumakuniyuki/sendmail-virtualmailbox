@@ -47,7 +47,7 @@ $(other_CONF):
 etc-makefile:
 	$(CAT) $@.in | $(SED) -e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" > $@
 
-install-am: $(sysconf_DATA) $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF)
+install-am: $(sysconf_DATA) $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF) etc-makefile
 	test -d @sysconfdir@ || $(MKDIR) -p @sysconfdir@
 	for F in $(sysconf_DATA); do \
 		test -s @sysconfdir@/$$F || \
@@ -57,7 +57,7 @@ install-am: $(sysconf_DATA) $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF)
 		test -s /etc/mail/$$M || \
 			$(INSTALL) -vpm 0644 -o root -g root $$M /etc/mail/$$M ;\
 	done
-	test -s /etc/mail/Makefile || $(CP) etc-makefile.in /etc/mail/Makefile
+	test -s /etc/mail/Makefile || $(CP) etc-makefile /etc/mail/Makefile
 	test -d @datarootdir@/example || $(MKDIR) -p @datarootdir@/example
 	for M in $(sendmail_MAPS); do \
 		test -s /etc/mail/$$M || \
