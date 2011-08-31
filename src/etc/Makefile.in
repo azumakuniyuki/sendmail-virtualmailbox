@@ -169,7 +169,7 @@ top_srcdir = @top_srcdir@
 # This is the auto-Makefile for src/etc/, is processed by 
 # automake to create Makefile.in.
 sysconf_DATA = procmailrc maildroprc 
-sendmail_MAPS = virtusertable access mailertable genericstable 
+sendmail_MAPS = virtusertable access mailertable genericstable authinfo
 sendmail_CONF = virtuser-domains relay-domains local-host-names generics-domains \
 		masquerade-domains
 

@@ -2,7 +2,7 @@
 # This is the auto-Makefile for src/etc/, is processed by 
 # automake to create Makefile.in.
 sysconf_DATA = procmailrc maildroprc 
-sendmail_MAPS = virtusertable access mailertable genericstable 
+sendmail_MAPS = virtusertable access mailertable genericstable authinfo
 sendmail_CONF = virtuser-domains relay-domains local-host-names generics-domains \
 		masquerade-domains
 other_CONF = queue-interval daemon-options sid-peer-hosts sid-pass-domains sid-options
