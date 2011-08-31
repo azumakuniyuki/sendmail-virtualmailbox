@@ -47,18 +47,33 @@ $(other_CONF):
 etc-makefile:
 	$(CAT) $@.in | $(SED) -e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" > $@
 
-install-am: $(sysconf_DATA) $(sendmail_CONF) $(other_CONF)
+install-am: $(sysconf_DATA) $(sendmail_MAPS) $(sendmail_CONF) $(other_CONF)
 	test -d @sysconfdir@ || $(MKDIR) -p @sysconfdir@
 	for F in $(sysconf_DATA); do \
 		test -s @sysconfdir@/$$F || \
 			$(INSTALL) -vpm 0644 -o root -g root $$F $(instdir)/$$F ;\
 	done
+	for M in $(sendmail_MAPS); do \
+		test -s /etc/mail/$$M || \
+			$(INSTALL) -vpm 0644 -o root -g root $$M /etc/mail/$$M ;\
+	done
 	test -s /etc/mail/Makefile || $(CP) etc-makefile.in /etc/mail/Makefile
 	test -d @datarootdir@/example || $(MKDIR) -p @datarootdir@/example
-	for F in $(sendmail_CONF); do \
-		test -s /etc/mail/$$F || \
-			$(INSTALL) -vpm 0640 -o root -g $(SENDMAILUSER) $$F /etc/mail/$$F ;\
-		$(CP) $$F.in @datarootdir@/example/$$F ;\
+	for M in $(sendmail_MAPS); do \
+		test -s /etc/mail/$$M || \
+			$(INSTALL) -vpm 0644 -o root -g $(SENDMAILUSER) $$M /etc/mail/$$M ;\
+		$(CP) $$M.in @datarootdir@/example/$$M ;\
+	done
+	test -s /etc/mail/authinfo && chmod 0600 /etc/mail/authinfo
+	for C in $(sendmail_CONF); do \
+		test -s /etc/mail/$$C || \
+			$(INSTALL) -vpm 0640 -o root -g $(SENDMAILUSER) $$C /etc/mail/$$C ;\
+		$(CP) $$C.in @datarootdir@/example/$$C ;\
+	done
+	for O in $(other_CONF); do \
+		test -s /etc/mail/$$O || \
+			$(INSTALL) -vpm 0644 -o root -g $(SENDMAILUSER) $$O /etc/mail/$$O ;\
+		$(CP) $$O.in @datarootdir@/example/$$O ;\
 	done
 
 .PHONY: clean
