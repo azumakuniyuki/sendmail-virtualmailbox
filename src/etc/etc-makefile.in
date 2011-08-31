@@ -8,7 +8,7 @@
 # ---------------------------------------------------------------------------
 SENDMAIL = /usr/sbin/sendmail
 MAKEMAP  = /usr/sbin/makemap
-DBFILES  = virtusertable.db access.db genericstable.db mailertable.db
+DBFILES  = virtusertable.db access.db genericstable.db mailertable.db \
 	   authinfo
 PIDFILE  = /var/run/sendmail.pid
 SMCTL    = /usr/local/sbin/sendmailctl
@@ -26,10 +26,9 @@ aliases.db:
 		( touch $@ && chown root.__SENDMAILUSER__ $@ && chmod 0640 $@ )
 	$(SENDMAIL) -bi
 
-authinfo.db: %
+authinfo.db: authinfo
 	@test -f $< && $(MAKEMAP) hash $@ < $<
-	@chown root.__SENDMAILUSER__ $@ && chmod 400 $@
-	@chown root.__SENDMAILUSER__ $< && chmod 600 $<
+	@chown root.__SENDMAILUSER__ $@ && chmod 600 $@ $<
 
 %.db: %
 	@test -f $< && $(MAKEMAP) hash $@ < $<
