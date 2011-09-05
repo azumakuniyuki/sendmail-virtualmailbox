@@ -1,7 +1,11 @@
 # $Id: Makefile.am,v 1.12.2.1 2011/03/19 09:41:17 ak Exp $
 # This is the auto-Makefile for src/sbin/, is processed by 
 # automake to create Makefile.in.
+if ENABLE_SIDMILTER
 bin_SCRIPTS = make-vmailbox sendmailctl sidctl
+else
+bin_SCRIPTS = make-vmailbox sendmailctl
+endif
 perlscripts = mailbox-to-maildir
 instdir = @sbindir@
 

@@ -22,9 +22,13 @@ PM_DISTURL = http://dl.dropbox.com/u/8413459/$(PM_ARCHIVE)
 MD_DISTURL = http://dl.dropbox.com/u/8413459/$(MD_ARCHIVE)
 SI_DISTURL = http://dl.dropbox.com/u/8413459/$(SI_ARCHIVE)
 
-
+if ENABLE_SIDMILTER
 all-am: procmail maildrop sendmail sid-milter
 install-am: install-procmail install-maildrop install-sendmail install-sid-milter
+else
+all-am: procmail maildrop sendmail 
+install-am: install-procmail install-maildrop install-sendmail
+endif
 
 procmail: get-procmail build-procmail
 maildrop: get-maildrop build-maildrop

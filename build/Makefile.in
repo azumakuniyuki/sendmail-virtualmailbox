@@ -329,8 +329,10 @@ uninstall-am:
 	mostlyclean-generic pdf pdf-am ps ps-am uninstall uninstall-am
 
 
-all-am: procmail maildrop sendmail sid-milter
-install-am: install-procmail install-maildrop install-sendmail install-sid-milter
+@ENABLE_SIDMILTER_TRUE@all-am: procmail maildrop sendmail sid-milter
+@ENABLE_SIDMILTER_TRUE@install-am: install-procmail install-maildrop install-sendmail install-sid-milter
+@ENABLE_SIDMILTER_FALSE@all-am: procmail maildrop sendmail 
+@ENABLE_SIDMILTER_FALSE@install-am: install-procmail install-maildrop install-sendmail
 
 procmail: get-procmail build-procmail
 maildrop: get-maildrop build-maildrop

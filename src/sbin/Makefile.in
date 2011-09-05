@@ -158,11 +158,12 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+@ENABLE_SIDMILTER_FALSE@bin_SCRIPTS = make-vmailbox sendmailctl
 
 # $Id: Makefile.am,v 1.12.2.1 2011/03/19 09:41:17 ak Exp $
 # This is the auto-Makefile for src/sbin/, is processed by 
 # automake to create Makefile.in.
-bin_SCRIPTS = make-vmailbox sendmailctl sidctl
+@ENABLE_SIDMILTER_TRUE@bin_SCRIPTS = make-vmailbox sendmailctl sidctl
 perlscripts = mailbox-to-maildir
 instdir = @sbindir@
 all: all-am

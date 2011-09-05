@@ -5,7 +5,11 @@ sysconf_DATA = procmailrc maildroprc
 sendmail_MAPS = virtusertable access mailertable genericstable authinfo
 sendmail_CONF = virtuser-domains relay-domains local-host-names generics-domains \
 		masquerade-domains
+if ENABLE_SIDMILTER
 other_CONF = queue-interval daemon-options sid-peer-hosts sid-pass-domains sid-options
+else
+other_CONF = queue-interval daemon-options
+endif
 instdir = @sysconfdir@
 
 all-am: $(sysconf_DATA) etc-makefile $(sendmail_CONF) $(sendmail_MAPS) $(other_CONF)
