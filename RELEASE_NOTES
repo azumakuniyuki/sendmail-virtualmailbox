@@ -12,6 +12,17 @@ __   _(_)_ __| |_ _   _  __ _| |_ __ ___   __ _(_) | |__   _____  __
   \_/ |_|_|   \__|\__,_|\__,_|_|_| |_| |_|\__,_|_|_|_.__/ \___/_/\_\
 
              SENDMAIL-VIRTUALMAILBOX/RELEASE_NOTES
+
+-----------------------------------------------------------------------
+1.1.8		2011/09/05
+
+  New functionality: 
+    * New configure option --enable-sid-milter (default=no)
+
+  Fixed bugs:
+    * Fix help messages of --with-hostname and --with-domainname in ./
+      configure script.
+
 -----------------------------------------------------------------------
 1.1.7		2011/08/31
 

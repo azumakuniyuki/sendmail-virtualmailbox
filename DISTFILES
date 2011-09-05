@@ -15,9 +15,9 @@
   relay-domains
   sendmail.cf
   sendmail.mc ---------------------------- Copy of share/cf/cf/`hostname`.mc
-  sid-pass-domains ----------------------- Domains to alwasys passs for sid-milter
-  sid-peer-hosts ------------------------- List of hosts to ignore for sid-milter
-  sid-options ---------------------------- Command line options for sid-milter
+  sid-pass-domains ----------------------- Domains to alwasys passs for sid-milter(optional)
+  sid-peer-hosts ------------------------- List of hosts to ignore for sid-milter(optional)
+  sid-options ---------------------------- Command line options for sid-milter(optional)
   submit.cf
   submit.mc ------------------------------ Copy of share/cf/cf/submit.mc
   virtuser-domains
@@ -27,7 +27,7 @@
 /usr/lib/libmilter.a --------------------- Milter library
 
 /usr/local/
-  bin/sid-filter ------------------------- sid-milter command
+  bin/sid-filter ------------------------- sid-milter command(optional)
   include/libmilter ---------------------- Milter header files
   include/libsmdb
   include/sendmail
@@ -37,7 +37,7 @@
 /usr/local/virtmail ---------------------- Base directory of sendmail-virtualmailbox 
  bin/ ------------------------------------ Commands
   procmail ------------------------------- procmail as a MDA for local mailbox
-  sid-filter ----------------------------- Symbolic link to /usr/local/bin/sid-filter
+  sid-filter ----------------------------- Symbolic link to /usr/local/bin/sid-filter(optional)
  etc/ ------------------------------------ Configuration files
   maildroprc ----------------------------- maildrop configuration file
   procmailrc ----------------------------- procmail configuration file
@@ -45,7 +45,7 @@
   mailbox-to-maildir --------------------- Convert from mbox to Maildir/
   make-vmailbox -------------------------- Helper script for making virtual mailbox
   sendmailctl ---------------------------- Helper script for controlling sendmail
-  sidctl --------------------------------- Helper script for controlling sid-milter
+  sidctl --------------------------------- Helper script for controlling sid-milter(optional)
  share/ ---------------------------------- Data
   example/a-part-of-dovecot.conf --------- Example of dovecot.conf
   example/a-part-of-aliases -------------- Example of etc/aliases
