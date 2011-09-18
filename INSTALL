@@ -103,7 +103,8 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 --------------------------------------------------------------------------------
  08. Setup dovecot or other IMAP/POP3 Server program
 
-      See example/dovecot-* files to install and configure dovecot.
+      See example/dovecot-* files to install and configure dovecot.  More infor-
+      mation about installing dovecot is available at ./INSTALL.dovecot .
 
 --------------------------------------------------------------------------------
  08. Start Milter programs if you use

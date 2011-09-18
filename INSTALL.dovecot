@@ -1,0 +1,96 @@
+$Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
+                                                
+  #### ##  ##  ##### ###### ##   ##     ##      
+   ##  ### ## ###      ##  ####  ##     ##      
+   ##  ######  ###     ## ##  ## ##     ##      
+   ##  ## ###   ###    ## ###### ##     ##      
+   ##  ##  ##    ###   ## ##  ## ##     ##     ###
+  #### ##  ## #####    ## ##  ## ###### ###### ### dovecot
+                                                
+             How to install dovecot
+--------------------------------------------------------------------------------
+ * dovecot is installed into /usr/local/dovecot with MILTER
+--------------------------------------------------------------------------------
+
+ 01. Download dovecot source
+
+      Download dovecot tarball like the following:
+
+      # cd /usr/local/src
+      # wget http://www.dovecot.org/releases/2.0/dovecot-2.0.14.tar.gz
+      ...
+      # gunzip -dc dovecot-2.0.14.tar.gz | tar xvf -
+      ...
+
+--------------------------------------------------------------------------------
+ 02. Apply patch 
+ 
+      Enter into dovecot source directory and apply patch.
+
+      # cd /usr/local/src/dovecot-2.0.14/
+      # patch -p0 < ../sendmail-virtualmailbox/example/dovecot-pkgsysconfdir.patch
+
+--------------------------------------------------------------------------------
+ 03. Run configure script and make, make install
+
+      # pwd
+      /usr/local/src/dovecot-2.0.14
+      # sh ../sendmail-virtualmailbox/example/dovecot-configure
+      ...
+      # make && make install
+     
+--------------------------------------------------------------------------------
+ 04. Run setup script
+
+      The following script make dovecot log directory, configuration directory,
+      sbin/mkcert.sh, sbin/dovecot-initd.sh, etc/openssl.cnf, and empty password
+      files.
+
+      # sh ../sendmail-virtualmailbox/example/dovecot-setup
+
+--------------------------------------------------------------------------------
+ 05. Make certification file and secret key file
+      
+      First, edit /usr/local/dovecot/etc/openssl.cnf and run sbin/mkcert.sh .
+
+      # cd /usr/local/dovecot
+      # vi etc/openssl.cnf
+      # sh sbin/mkcert.sh
+
+--------------------------------------------------------------------------------
+ 06. Edit dovecot configuration file.
+
+      Edit /usr/local/dovecot/etc/dovecot.conf 
+
+      or
+      
+      Copy sendmail-virtualmailbox/example/dovecot.conf-example as dovecot.conf
+      and edit it.
+
+--------------------------------------------------------------------------------
+ 07. Create password entry
+
+      Copy sample password file like the following:
+
+      # cd /usr/local/src/sendmail-virtualmailbox/example
+      # cp ./dovecot-virtuser-passwd /usr/local/dovecot/etc/virtuser-passwd
+
+      And create password entry using bin/doveadm
+
+      # cd /usr/local/dovecot
+      # ./bin/doveadm pw -s MD5 -u user@example.com 
+      Enter new password: 
+      Retype new password: 
+      {MD5}$1$**************
+      
+      Replace the username, the home directory and the password string in 
+      etc/virtuser-passwd .
+
+      # vi etc/virtuser-passwd
+
+--------------------------------------------------------------------------------
+ 08. Start dovecot daemon
+      
+      # /usr/local/dovecot/sbin/dovecot-initd.sh start
+
+--------------------------------------------------------------------------------
