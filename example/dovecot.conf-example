@@ -1,7 +1,7 @@
 auth_username_translation = %@
 base_dir = /usr/local/dovecot/var/run
 disable_plaintext_auth = no
-log_path = /usr/local/dovecot/var/log/dovecot.log
+log_path = /usr/local/dovecot/var/log/dovecot-daemon.log
 debug_log_path = /usr/local/dovecot/var/log/dovecot-debug.log
 mail_location = maildir:~/Maildir
 first_valid_uid = 250

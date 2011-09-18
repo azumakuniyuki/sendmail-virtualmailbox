@@ -1,4 +1,5 @@
 #!/bin/sh
+export LANG=C
 export D=/usr/local/dovecot
 /bin/sh ./configure \
  --prefix=$D \
