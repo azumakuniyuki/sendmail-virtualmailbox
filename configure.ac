@@ -1,7 +1,7 @@
 dnl #                                               -*- Autoconf -*-
 dnl # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([sendmail-virtualmailbox], [1.1.8], [azumakuniyuki@gmail.com])
+AC_INIT([sendmail-virtualmailbox], [1.1.9], [azumakuniyuki@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 AC_PREFIX_DEFAULT(/usr/local/virtmail)
 AC_CANONICAL_HOST
@@ -10,7 +10,7 @@ BUILDROOT=`pwd`
 AC_SUBST(BUILDROOT)
 
 SYSTEMNAME=sendmail-virtualmailbox
-SYSVERSION=1.1.8
+SYSVERSION=1.1.9
 AC_SUBST(SYSTEMNAME)
 AC_SUBST(SYSVERSION)
 
@@ -226,9 +226,10 @@ AC_ARG_WITH([domainname],
 AC_SUBST(TARGET_DOMAINNAME)
 
 AC_ARG_ENABLE(sid-milter,
-	AC_HELP_STRING( [--enable-sidmilter], [Enable sid-milter(default=no)] ),
+	AC_HELP_STRING( [--enable-sid-milter], [Enable sid-milter(default=no)] ),
 	[enable_sidmilter="$enableval"], [enable_sidmilter="no"])
 	AM_CONDITIONAL([ENABLE_SIDMILTER], [test "x$enable_sidmilter" = "xyes"])
+AC_SUBST(ENABLE_SIDMILTER)
 
 AC_CONFIG_FILES([Makefile
                  build/Makefile
