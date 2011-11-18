@@ -1,10 +1,16 @@
 #!/bin/sh
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 export LANG=C
+
+echo 'Install /usr/local/dovecot/sbin/dovecot-initd.sh'
 cat doc/dovecot-initd.sh | \
 	sed 's|DAEMON=.*|DAEMON=/usr/local/dovecot/sbin/dovecot|' > /usr/local/dovecot/sbin/dovecot-initd.sh
 chmod a+x /usr/local/dovecot/sbin/dovecot-initd.sh
+
+echo 'Install /usr/local/dovecot/etc/openssl.cnf'
 install -o root -g root -pm 0644 doc/dovecot-openssl.cnf /usr/local/dovecot/etc/openssl.cnf
+
+echo 'Install /usr/local/dovecot/sbin/mkcert.sh'
 cat doc/mkcert.sh | sed \
 	-e 's|SSLDIR=.*|SSLDIR=/usr/local/dovecot/etc/ssl|g' \
 	-e 's|OPENSSLCONFIG=.*|OPENSSLCONFIG=/usr/local/dovecot/etc/openssl.cnf|g' \
@@ -13,9 +19,13 @@ cat doc/mkcert.sh | sed \
 	-e 's|CERTFILE=.*|CERTFILE=$CERTDIR/dovecot-cert.pem|g' \
 	-e 's|KEYFILE=.*|KEYFILE=$KEYDIR/dovecot-key.pem|g' \
 	> /usr/local/dovecot/sbin/mkcert.sh
+
+echo 'Creating directories in /usr/local/dovecot: etc/ssl etc/conf.d var/log'
 mkdir -p /usr/local/dovecot/etc/ssl/
 mkdir -p /usr/local/dovecot/etc/conf.d/
 mkdir -p /usr/local/dovecot/var/log/
+
+echo 'Creating files in /usr/local/dovecot/etc: disabled-users virtuser-passwd dovecot.conf'
 touch /usr/local/dovecot/etc/disabled-users
 touch /usr/local/dovecot/etc/virtuser-passwd
 cp /usr/local/dovecot/share/doc/example-config/dovecot.conf /usr/local/dovecot/etc/
