@@ -65,7 +65,7 @@ message:
 	@echo "  4. cd /etc/mail && make virtusertable.db"
 	@echo "  5. If you use sid-milter, Edit sendmail.mc and run ``make sendmail.cf'' in"
 	@echo "     /etc/mail, and run ``/usr/local/sbin/sidctl start''"
-	@echo "  6. /usr/local/sbin/sendmailctl start or /usr/local/sbin/smctl start"
+	@echo "  6. /usr/local/sbin/smctl start"
 	@echo
 	
 
