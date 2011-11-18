@@ -17,9 +17,9 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       Download dovecot tarball like the following:
 
       # cd /usr/local/src
-      # wget http://www.dovecot.org/releases/2.0/dovecot-2.0.14.tar.gz
+      # wget http://www.dovecot.org/releases/2.0/dovecot-2.0.16.tar.gz
       ...
-      # gunzip -dc dovecot-2.0.14.tar.gz | tar xvf -
+      # gunzip -dc dovecot-2.0.16.tar.gz | tar xvf -
       ...
 
 --------------------------------------------------------------------------------
@@ -27,14 +27,14 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  
       Enter into dovecot source directory and apply patch.
 
-      # cd /usr/local/src/dovecot-2.0.14/
+      # cd /usr/local/src/dovecot-2.0.16/
       # patch -p0 < ../sendmail-virtualmailbox/example/dovecot-pkgsysconfdir.patch
 
 --------------------------------------------------------------------------------
  03. Run configure script and make, make install
 
       # pwd
-      /usr/local/src/dovecot-2.0.14
+      /usr/local/src/dovecot-2.0.16
       # sh ../sendmail-virtualmailbox/example/dovecot-configure
       ...
       # make && make install
