@@ -1,0 +1,8 @@
+db4
+db4-devel
+openssl-devel
+cyrus-sasl-lib
+cyrus-sasl-devel
+cyrus-sasl-md5
+cyrus-sasl-plain
+cyrus-sasl-ntlm
