@@ -14,13 +14,19 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  * sendmail is installed into /usr/sbin/sendmail with MILTER
 --------------------------------------------------------------------------------
 
- 01. Add users and groups
+ 01. Add required libraries
+
+      Install required libraries: cyrus-sasl, BerkeleyDB, and so on. See also
+      packages listed in example/centos-packages file.
+
+--------------------------------------------------------------------------------
+ 02. Add users and groups
 
       Add users and groups which are listed in the following files:
       example/etc-passwd, and example/etc-group .
 
 --------------------------------------------------------------------------------
- 02. Run configure script: 
+ 03. Run configure script: 
 
       # ./configure
 
@@ -32,18 +38,18 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
         --virtualmailbox-home=/home/virtmail
         --with-hostname=`hostname | cut -d. -f1`
         --with-domainname=`hostname | cut -d. -f2,3,4,5,6,7,8,9`
-	--enable-sid-milter=no
+        --enable-sid-milter=no
 
 --------------------------------------------------------------------------------
- 03. Run make command
+ 04. Run make command
 
       # make && make install
-      
+
       After you run ``make'', procmail, maildrop, sendmail, and sid-milter are
       automatically downloaded and built.
 
 --------------------------------------------------------------------------------
- 04. Install sendmail.cf and sendmail.mc
+ 05. Install sendmail.cf and sendmail.mc
 
       # make install-cf
 
@@ -56,7 +62,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       /etc/mail/cf/cf as `hostname`.(mc|cf)
 
 --------------------------------------------------------------------------------
- 05. Edit configuration files
+ 06. Edit configuration files
 
       Edit virtuser-domains, virtusertable, and other sendmail configuration
       files in /etc/mail directory. See also /usr/local/virtmail/share/example.
@@ -66,7 +72,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       rectory and run ``make `hostname`.cf''.
 
 --------------------------------------------------------------------------------
- 06. Create local user's mailbox
+ 07. Create local user's mailbox
 
       Create local user's mailbox(Maildir/) like following:
       # mkdir -pm 0700 /root/Maildir/{cur,new,tmp}
@@ -78,7 +84,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       # adduser bar
 
 --------------------------------------------------------------------------------
- 07. Create virtual user's mailbox
+ 08. Create virtual user's mailbox
 
       Virtual user's mailbox directory is /home/virtmail by default. 
       /usr/local/virtmail/sbin/make-vmailbox script is useful to create virtual
@@ -101,13 +107,13 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       
 
 --------------------------------------------------------------------------------
- 08. Setup dovecot or other IMAP/POP3 Server program
+ 09. Setup dovecot or other IMAP/POP3 Server program
 
       See example/dovecot-* files to install and configure dovecot.  More infor-
       mation about installing dovecot is available at ./INSTALL.dovecot .
 
 --------------------------------------------------------------------------------
- 08. Start Milter programs if you use
+ 10. Start Milter programs if you use
      
       Start milter programs, ( e.g. sid-milter, clamav-milter, and so on) before
       starting sendmail. Helper script /usr/local/sendmail/sbin/sidctl is useful
@@ -117,7 +123,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       # grep MILTER sendmail.cf
 
 --------------------------------------------------------------------------------
- 09. Start sendmail
+ 11. Start sendmail
 
       There are 3 ways to start sendmail daemon
       a) /usr/local/sendmail/sbin/sendmail -bd -q5m -Lsm-mta
