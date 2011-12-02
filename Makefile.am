@@ -67,5 +67,6 @@ message:
 	@echo "     /etc/mail, and run ``/usr/local/sbin/sidctl start''"
 	@echo "  6. /usr/local/sbin/smctl start"
 	@echo
-	
+	@echo "-----------------------------------------------------------------------------"
+	@echo
 
