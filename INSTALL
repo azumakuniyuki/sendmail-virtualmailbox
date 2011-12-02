@@ -104,7 +104,6 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       /home/virtmail/example.org/foo/Maildir/tmp
       /home/virtmail/example.org/foo/Maildir/new
       /home/virtmail/example.org/foo/Maildir/cur
-      
 
 --------------------------------------------------------------------------------
  09. Setup dovecot or other IMAP/POP3 Server program
@@ -114,9 +113,9 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 
 --------------------------------------------------------------------------------
  10. Start Milter programs if you use
-     
+
       Start milter programs, ( e.g. sid-milter, clamav-milter, and so on) before
-      starting sendmail. Helper script /usr/local/sendmail/sbin/sidctl is useful
+      starting sendmail. Helper script /usr/local/virtmail/sbin/sidctl is useful
       to start/stop sid-milter.
 
       Dont forget enable a milter configuration in sendmail.cf.
@@ -126,12 +125,12 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  11. Start sendmail
 
       There are 3 ways to start sendmail daemon
-      a) /usr/local/sendmail/sbin/sendmail -bd -q5m -Lsm-mta
-      b) /usr/local/sendmail/sbin/sendmailctl start
+      a) /usr/sbin/sendmail -bd -q5m -Lsm-mta
+      b) /usr/local/virtmail/sbin/sendmailctl start
       c) /usr/local/sbin/smctl start
 
       smctl is a symbolic link to sendmailctl command. If you use sendmailctl or
-      smctl command, Edit daemon-options and queue-interval file in /usr/local/
-      sendmail/etc directory.
+      smctl command, Edit daemon-options and queue-interval file in /etc/mail
+      directory.
 
 --------------------------------------------------------------------------------
