@@ -398,7 +398,7 @@ distdir: $(DISTFILES)
 	      || exit 1; \
 	  fi; \
 	done
-	-find $(distdir) -type d ! -perm -777 -exec chmod a+rwx {} \; -o \
+	-find $(distdir) -type d ! -perm -755 -exec chmod u+rwx,go+rx {} \; -o \
 	  ! -type d ! -perm -444 -links 1 -exec chmod a+r {} \; -o \
 	  ! -type d ! -perm -400 -exec chmod a+r {} \; -o \
 	  ! -type d ! -perm -444 -exec $(install_sh) -c -m a+r {} {} \; \
@@ -656,7 +656,9 @@ message:
 	@echo "  4. cd /etc/mail && make virtusertable.db"
 	@echo "  5. If you use sid-milter, Edit sendmail.mc and run ``make sendmail.cf'' in"
 	@echo "     /etc/mail, and run ``/usr/local/sbin/sidctl start''"
-	@echo "  6. /usr/local/sbin/sendmailctl start or /usr/local/sbin/smctl start"
+	@echo "  6. /usr/local/sbin/smctl start"
+	@echo
+	@echo "-----------------------------------------------------------------------------"
 	@echo
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
