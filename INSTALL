@@ -32,10 +32,10 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
 
       Default values are:
         --prefix=/usr/local/virtmail
-        --sendmail-user=sendmail
-        --submit-user=smsubmit
-        --virtualmailbox-user=virtmail
-        --virtualmailbox-home=/home/virtmail
+        --with-sendmail-user=sendmail
+        --with-submit-user=smsubmit
+        --with-virtualmailbox-user=virtmail
+        --with-virtualmailbox-home=/home/virtmail
         --with-hostname=`hostname | cut -d. -f1`
         --with-domainname=`hostname | cut -d. -f2,3,4,5,6,7,8,9`
         --enable-sid-milter=no
@@ -125,6 +125,7 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
  11. Start sendmail
 
       There are 3 ways to start sendmail daemon
+
       a) /usr/sbin/sendmail -bd -q5m -Lsm-mta
       b) /usr/local/virtmail/sbin/sendmailctl start
       c) /usr/local/sbin/smctl start
@@ -134,3 +135,4 @@ $Id: INSTALL,v 1.2 2010/02/02 11:39:39 ak Exp $
       directory.
 
 --------------------------------------------------------------------------------
+
