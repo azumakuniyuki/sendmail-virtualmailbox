@@ -14,6 +14,15 @@ __   _(_)_ __| |_ _   _  __ _| |_ __ ___   __ _(_) | |__   _____  __
              SENDMAIL-VIRTUALMAILBOX/RELEASE_NOTES
 
 -----------------------------------------------------------------------
+1.1.13		2012/11/23
+
+  New files:
+    * ./example/sasl2-sendmail.conf
+
+  Assorted improvements and code cleanup:
+    * dovecot 2.1.10 and maildrop 2.6.0
+
+-----------------------------------------------------------------------
 1.1.12		2012/09/05
 
   Fixed bugs:
