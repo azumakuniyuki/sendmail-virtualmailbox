@@ -1,7 +1,7 @@
 dnl #                                               -*- Autoconf -*-
 dnl # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([sendmail-virtualmailbox], [1.1.13], [azumakuniyuki@gmail.com])
+AC_INIT([sendmail-virtualmailbox], [1.1.14], [azumakuniyuki@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 AC_PREFIX_DEFAULT(/usr/local/virtmail)
 AC_CANONICAL_HOST
@@ -10,7 +10,7 @@ BUILDROOT=`pwd`
 AC_SUBST(BUILDROOT)
 
 SYSTEMNAME=sendmail-virtualmailbox
-SYSVERSION=1.1.13
+SYSVERSION=1.1.14
 AC_SUBST(SYSTEMNAME)
 AC_SUBST(SYSVERSION)
 
@@ -58,12 +58,12 @@ if test "x$PERL" = xno; then
 	AC_MSG_ERROR([*** Cannot find perl program])
 fi
 
-AC_PATH_PROG(CHMOD, chmod, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(CHMOD, chmod, no, /sbin:/bin:/usr/bin:/usr/local/bin)
 if test "x$CHMOD" = xno; then
 	AC_MSG_ERROR([*** Cannot find chmod program])
 fi
 
-AC_PATH_PROG(CHOWN, chown, no, /bin:/usr/bin:/usr/local/bin)
+AC_PATH_PROG(CHOWN, chown, no, /sbin:/bin:/usr/bin:/usr/local/bin)
 if test "x$CHOWN" = xno; then
 	AC_MSG_ERROR([*** Cannot find chown program])
 fi
