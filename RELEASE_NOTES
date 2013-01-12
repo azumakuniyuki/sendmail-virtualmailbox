@@ -14,6 +14,19 @@ __   _(_)_ __| |_ _   _  __ _| |_ __ ___   __ _(_) | |__   _____  __
              SENDMAIL-VIRTUALMAILBOX/RELEASE_NOTES
 
 -----------------------------------------------------------------------
+1.1.14		2013/01/11
+
+  New files:
+    * /etc/mail/trusted-users
+
+  Assorted improvements and code cleanup:
+    * sendmail 8.14.6 and dovecot 2.1.13
+
+  Fixed bugs:
+    * configure script find ``chown'' program from also /sbin .
+    * Remove -d option from gunzip command.
+
+-----------------------------------------------------------------------
 1.1.13		2012/11/23
 
   New files:

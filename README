@@ -72,6 +72,7 @@ src/ --------------------------------------- Source files
   sid-options.in --------------------------- Define sid-milter options
   sid-pass-domains.in ---------------------- Domains to always pass for sid-milter
   sid-peer-hosts.in ------------------------ List of hosts to ignore for sid-milter
+  trusted-users.in ------------------------- /etc/mail/trusted-users
   virtuser-domains.in ---------------------- /etc/mail/virtuser-domains
   virtusertable.in ------------------------- /etc/mail/virtusertable
  sbin/ ------------------------------------- Source scripts for /usr/local/sendmail/sbin
@@ -80,8 +81,8 @@ src/ --------------------------------------- Source files
   sidctl.SH -------------------------------- /usr/local/virtmail/sbin/sidctl
 
 virtmail.m4 has been tested at the followings:
- sendmail) 8.13.8, 8.14.3 - 8.14.5
- dovecot)  1.2.9 - 1.2.16, 2.0.16, 2.1.9, 2.1.10
+ sendmail) 8.13.8, 8.14.3 - 8.14.6
+ dovecot)  1.2.9 - 1.2.16, 2.0.16, 2.1.9, 2.1.10, 2.1.13
  procmail) 3.22
  maildrop) 2.3.0.20100112, 2.5.1 - 2.5.5, 2.6.0
 
