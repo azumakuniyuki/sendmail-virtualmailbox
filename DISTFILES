@@ -20,6 +20,7 @@
   sid-options ---------------------------- Command line options for sid-milter(optional)
   submit.cf
   submit.mc ------------------------------ Copy of share/cf/cf/submit.mc
+  trusted-users
   virtuser-domains
   virtusertable
   genericstable
