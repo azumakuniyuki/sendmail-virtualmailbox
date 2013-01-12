@@ -172,7 +172,7 @@ top_srcdir = @top_srcdir@
 sysconf_DATA = procmailrc maildroprc 
 sendmail_MAPS = virtusertable access mailertable genericstable authinfo
 sendmail_CONF = virtuser-domains relay-domains local-host-names generics-domains \
-		masquerade-domains
+		masquerade-domains trusted-users
 
 @ENABLE_SIDMILTER_FALSE@other_CONF = queue-interval daemon-options
 @ENABLE_SIDMILTER_TRUE@other_CONF = queue-interval daemon-options sid-peer-hosts sid-pass-domains sid-options

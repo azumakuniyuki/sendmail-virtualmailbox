@@ -4,7 +4,7 @@
 sysconf_DATA = procmailrc maildroprc 
 sendmail_MAPS = virtusertable access mailertable genericstable authinfo
 sendmail_CONF = virtuser-domains relay-domains local-host-names generics-domains \
-		masquerade-domains
+		masquerade-domains trusted-users
 if ENABLE_SIDMILTER
 other_CONF = queue-interval daemon-options sid-peer-hosts sid-pass-domains sid-options
 else
