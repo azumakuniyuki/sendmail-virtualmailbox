@@ -7,8 +7,7 @@ SHELL='/bin/sh'
 UMASK='077'
 logfile '/var/log/maildrop-virtual.log'
 
-ADDRESSER="$FROM"
-RECIPIENT="$1"
+RECIPIENT=tolower("$1")
 VIRTUALROOT="$HOME"
 VIRTUALUSER=`echo $RECIPIENT | cut -d@ -f1`
 VIRTUALHOST=`echo $RECIPIENT | cut -d@ -f2`
