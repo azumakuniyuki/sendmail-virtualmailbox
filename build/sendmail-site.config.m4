@@ -17,10 +17,10 @@ dnl # APPENDDEF(`confLDOPTS',`-s')dnl <- strip binaries
 dnl # APPENDDEF(`conf_sendmail_LIBS',`-lssl -lcrypt')dnl
 APPENDDEF(`confMAPDEF',`-DMAP_REGEX -DDNSMAP=1 -DUSERDB=0')dnl
 APPENDDEF(`confENVDEF',`-DNETUNIX=0 -DMATCHGECOS=0 -DXDEBUG=0')dnl
-APPENDDEF(`confENVDEF',`-DSASL=2 -DSM_CONF_SHM=1')
-APPENDDEF(`confLIBS',`-lsasl2')
-APPENDDEF(`confLIBDIRS',`-L/usr/local/lib/sasl2 -L/usr/lib -L/usr/lib64')
-APPENDDEF(`confINCDIRS',`-I/usr/local/include/sasl -I/usr/include -I/usr/include/gdbm')
+APPENDDEF(`confENVDEF',`-DSASL=2 -DSM_CONF_SHM=1 -DNEWDB')
+APPENDDEF(`confLIBS',`-lsasl2 -lresolv -ldb')
+APPENDDEF(`confLIBDIRS',`-L/usr/local/lib -L/usr/local/lib/sasl2 -L/usr/lib -L/usr/lib64')
+APPENDDEF(`confINCDIRS',`-I/usr/local/include -I/usr/local/include/sasl -I/usr/include -I/usr/include/gdbm')
 
 
 dnl ############################################################################
