@@ -1,7 +1,7 @@
 dnl #                                               -*- Autoconf -*-
 dnl # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([sendmail-virtualmailbox], [1.1.15], [azumakuniyuki@gmail.com])
+AC_INIT([sendmail-virtualmailbox], [1.1.16], [azumakuniyuki@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 AC_PREFIX_DEFAULT(/usr/local/virtmail)
 AC_CANONICAL_HOST
@@ -10,7 +10,7 @@ BUILDROOT=`pwd`
 AC_SUBST(BUILDROOT)
 
 SYSTEMNAME=sendmail-virtualmailbox
-SYSVERSION=1.1.15
+SYSVERSION=1.1.16
 AC_SUBST(SYSTEMNAME)
 AC_SUBST(SYSVERSION)
 

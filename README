@@ -81,7 +81,7 @@ src/ --------------------------------------- Source files
   sidctl.SH -------------------------------- /usr/local/virtmail/sbin/sidctl
 
 virtmail.m4 has been tested at the followings:
- sendmail) 8.13.8, 8.14.3 - 8.14.6
+ sendmail) 8.13.8, 8.14.3 - 8.14.7
  dovecot)  1.2.9 - 1.2.16, 2.0.16, 2.1.9, 2.1.10, 2.1.13, 2.1.16
  procmail) 3.22
  maildrop) 2.3.0.20100112, 2.5.1 - 2.5.5, 2.6.0
