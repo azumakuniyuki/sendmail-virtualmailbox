@@ -1,6 +1,6 @@
 ### $Id: Makefile.am,v 1.2 2009/04/29 13:53:25 ak Exp $
 ### Makefile.am -- makefile(GNU) for sendmail-virtualmailbox/build
-SM_VERSION = 8.14.6
+SM_VERSION = 8.14.7
 PM_VERSION = 3.22
 MD_VERSION = 2.6.0
 SI_VERSION = 1.0.0
@@ -149,6 +149,7 @@ build-sendmail: $(SM_DISTDIR) check-sendmail-user
 			-e "s|__SMSUBMITUSER__|$(SMSUBMITUSER)|g" \
 			-e "s|__SENDMAILUSER__|$(SENDMAILUSER)|g" \
 			-e "s|__VIRTMAILUSER__|$(VIRTMAILUSER)|g" \
+			-e 's|__DATAROOTDIR__|@datarootdir@|g' \
 			-e 's|\([^:]\)//|\1/|g' > site.config.m4 ;\
 		$(CP) site.config.m4 $(SM_DISTDIR)/devtools/Site/ ;\
 		cd $(SM_DISTDIR) && ( \
