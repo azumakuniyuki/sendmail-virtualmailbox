@@ -3,7 +3,7 @@
 SUBDIRS = build src
 .PHONY: clean
 all-am: Makefile
-install-am: maildirs queuedirs install-example message
+install-am: maildirs queuedirs sendmail-st install-example message
 
 maildirs:
 	test -d /root/Maildir || ( \
@@ -39,6 +39,9 @@ queuedirs:
 
 sendmail-cf:
 	cd ./build && $(MAKE) sendmail.cf
+
+sendmail-st:
+	test -f /var/tmp/sendmail.st || touch /var/tmp/sendmail.st
 
 install-cf: sendmail-cf
 	cd ./build && $(MAKE) install-cf
